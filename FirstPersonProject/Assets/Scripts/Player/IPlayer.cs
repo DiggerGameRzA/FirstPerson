@@ -7,4 +7,5 @@ public interface IPlayer
     Stats GetStats();
     Rigidbody GetRigidbody();
     Transform GetTransform();
+    Transform GetHandTransform();
 }

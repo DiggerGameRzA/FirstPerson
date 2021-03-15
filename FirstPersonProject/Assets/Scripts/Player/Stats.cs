@@ -6,5 +6,4 @@ public class Stats : MonoBehaviour
 {
     public float WalkSpeed = 10f;
     public float RunSpeed = 20f;
-    public float RotationSpeed = 2f;
 }

@@ -21,4 +21,17 @@ public class CameraManager : MonoBehaviour
         right.y = 0;
         return right.normalized;
     }
+    public static Quaternion GetCameraRotation()
+    {
+        Quaternion dir = camera.transform.rotation;
+        dir.z = 0;
+        return dir;
+    }
+    public static Quaternion GetCameraRotationY()
+    {
+        Quaternion yDir = camera.transform.rotation;
+        yDir.x = 0;
+        yDir.z = 0;
+        return yDir;
+    }
 }

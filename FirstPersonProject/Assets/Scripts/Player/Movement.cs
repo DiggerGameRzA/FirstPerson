@@ -8,27 +8,26 @@ public class Movement : IMovement
     Stats stats;
     Rigidbody rb;
     Transform transform;
+    Transform handTransform;
     public Movement(IPlayer player)
     {
         this.player = player;
         stats = player.GetStats();
         rb = player.GetRigidbody();
         transform = player.GetTransform();
+        handTransform = player.GetHandTransform();
     }
-    
-    public void Walk(Vector3 direction)
+
+    public void Walk(Vector3 direction, float speed)
     {
-        rb.velocity = direction * stats.WalkSpeed;
+        rb.AddForce(direction * speed);
     }
-    public void Run(Vector3 direction)
+    public void RotateBody(Quaternion direction)
     {
-        rb.velocity = direction * stats.WalkSpeed;
+        transform.rotation = direction;
     }
-    public void Rotate(Vector3 direction)
+    public void RotateHand(Quaternion direction)
     {
-        if (direction != Vector3.zero)
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), stats.RotationSpeed);
-        }
+        handTransform.rotation = direction;
     }
 }
