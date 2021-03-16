@@ -16,14 +16,14 @@ public class Player : MonoBehaviour, IPlayer
     {
         stats = GetComponent<Stats>();
         rb = GetComponent<Rigidbody>();
-        handPrefabs = transform.GetChild(0);
+        //handPrefabs = transform.GetChild(0);
         movement = new Movement(this);
         movementDir = new MovementDir();
     }
 
     void Update()
     {
-        movement.RotateHand(CameraManager.GetCameraRotation());
+        //movement.RotateHand(CameraManager.GetCameraRotation());
         movement.RotateBody(CameraManager.GetCameraRotationY());
     }
     void FixedUpdate()

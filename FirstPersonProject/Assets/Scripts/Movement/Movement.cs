@@ -8,14 +8,14 @@ public class Movement : IMovement
     Stats stats;
     Rigidbody rb;
     Transform transform;
-    Transform handTransform;
+    //Transform handTransform;
     public Movement(IPlayer player)
     {
         this.player = player;
         stats = player.GetStats();
         rb = player.GetRigidbody();
         transform = player.GetTransform();
-        handTransform = player.GetHandTransform();
+        //handTransform = player.GetHandTransform();
     }
 
     public void Walk(Vector3 direction, float speed)
@@ -28,6 +28,6 @@ public class Movement : IMovement
     }
     public void RotateHand(Quaternion direction)
     {
-        handTransform.rotation = direction;
+        //handTransform.rotation = direction;
     }
 }

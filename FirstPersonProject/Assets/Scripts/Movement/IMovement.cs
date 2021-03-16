@@ -6,5 +6,5 @@ public interface IMovement
 {
     void Walk(Vector3 direction, float speed);
     void RotateBody(Quaternion direction);
-    void RotateHand(Quaternion direction);
+    //void RotateHand(Quaternion direction);
 }

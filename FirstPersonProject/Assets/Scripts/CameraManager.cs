@@ -23,9 +23,7 @@ public class CameraManager : MonoBehaviour
     }
     public static Quaternion GetCameraRotation()
     {
-        Quaternion dir = camera.transform.rotation;
-        dir.z = 0;
-        return dir;
+        return camera.transform.rotation;
     }
     public static Quaternion GetCameraRotationY()
     {
