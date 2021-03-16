@@ -10,7 +10,7 @@ public class Player : MonoBehaviour, IPlayer
     Rigidbody rb;
     IMovement movement;
     IMovementDir movementDir;
-    [SerializeField] Transform handPrefabs;
+    //Transform handPrefabs;
 
     void Start()
     {
