@@ -21,15 +21,23 @@ public class CameraManager : MonoBehaviour
         right.y = 0;
         return right.normalized;
     }
+    /*
     public static Quaternion GetCameraRotation()
     {
         return camera.transform.rotation;
     }
+    */
     public static Quaternion GetCameraRotationY()
     {
         Quaternion yDir = camera.transform.rotation;
         yDir.x = 0;
         yDir.z = 0;
         return yDir;
+    }
+    public static RaycastHit GetCameraRaycast(float range)
+    {
+        RaycastHit hit;
+        Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range);
+        return hit;
     }
 }
