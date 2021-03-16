@@ -51,8 +51,10 @@ public class Player : MonoBehaviour, IPlayer
     {
         return transform;
     }
+    /*
     public Transform GetHandTransform()
     {
         return handPrefabs;
     }
+    */
 }
