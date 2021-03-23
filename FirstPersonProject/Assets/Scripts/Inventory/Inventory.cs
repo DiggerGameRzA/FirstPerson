@@ -5,67 +5,126 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    private const int SLOTS = 5;
+    private const int itemSlots = 5;
+    private const int weaponSlots = 2;
     //public List<IInventoryItem> mItems = new List<IInventoryItem>();
-    public List<InventorySlot> mSlots = new List<InventorySlot>();
+
+    public List<InventorySlot> iSlots = new List<InventorySlot>();
+    public List<InventorySlot> wSlots = new List<InventorySlot>();
+
     public event EventHandler<InventoryEventArgs> ItemAdded;
     public event EventHandler<InventoryEventArgs> ItemUsed;
     public event EventHandler<InventoryEventArgs> ItemRemoved;
 
+    public event EventHandler<InventoryEventArgs> WeaponAdded;
+
     public Inventory()
     {
-        for (int i = 0; i < SLOTS; i++)
+        for (int i = 0; i < itemSlots; i++)
         {
-            mSlots.Add(new InventorySlot(i));
+            iSlots.Add(new InventorySlot(i));
+        }
+        for (int i = 0; i < weaponSlots; i++)
+        {
+            wSlots.Add(new InventorySlot(i));
         }
     }
 
-    private InventorySlot FindStackkableSlot(IInventoryItem item)
+    private InventorySlot FindStackkableSlot(IInventoryItem item, string type)
     {
-        foreach (InventorySlot slot in mSlots)
+        if (type == "Item")
         {
-            if (slot.IsStackable(item))
-                return slot;
+            foreach (InventorySlot slot in iSlots)
+            {
+                if (slot.IsStackable(item))
+                    return slot;
+            }
+        }
+        else if (type == "Weapon")
+        {
+            return null;
+            /*
+            foreach (InventorySlot slot in wSlots)
+            {
+                if (slot.IsStackable(item))
+                    return slot;
+            }
+            */
         }
         return null;
     }
-    private InventorySlot FindNextEmptySlot()
+    private InventorySlot FindNextEmptySlot(string type)
     {
-        foreach (InventorySlot slot in mSlots)
+        if (type == "Item")
         {
-            if (slot.IsEmpty)
-                return slot;
+            foreach (InventorySlot slot in iSlots)
+            {
+                if (slot.IsEmpty)
+                    return slot;
+            }
+        }
+        if(type == "Weapon")
+        {
+            foreach (InventorySlot slot in wSlots)
+            {
+                if (slot.IsEmpty)
+                    return slot;
+            }
         }
         return null;
     }
-
-    public IInventoryItem ItemTop()
+    public IInventoryItem ItemTop(string type)
     {
         IInventoryItem item = null;
-        foreach (InventorySlot slot in mSlots)
+        if (type == "Item")
         {
-            if (slot.Count > 0)
-                item = slot.mItemStack.Peek();
+            foreach (InventorySlot slot in iSlots)
+            {
+                if (slot.Count > 0)
+                    item = slot.mItemStack.Peek();
+            }
+        }
+        else if (type == "Weapon")
+        {
+            foreach (InventorySlot slot in wSlots)
+            {
+                if (slot.Count > 0)
+                    item = slot.mItemStack.Peek();
+            }
         }
         return item;
     }
-    public void AddItem(IInventoryItem item)
+    public void AddItem(IInventoryItem item, string type)
     {
-        InventorySlot freeSlot = FindStackkableSlot(item);
+        InventorySlot freeSlot = FindStackkableSlot(item, type);
         if (freeSlot == null)
         {
-            freeSlot = FindNextEmptySlot();
+            freeSlot = FindNextEmptySlot(type);
         }
         if (freeSlot != null)
         {
             freeSlot.AddItem(item);
             item.OnPickUp();
-            if (ItemAdded != null)
+
+            if (type == "Item")
             {
-                ItemAdded(this, new InventoryEventArgs(item));
+                if (ItemAdded != null)
+                {
+                    ItemAdded(this, new InventoryEventArgs(item));
+                }
+            }
+            else if(type == "Weapon")
+            {
+                if (WeaponAdded != null)
+                {
+                    WeaponAdded(this, new InventoryEventArgs(item));
+                }
             }
         }
-        Debug.Log("Added Item : " + item);
+        if (type == "Item")
+            Debug.Log("Added Item : " + item.Name);
+        else if (type == "Weapon")
+            Debug.Log("Added Weapon : " + item.Name);
         /*
           if(mItems.Count < SLOTS)
           {
@@ -85,7 +144,7 @@ public class Inventory : MonoBehaviour
     }
     internal void UseItem(IInventoryItem item)
     {
-        if(ItemUsed != null)
+        if (ItemUsed != null)
         {
             ItemUsed(this, new InventoryEventArgs(item));
         }
@@ -93,7 +152,7 @@ public class Inventory : MonoBehaviour
     }
     public void RemoveItem(IInventoryItem item)
     {
-        foreach (InventorySlot slot in mSlots)
+        foreach (InventorySlot slot in iSlots)
         {
             if (slot.Remove(item))
             {

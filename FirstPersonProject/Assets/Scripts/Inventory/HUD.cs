@@ -11,12 +11,41 @@ public class HUD : MonoBehaviour
     {
         inventory.ItemAdded += InventoryScript_ItemAdd;
         inventory.ItemRemoved += InventoryScript_ItemRemoved;
+
+        inventory.WeaponAdded += InventoryScript_WeaponAdd;
     }
     private void InventoryScript_ItemAdd(object sender,InventoryEventArgs e)
     {
-        Transform inventoryPanel = transform.Find("Inventory");
+        Transform inventoryPanel = transform.GetChild(1).GetChild(2);
         int index = -1;
         foreach(Transform slot in inventoryPanel)
+        {
+            index++;
+
+            Transform imageTransform = slot.GetChild(0);
+            Transform textTransform = slot.GetChild(1);
+            Image image = imageTransform.GetComponent<Image>();
+            Text txtCount = textTransform.GetComponent<Text>();
+
+            if (index == e.Item.Slot.Id)
+            {
+                image.enabled = true;
+                image.sprite = e.Item.Image;
+
+                int ItemCount = e.Item.Slot.Count;
+                if (ItemCount > 1)
+                    txtCount.text = ItemCount.ToString();
+                else
+                    txtCount.text = "";
+                break;
+            }
+        }
+    }
+    private void InventoryScript_WeaponAdd(object sender, InventoryEventArgs e)
+    {
+        Transform inventoryPanel = transform.GetChild(1).GetChild(1);
+        int index = -1;
+        foreach (Transform slot in inventoryPanel)
         {
             index++;
 

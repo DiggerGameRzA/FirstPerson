@@ -7,10 +7,10 @@ public interface IInventoryItem
 {
     string Name { get; }
     Sprite Image { get; }
-    float Range { get; }
     InventorySlot Slot { get; set; }
     void OnPickUp();
     void OnUse();
+    void ShowUI(bool show);
 }
 public class InventoryEventArgs : EventArgs
 {

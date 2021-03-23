@@ -16,10 +16,6 @@ public class Item : MonoBehaviour,IInventoryItem
     {
         get { return _image; }
     }
-    public float Range
-    {
-        get { return _range; }
-    }
     public InventorySlot Slot { get; set; }
     public void OnPickUp()
     {
@@ -28,5 +24,13 @@ public class Item : MonoBehaviour,IInventoryItem
     public virtual void OnUse()
     {
         
+    }
+    public void ShowUI(bool show)
+    {
+        transform.GetChild(1).gameObject.SetActive(show);
+    }
+    void Update()
+    {
+        ShowUI(false);
     }
 }

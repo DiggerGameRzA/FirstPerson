@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    Inventory inventory;
-    void Start()
+    public Inventory inventory;
+    public UIManager ui;
+    private void Start()
     {
-        inventory = new Inventory();
+        
     }
     void Update()
     {
-        RaycastHit hit = CameraManager.GetCameraRaycast(100f);
-        IInventoryItem item = hit.transform.GetComponent<IInventoryItem>();
-        if (item != null)
+        RaycastItem();
+
+        if(Input.GetButtonDown("Open Inventory"))
         {
-            if (hit.transform.CompareTag("Item"))
+            if (!ui.GetInventoryVisible())
             {
-                if (Input.GetButtonDown("Collect"))
-                    inventory.AddItem(item);
+                ui.ShowInventory(true);
+            }
+            else
+            {
+                ui.ShowInventory(false);
             }
         }
     }
@@ -29,5 +33,29 @@ public class InputManager : MonoBehaviour
     public static float GetHorInput()
     {
         return Input.GetAxis("Horizontal");
+    }
+    private void RaycastItem()
+    {
+        RaycastHit hit = CameraManager.GetCameraRaycast(50f);
+        if (hit.transform)
+        {
+            IInventoryItem item = hit.transform.GetComponent<IInventoryItem>();
+            if (hit.transform.CompareTag("Item"))
+            {
+                item.ShowUI(true);
+                if (Input.GetButtonDown("Collect"))
+                {
+                    inventory.AddItem(item, "Item");
+                }
+            }
+            else if (hit.transform.CompareTag("Weapon"))
+            {
+                item.ShowUI(true);
+                if (Input.GetButtonDown("Collect"))
+                {
+                    inventory.AddItem(item, "Weapon");
+                }
+            }
+        }
     }
 }
