@@ -8,6 +8,8 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         camera = UnityEngine.Camera.main;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public static Vector3 GetCameraForwardDirectionNormalized()
     {

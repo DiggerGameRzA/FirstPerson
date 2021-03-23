@@ -6,7 +6,7 @@ public class Item : MonoBehaviour,IInventoryItem
 {
     public string _name = "Item";
     public Sprite _image = null;
-    public float _range = 50f;
+    public bool _hit = false;
    
     public string Name
     {
@@ -31,6 +31,10 @@ public class Item : MonoBehaviour,IInventoryItem
     }
     void Update()
     {
-        ShowUI(false);
+        RaycastHit hit = CameraManager.GetCameraRaycast(50f);
+        if(this != hit.transform)
+        {
+            ShowUI(false);
+        }
     }
 }

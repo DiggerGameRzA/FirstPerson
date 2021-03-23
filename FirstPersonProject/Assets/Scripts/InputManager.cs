@@ -25,6 +25,20 @@ public class InputManager : MonoBehaviour
                 ui.ShowInventory(false);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
     }
     public static float GetVerInput()
     {
@@ -56,6 +70,7 @@ public class InputManager : MonoBehaviour
                     inventory.AddItem(item, "Weapon");
                 }
             }
+            
         }
     }
 }
