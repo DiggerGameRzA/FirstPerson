@@ -16,6 +16,11 @@ public class Item : MonoBehaviour,IInventoryItem
     {
         get { return _image; }
     }
+    public bool Hit
+    {
+        get { return _hit; }
+        set { _hit = value; }
+    }
     public InventorySlot Slot { get; set; }
     public void OnPickUp()
     {
@@ -32,7 +37,7 @@ public class Item : MonoBehaviour,IInventoryItem
     void Update()
     {
         RaycastHit hit = CameraManager.GetCameraRaycast(50f);
-        if(this != hit.transform)
+        if(this.transform != hit.transform)
         {
             ShowUI(false);
         }
