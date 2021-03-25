@@ -6,7 +6,7 @@ public class Item : MonoBehaviour,IInventoryItem
 {
     public string _name = "Item";
     public Sprite _image = null;
-    public bool _hit = false;
+    public WeaponEnum _weapon = WeaponEnum.None;
    
     public string Name
     {
@@ -16,10 +16,9 @@ public class Item : MonoBehaviour,IInventoryItem
     {
         get { return _image; }
     }
-    public bool Hit
+    public WeaponEnum Weapon
     {
-        get { return _hit; }
-        set { _hit = value; }
+        get { return _weapon; }
     }
     public InventorySlot Slot { get; set; }
     public void OnPickUp()
@@ -40,6 +39,10 @@ public class Item : MonoBehaviour,IInventoryItem
         if(this.transform != hit.transform)
         {
             ShowUI(false);
+        }
+        else
+        {
+            ShowUI(true);
         }
     }
 }

@@ -7,6 +7,7 @@ public interface IInventoryItem
 {
     string Name { get; }
     Sprite Image { get; }
+    WeaponEnum Weapon { get; }
     InventorySlot Slot { get; set; }
     void OnPickUp();
     void OnUse();

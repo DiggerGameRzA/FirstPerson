@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Gun
   _image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  _range: 50
+  Weapon: 1
 --- !u!65 &1204797077520225269
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 1204797078635690706}
   - component: {fileID: 1204797078635690704}
   - component: {fileID: 1204797078635690705}
+  - component: {fileID: 7336224254620572783}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -155,6 +156,18 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
+--- !u!114 &7336224254620572783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204797078635690707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2564c4c3a4ea3284cb3780b958018aba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1204797079026061562
 GameObject:
   m_ObjectHideFlags: 0

@@ -164,4 +164,29 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+    public IInventoryItem GetPeekItem(int slot, string type)
+    {
+        slot -= 1;
+        IInventoryItem item;
+        if (wSlots[slot].mItemStack.Count != 0 || iSlots[slot].mItemStack.Count != 0)
+        {
+            if (type == "Item")
+            {
+                item = iSlots[slot].mItemStack.Peek();
+            }
+            else if (type == "Weapon")
+            {
+                item = wSlots[slot].mItemStack.Peek();
+            }
+            else
+            {
+                item = null;
+            }
+        }
+        else
+        {
+            item = null;
+        }
+        return item;
+    }
 }
