@@ -4,5 +4,11 @@ using UnityEngine;
 
 public enum WeaponEnum
 {
-    None,Pistol
+    None,
+    Pistol,
+    AssultRifle,
+    Sedat,
+    M60,
+    RocketLauncher,
+
 }

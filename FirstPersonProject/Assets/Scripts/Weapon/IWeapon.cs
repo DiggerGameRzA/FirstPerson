@@ -4,6 +4,8 @@ using UnityEngine;
 
 public interface IWeapon
 {
+    WeaponEnum WeaponType { get; }
+
     float FireDelay { get; }
 
     int CurrentAmmo { get; set; }

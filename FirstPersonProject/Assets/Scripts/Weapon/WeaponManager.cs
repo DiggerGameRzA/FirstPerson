@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Pistol))]
+[RequireComponent(typeof(Sedat))]
 public class WeaponManager : MonoBehaviour
 {
     IPlayer player;
     IWeapon weapon;
-    UIManager uiManager;
+    public UIManager uiManager;
 
     float tempTime = 0f;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<IPlayer>();
-        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
     void Update()
     {

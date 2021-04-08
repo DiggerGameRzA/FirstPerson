@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pistol : MonoBehaviour, IWeapon
+public class Sedat : MonoBehaviour, IWeapon
 {
-    public WeaponEnum WeaponType { get { return WeaponEnum.Pistol; } }
+    public WeaponEnum WeaponType { get { return WeaponEnum.Sedat; } }
     [Header("Firing")]
     public float _fireDelay = 0.5f;
 
@@ -13,8 +13,8 @@ public class Pistol : MonoBehaviour, IWeapon
     public int _maxAmmo = 10;
     public int _currentSpare = 0;
     public int _maxSpare = 30;
-
-    public float FireDelay 
+    
+    public float FireDelay
     {
         get { return _fireDelay; }
     }
@@ -39,15 +39,15 @@ public class Pistol : MonoBehaviour, IWeapon
         set { _maxSpare = value; }
     }
     public bool IsEquiped { get; set; }
-    GameObject PistolPrefab;
+    GameObject SedatPrefab;
     public void Equip()
     {
-        PistolPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
-        foreach (Transform i in PistolPrefab.transform.parent)
+        SedatPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(1).gameObject;
+        foreach (Transform i in SedatPrefab.transform.parent)
         {
             i.gameObject.SetActive(false);
         }
-        PistolPrefab.SetActive(true);
+        SedatPrefab.SetActive(true);
     }
     public void Fire()
     {

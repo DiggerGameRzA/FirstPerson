@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Box
   _image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  _weapon: 0
 --- !u!65 &3053516768574619672
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -220,7 +221,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3053516769924012031}
-  m_Text: Press F
+  m_Text: Press E
   m_OffsetZ: 0
   m_CharacterSize: 0.07
   m_LineSpacing: 1

@@ -30,4 +30,8 @@ public class Movement : IMovement
     {
         //handTransform.rotation = direction;
     }
+    public void Jump(float jumpForce)
+    {
+        rb.AddForce(0, jumpForce, 0);
+    }
 }

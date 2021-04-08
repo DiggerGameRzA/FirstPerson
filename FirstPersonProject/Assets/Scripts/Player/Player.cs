@@ -12,7 +12,7 @@ public class Player : MonoBehaviour, IPlayer
     IMovementDir movementDir;
     IWeapon weapon;
     GameObject weaponManager;
-    UIManager uiManager;
+    public UIManager uiManager;
     //Transform handPrefabs;
 
     void Start()
@@ -25,8 +25,6 @@ public class Player : MonoBehaviour, IPlayer
 
         weaponManager = GameObject.Find("Weapon Manager");
         weapon = null;
-
-        uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
     }
 
     void Update()
@@ -45,6 +43,10 @@ public class Player : MonoBehaviour, IPlayer
         else
         {
             movement.Walk(movementDir.GetMovementDir(), stats.WalkSpeed);
+        }
+        if (Input.GetButton("Jump") && rb.velocity.y == 0)
+        {
+            movement.Jump(stats.JumpForce);
         }
     }
     public Stats GetStats()
@@ -74,6 +76,12 @@ public class Player : MonoBehaviour, IPlayer
         if(weapon == WeaponEnum.Pistol)
         {
             this.weapon = weaponManager.GetComponent<Pistol>();
+            this.weapon.Equip();
+            uiManager.UpdateAmmo(this.weapon.CurrentAmmo, this.weapon.CurrentSpare);
+        }
+        else if (weapon == WeaponEnum.Sedat)
+        {
+            this.weapon = weaponManager.GetComponent<Sedat>();
             this.weapon.Equip();
             uiManager.UpdateAmmo(this.weapon.CurrentAmmo, this.weapon.CurrentSpare);
         }

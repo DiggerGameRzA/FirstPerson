@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     public Inventory inventory;
-    public UIManager ui;
+    public UIManager uiManager;
     public WeaponManager wm;
     IPlayer player;
     void Start()
@@ -18,13 +18,13 @@ public class InputManager : MonoBehaviour
 
         if(Input.GetButtonDown("Open Inventory"))
         {
-            if (!ui.GetInventoryVisible())
+            if (!uiManager.GetInventoryVisible())
             {
-                ui.ShowInventory(true);
+                uiManager.ShowInventory(true);
             }
             else
             {
-                ui.ShowInventory(false);
+                uiManager.ShowInventory(false);
             }
         }
 
