@@ -44,5 +44,7 @@ public class Item : MonoBehaviour,IInventoryItem
         {
             ShowUI(true);
         }
+
+        transform.Rotate(0, 100.0f * Time.deltaTime, 0);
     }
 }

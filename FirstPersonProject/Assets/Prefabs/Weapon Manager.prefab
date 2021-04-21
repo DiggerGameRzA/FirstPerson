@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5964441784440074890}
-  - component: {fileID: 5964441784440074891}
-  - component: {fileID: -4267712816203354141}
-  - component: {fileID: 2474278491443275821}
+  - component: {fileID: 6071176560937073810}
+  - component: {fileID: 3735935088031216111}
+  - component: {fileID: 8047852489406641720}
+  - component: {fileID: 6184830440101684760}
   m_Layer: 0
   m_Name: Weapon Manager
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5964441784440074891
+--- !u!114 &6071176560937073810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,7 +51,7 @@ MonoBehaviour:
   _maxAmmo: 10
   _currentSpare: 30
   _maxSpare: 30
---- !u!114 &-4267712816203354141
+--- !u!114 &3735935088031216111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,7 +68,24 @@ MonoBehaviour:
   _maxAmmo: 1
   _currentSpare: 10
   _maxSpare: 10
---- !u!114 &2474278491443275821
+--- !u!114 &8047852489406641720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5964441784440074889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06aff85cd84918c4d8d81d2780a0c5c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireDelay: 0.1
+  _currentAmmo: 30
+  _maxAmmo: 30
+  _currentSpare: 90
+  _maxSpare: 90
+--- !u!114 &6184830440101684760
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

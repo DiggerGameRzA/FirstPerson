@@ -53,7 +53,12 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1"))
         {
-            if(player.GetWeapon() != null)
+            if (player.GetWeapon() != null)
+                wm.Fire();
+        }
+        else if (Input.GetButton("Fire1"))
+        {
+            if (player.GetWeapon().WeaponType == WeaponEnum.AssaultRifle)
                 wm.Fire();
         }
         else if (Input.GetButtonDown("Reload"))

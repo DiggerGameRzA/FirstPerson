@@ -111,6 +111,7 @@ public class Inventory : MonoBehaviour
                 if (ItemAdded != null)
                 {
                     ItemAdded(this, new InventoryEventArgs(item));
+                    Debug.Log("Added Item : " + item.Name);
                 }
             }
             else if(type == "Weapon")
@@ -118,13 +119,10 @@ public class Inventory : MonoBehaviour
                 if (WeaponAdded != null)
                 {
                     WeaponAdded(this, new InventoryEventArgs(item));
+                    Debug.Log("Added Weapon : " + item.Name);
                 }
             }
         }
-        if (type == "Item")
-            Debug.Log("Added Item : " + item.Name);
-        else if (type == "Weapon")
-            Debug.Log("Added Weapon : " + item.Name);
         /*
           if(mItems.Count < SLOTS)
           {

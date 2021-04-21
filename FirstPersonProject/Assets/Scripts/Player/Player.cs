@@ -85,5 +85,11 @@ public class Player : MonoBehaviour, IPlayer
             this.weapon.Equip();
             uiManager.UpdateAmmo(this.weapon.CurrentAmmo, this.weapon.CurrentSpare);
         }
+        else if (weapon == WeaponEnum.AssaultRifle)
+        {
+            this.weapon = weaponManager.GetComponent<AssaultRifle>();
+            this.weapon.Equip();
+            uiManager.UpdateAmmo(this.weapon.CurrentAmmo, this.weapon.CurrentSpare);
+        }
     }
 }

@@ -49,6 +49,10 @@ public class Sedat : MonoBehaviour, IWeapon
         }
         SedatPrefab.SetActive(true);
     }
+    public Animator GetAnimator()
+    {
+        return SedatPrefab.GetComponent<Animator>();
+    }
     public void Fire()
     {
 

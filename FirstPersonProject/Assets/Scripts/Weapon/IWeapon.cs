@@ -15,6 +15,7 @@ public interface IWeapon
 
     bool IsEquiped { get; set; }
 
+    Animator GetAnimator();
     void Equip();
     void Fire();
 }

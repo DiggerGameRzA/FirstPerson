@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Pistol))]
 [RequireComponent(typeof(Sedat))]
+[RequireComponent(typeof(AssaultRifle))]
 public class WeaponManager : MonoBehaviour
 {
     IPlayer player;
@@ -28,6 +29,8 @@ public class WeaponManager : MonoBehaviour
             weapon.CurrentAmmo -= 1;
             uiManager.UpdateAmmo(weapon.CurrentAmmo, weapon.CurrentSpare);
             weapon.Fire();
+            weapon.GetAnimator().SetBool("fire", true);
+            Invoke("ResetAnimation", weapon.FireDelay - 0.2f);
             Debug.Log("Pew");
         }
     }
@@ -54,5 +57,9 @@ public class WeaponManager : MonoBehaviour
                 }
             }
         }
+    }
+    void ResetAnimation()
+    {
+        weapon.GetAnimator().SetBool("fire", false);
     }
 }

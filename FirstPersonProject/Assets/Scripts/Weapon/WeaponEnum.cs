@@ -6,7 +6,7 @@ public enum WeaponEnum
 {
     None,
     Pistol,
-    AssultRifle,
+    AssaultRifle,
     Sedat,
     M60,
     RocketLauncher,
