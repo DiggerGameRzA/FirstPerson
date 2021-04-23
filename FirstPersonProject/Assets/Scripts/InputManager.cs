@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public Inventory inventory;
-    public UIManager uiManager;
-    public WeaponManager wm;
-    IPlayer player;
+    [SerializeField] IPlayer player;
+    [SerializeField] Inventory inventory;
+    [SerializeField] UIManager uiManager;
+    [SerializeField] WeaponManager weaponManager;
+    private void Awake()
+    {
+        inventory = FindObjectOfType<Inventory>();
+        uiManager = FindObjectOfType<UIManager>();
+        weaponManager = FindObjectOfType<WeaponManager>();
+    }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<IPlayer>();
+        player = FindObjectOfType<Player>().GetComponent<IPlayer>();
+        uiManager = FindObjectOfType<UIManager>();
     }
     void Update()
     {
@@ -54,17 +61,24 @@ public class InputManager : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             if (player.GetWeapon() != null)
-                wm.Fire();
+            {
+                weaponManager.Fire();
+            }
         }
         else if (Input.GetButton("Fire1"))
         {
-            if (player.GetWeapon().WeaponType == WeaponEnum.AssaultRifle)
-                wm.Fire();
+            if (player.GetWeapon() != null)
+            {
+                if (player.GetWeapon().WeaponType == WeaponEnum.AssaultRifle)
+                {
+                    weaponManager.Fire();
+                }
+            }
         }
         else if (Input.GetButtonDown("Reload"))
         {
             if (player.GetWeapon() != null)
-                wm.Reload();
+                weaponManager.Reload();
         }
     }
     public static float GetVerInput()

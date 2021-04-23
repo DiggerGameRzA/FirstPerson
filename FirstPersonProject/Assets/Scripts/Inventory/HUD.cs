@@ -6,7 +6,11 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     public Inventory inventory;
-    
+
+    private void Awake()
+    {
+        inventory = FindObjectOfType<Inventory>();
+    }
     void Start()
     {
         inventory.ItemAdded += InventoryScript_ItemAdd;

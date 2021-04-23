@@ -7,14 +7,15 @@ using UnityEngine;
 [RequireComponent(typeof(AssaultRifle))]
 public class WeaponManager : MonoBehaviour
 {
-    IPlayer player;
-    IWeapon weapon;
-    public UIManager uiManager;
+    [SerializeField] IPlayer player;
+    [SerializeField] IWeapon weapon;
+    [SerializeField] UIManager uiManager;
 
     float tempTime = 0f;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<IPlayer>();
+        player = FindObjectOfType<Player>().GetComponent<IPlayer>();
+        uiManager = FindObjectOfType<UIManager>();
     }
     void Update()
     {

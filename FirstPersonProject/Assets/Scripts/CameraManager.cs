@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    static new UnityEngine.Camera camera;
+    [SerializeField] static new UnityEngine.Camera camera;
     void Start()
     {
         camera = UnityEngine.Camera.main;

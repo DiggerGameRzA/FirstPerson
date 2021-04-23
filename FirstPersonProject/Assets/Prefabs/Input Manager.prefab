@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4135252932809711709}
   - component: {fileID: 4135252932809711706}
   m_Layer: 0
-  m_Name: InputManager
+  m_Name: Input Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,5 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1a55402775548c4cbf8d320a5946cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 6105895640244221240, guid: 11fdf2b02b4e9944facfb5bab5a37a2c,
-    type: 3}
+  inventory: {fileID: 0}
+  uiManager: {fileID: 0}
+  weaponManager: {fileID: 0}

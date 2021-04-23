@@ -881,7 +881,6 @@ GameObject:
   - component: {fileID: 6781635216934802179}
   - component: {fileID: 6872387966092365247}
   - component: {fileID: 6681355385775160295}
-  - component: {fileID: 6776062718354129320}
   - component: {fileID: 6776062718354129321}
   m_Layer: 0
   m_Name: Pteranodon
@@ -947,20 +946,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6776062718354129320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6776062718354129323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9a653d9c7b310346b8ee000aed458d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fly: 0
-  skyPoint: {fileID: 0}
 --- !u!65 &6776062718354129321
 BoxCollider:
   m_ObjectHideFlags: 0

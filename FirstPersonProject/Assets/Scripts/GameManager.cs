@@ -7,11 +7,20 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject loadingPrefab;
+    WeaponManager weaponManager;
+    InputManager inputManager;
+    CameraManager cameraManager;
 
     List<AsyncOperation> sceneLoading = new List<AsyncOperation>();
     private void Awake()
     {
         instance = this;
+        weaponManager = FindObjectOfType<WeaponManager>();
+        inputManager = FindObjectOfType<InputManager>();
+        cameraManager = FindObjectOfType<CameraManager>();
+    }
+    private void Start()
+    {
         SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
     }
     public void LoadGame()
@@ -35,5 +44,9 @@ public class GameManager : MonoBehaviour
         }
 
         loadingPrefab.SetActive(false);
+
+        cameraManager.enabled = true;
+        weaponManager.enabled = true;
+        inputManager.enabled = true;
     }
 }
