@@ -13,6 +13,7 @@ public class Player : MonoBehaviour, IPlayer
     IWeapon weapon;
     GameObject weaponManager;
     public UIManager uiManager;
+    public bool CanWalk { get; set; }
     //Transform handPrefabs;
 
     void Start()
@@ -25,6 +26,9 @@ public class Player : MonoBehaviour, IPlayer
 
         weaponManager = GameObject.Find("Weapon Manager");
         weapon = null;
+        uiManager = FindObjectOfType<UIManager>();
+
+        CanWalk = true;
     }
 
     void Update()
@@ -36,14 +40,18 @@ public class Player : MonoBehaviour, IPlayer
     {
         rb.velocity = new Vector3(0, rb.velocity.y, 0);
 
-        if (Input.GetButton("Sprint"))
+        if (CanWalk)
         {
-            movement.Walk(movementDir.GetMovementDir(), stats.RunSpeed);
+            if (Input.GetButton("Sprint"))
+            {
+                movement.Walk(movementDir.GetMovementDir(), stats.RunSpeed);
+            }
+            else
+            {
+                movement.Walk(movementDir.GetMovementDir(), stats.WalkSpeed);
+            }
         }
-        else
-        {
-            movement.Walk(movementDir.GetMovementDir(), stats.WalkSpeed);
-        }
+
         if (Input.GetButton("Jump") && rb.velocity.y == 0)
         {
             movement.Jump(stats.JumpForce);

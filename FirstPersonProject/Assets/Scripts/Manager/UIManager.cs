@@ -10,17 +10,15 @@ public class UIManager : MonoBehaviour
     GameObject ammoUI;
     GameObject currentAmmo;
     GameObject currentSpare;
+
+    public Text dialogueName;
+    public Text dialogueSentence;
     void Start()
     {
         inventoryUI = transform.GetChild(1).gameObject;
         ammoUI = transform.GetChild(2).gameObject;
         currentAmmo = ammoUI.transform.GetChild(2).gameObject;
         currentSpare = ammoUI.transform.GetChild(0).gameObject;
-    }
-
-    void Update()
-    {
-        
     }
     public void ShowInventory(bool show)
     {
@@ -34,5 +32,22 @@ public class UIManager : MonoBehaviour
     {
         currentAmmo.GetComponent<Text>().text = ammo.ToString();
         currentSpare.GetComponent<Text>().text = spare.ToString();
+    }
+    public void DialogueUpdateName(string name)
+    {
+        dialogueName.text = name.ToString();
+    }
+    public void DialogueUpdateSentence(string sentence)
+    {
+        dialogueSentence.text = sentence.ToString();
+    }
+    public IEnumerator TypeSentence(string sentence)
+    {
+        dialogueSentence.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            dialogueSentence.text += letter;
+            yield return null;
+        }
     }
 }

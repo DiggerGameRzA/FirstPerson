@@ -7,7 +7,13 @@ public class Item : MonoBehaviour,IInventoryItem
     public string _name = "Item";
     public Sprite _image = null;
     public WeaponEnum _weapon = WeaponEnum.None;
-   
+    public IPlayer player;
+
+    private void Start()
+    {
+        player = FindObjectOfType<Player>().GetComponent<IPlayer>();
+    }
+
     public string Name
     {
         get { return _name; }
@@ -35,14 +41,17 @@ public class Item : MonoBehaviour,IInventoryItem
     }
     void Update()
     {
-        RaycastHit hit = CameraManager.GetCameraRaycast(50f);
-        if(this.transform != hit.transform)
+        if (CameraManager.camera != null)
         {
-            ShowUI(false);
-        }
-        else
-        {
-            ShowUI(true);
+            RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+            if (this.transform != hit.transform)
+            {
+                ShowUI(false);
+            }
+            else
+            {
+                ShowUI(true);
+            }
         }
 
         transform.Rotate(0, 100.0f * Time.deltaTime, 0);

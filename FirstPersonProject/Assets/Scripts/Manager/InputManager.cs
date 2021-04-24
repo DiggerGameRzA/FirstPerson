@@ -8,11 +8,13 @@ public class InputManager : MonoBehaviour
     [SerializeField] Inventory inventory;
     [SerializeField] UIManager uiManager;
     [SerializeField] WeaponManager weaponManager;
+    [SerializeField] CameraManager cameraManager;
     private void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
         uiManager = FindObjectOfType<UIManager>();
         weaponManager = FindObjectOfType<WeaponManager>();
+        cameraManager = FindObjectOfType<CameraManager>();
     }
     void Start()
     {
@@ -28,10 +30,16 @@ public class InputManager : MonoBehaviour
             if (!uiManager.GetInventoryVisible())
             {
                 uiManager.ShowInventory(true);
+                cameraManager.ShowCursor();
+                cameraManager.CanNotLookAround();
+                player.CanWalk = false;
             }
             else
             {
                 uiManager.ShowInventory(false);
+                cameraManager.HideCursor();
+                cameraManager.CanLookAround();
+                player.CanWalk = true;
             }
         }
 
@@ -39,13 +47,11 @@ public class InputManager : MonoBehaviour
         {
             if (Cursor.lockState == CursorLockMode.Locked)
             {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
+                cameraManager.ShowCursor();
             }
             else
             {
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
+                cameraManager.HideCursor();
             }
         }
 
@@ -91,7 +97,7 @@ public class InputManager : MonoBehaviour
     }
     private void RaycastItem()
     {
-        RaycastHit hit = CameraManager.GetCameraRaycast(50f);
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
         if (hit.transform)
         {
             if (Input.GetButtonDown("Collect"))
