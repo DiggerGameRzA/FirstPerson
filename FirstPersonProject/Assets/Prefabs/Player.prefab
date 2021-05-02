@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 1645916590929611401}
   - component: {fileID: 1645916590929611412}
   - component: {fileID: 1645916590929611403}
-  - component: {fileID: 1645916590929611402}
+  - component: {fileID: 2048213019097142177}
+  - component: {fileID: 8278974617320623581}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -76,10 +77,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4937b06a0b969840aa1577bfa76019f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InteractRange: 10
   WalkSpeed: 400
   RunSpeed: 700
   JumpForce: 300
---- !u!114 &1645916590929611402
+--- !u!114 &2048213019097142177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645916590929611407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 726bd38926f170646b1d1716b001856e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPoint: 100
+  maxHealthPoint: 100
+--- !u!114 &8278974617320623581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

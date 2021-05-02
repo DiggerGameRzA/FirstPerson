@@ -13,6 +13,8 @@ public interface IWeapon
     int CurrentSpare { get; set; }
     int MaxSpare { get; set; }
 
+    int Damage { get; set; }
+
     bool IsEquiped { get; set; }
 
     Animator GetAnimator();

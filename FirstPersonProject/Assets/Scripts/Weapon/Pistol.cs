@@ -14,6 +14,9 @@ public class Pistol : MonoBehaviour, IWeapon
     public int _currentSpare = 0;
     public int _maxSpare = 30;
 
+    [Header("Damage")]
+    public int _damage = 10;
+
     public float FireDelay 
     {
         get { return _fireDelay; }
@@ -38,6 +41,11 @@ public class Pistol : MonoBehaviour, IWeapon
         get { return _maxSpare; }
         set { _maxSpare = value; }
     }
+    public int Damage
+    {
+        get { return _damage; }
+        set { _damage = value; }
+    }
     public bool IsEquiped { get; set; }
     GameObject PistolPrefab;
     public void Equip()
@@ -59,6 +67,20 @@ public class Pistol : MonoBehaviour, IWeapon
     }
     public void Fire()
     {
-        
+        print("pew");
+        RaycastHit hit = CameraManager.GetCameraRaycast(100f);
+        if (hit.collider.gameObject.GetComponent<Health>())
+        {
+            print("hit entity!");
+            hit.transform.gameObject.GetComponent<Health>().TakeDamage(Damage);
+        }
+        else if (!hit.collider.gameObject.GetComponent<Health>())
+        {
+            print("doesn't hit entity");
+        }
+        else if (hit.collider == null)
+        {
+            print("doesn't hit anything");
+        }
     }
 }

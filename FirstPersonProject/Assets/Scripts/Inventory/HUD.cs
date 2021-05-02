@@ -74,7 +74,7 @@ public class HUD : MonoBehaviour
     }
     private void InventoryScript_ItemRemoved(object sender,InventoryEventArgs e)
     {
-        Transform inventoryPanel = transform.Find("Inventory");
+        Transform inventoryPanel = transform.GetChild(1).GetChild(2);
         int index = -1;
         foreach (Transform slot in inventoryPanel)
         {

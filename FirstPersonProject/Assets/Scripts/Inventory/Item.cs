@@ -7,11 +7,13 @@ public class Item : MonoBehaviour,IInventoryItem
     public string _name = "Item";
     public Sprite _image = null;
     public WeaponEnum _weapon = WeaponEnum.None;
-    public IPlayer player;
+    IPlayer player;
+    [SerializeField] Inventory inventory;
 
     private void Start()
     {
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
+        inventory = FindObjectOfType<Inventory>();
     }
 
     public string Name
@@ -33,7 +35,16 @@ public class Item : MonoBehaviour,IInventoryItem
     }
     public virtual void OnUse()
     {
-        
+        print("Using Item : " + Name);
+        if (Name == "First Aid M")
+        {
+            player.GetHealth().TakeHeal(50);
+            inventory.RemoveItem(this);
+        }
+        else if (Name == "First Aid S")
+        {
+
+        }
     }
     public void ShowUI(bool show)
     {

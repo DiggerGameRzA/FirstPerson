@@ -14,6 +14,9 @@ public class AssaultRifle : MonoBehaviour, IWeapon
     public int _currentSpare = 0;
     public int _maxSpare = 30;
 
+    [Header("Damage")]
+    public int _damage = 10;
+
     public float FireDelay
     {
         get { return _fireDelay; }
@@ -37,6 +40,11 @@ public class AssaultRifle : MonoBehaviour, IWeapon
     {
         get { return _maxSpare; }
         set { _maxSpare = value; }
+    }
+    public int Damage
+    {
+        get { return _damage; }
+        set { _damage = value; }
     }
     public bool IsEquiped { get; set; }
     GameObject ARPrefab;

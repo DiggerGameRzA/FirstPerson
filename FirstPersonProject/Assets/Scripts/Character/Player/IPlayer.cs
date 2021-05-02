@@ -9,6 +9,7 @@ public interface IPlayer
     Rigidbody GetRigidbody();
     Transform GetTransform();
     IWeapon GetWeapon();
+    IHealth GetHealth();
     void EquipWeapon(WeaponEnum weapon);
     //Transform GetHandTransform();
 }

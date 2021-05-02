@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Stats))]
 public class Player : MonoBehaviour, IPlayer
 {
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour, IPlayer
     IMovement movement;
     IMovementDir movementDir;
     IWeapon weapon;
+    IHealth health;
     GameObject weaponManager;
     public UIManager uiManager;
     public bool CanWalk { get; set; }
@@ -27,6 +29,7 @@ public class Player : MonoBehaviour, IPlayer
         weaponManager = GameObject.Find("Weapon Manager");
         weapon = null;
         uiManager = FindObjectOfType<UIManager>();
+        health = GetComponent<Health>();
 
         CanWalk = true;
     }
@@ -72,6 +75,10 @@ public class Player : MonoBehaviour, IPlayer
     public IWeapon GetWeapon()
     {
         return weapon;
+    }
+    public IHealth GetHealth()
+    {
+        return health;
     }
     /*
     public Transform GetHandTransform()

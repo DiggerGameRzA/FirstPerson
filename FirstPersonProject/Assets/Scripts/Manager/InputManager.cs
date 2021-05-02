@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Cancel"))
         {
             if (Cursor.lockState == CursorLockMode.Locked)
             {
@@ -62,6 +62,10 @@ public class InputManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             EquipWeaponInSlot(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            UseItemInSlot(1);
         }
 
         if (Input.GetButtonDown("Fire1"))
@@ -85,6 +89,11 @@ public class InputManager : MonoBehaviour
         {
             if (player.GetWeapon() != null)
                 weaponManager.Reload();
+        }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            player.GetHealth().TakeDamage(10f);
         }
     }
     public static float GetVerInput()
@@ -124,6 +133,18 @@ public class InputManager : MonoBehaviour
         else
         {
             Debug.Log("There is no weapon in this slot.");
+        }
+    }
+    void UseItemInSlot(int slot)
+    {
+        IInventoryItem item = inventory.GetPeekItem(slot, "Item");
+        if (item != null && item.Weapon == WeaponEnum.None)
+        {
+            item.OnUse();
+        }
+        else
+        {
+            Debug.Log("There is no item in this slot.");
         }
     }
 }

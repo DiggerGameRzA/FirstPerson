@@ -29,10 +29,9 @@ public class WeaponManager : MonoBehaviour
             tempTime = weapon.FireDelay;
             weapon.CurrentAmmo -= 1;
             uiManager.UpdateAmmo(weapon.CurrentAmmo, weapon.CurrentSpare);
-            weapon.Fire();
             weapon.GetAnimator().SetBool("fire", true);
             Invoke("ResetAnimation", weapon.FireDelay - 0.2f);
-            Debug.Log("Pew");
+            weapon.Fire();
         }
     }
     public void Reload()

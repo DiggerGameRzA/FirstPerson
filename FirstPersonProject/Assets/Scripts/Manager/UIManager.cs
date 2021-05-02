@@ -5,20 +5,31 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    //Inventory
     GameObject inventoryUI;
 
+    //Ammo
     GameObject ammoUI;
     GameObject currentAmmo;
     GameObject currentSpare;
 
+    //Health Point
+    GameObject hpBar;
+    IHealth playerHealth;
+
+    //Dialogue
     public Text dialogueName;
     public Text dialogueSentence;
     void Start()
     {
         inventoryUI = transform.GetChild(1).gameObject;
+
         ammoUI = transform.GetChild(2).gameObject;
         currentAmmo = ammoUI.transform.GetChild(2).gameObject;
         currentSpare = ammoUI.transform.GetChild(0).gameObject;
+
+        hpBar = transform.GetChild(3).GetChild(0).GetChild(0).gameObject;
+        playerHealth = FindObjectOfType<Player>().GetHealth();
     }
     public void ShowInventory(bool show)
     {
@@ -49,5 +60,9 @@ public class UIManager : MonoBehaviour
             dialogueSentence.text += letter;
             yield return null;
         }
+    }
+    public void UpdateHealth(float hp)
+    {
+        hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2(hp, 100);
     }
 }
