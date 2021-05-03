@@ -53,7 +53,10 @@ public class AssaultRifle : MonoBehaviour, IWeapon
         ARPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(2).gameObject;
         foreach (Transform i in ARPrefab.transform.parent)
         {
-            i.gameObject.SetActive(false);
+            if (i.name != "Arm_R")
+            {
+                i.gameObject.SetActive(false);
+            }
         }
         ARPrefab.SetActive(true);
     }

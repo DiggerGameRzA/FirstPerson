@@ -13,6 +13,10 @@ public class Button : MonoBehaviour
     {
         Application.Quit();
     }
+    public void LoadCutscene()
+    {
+        GameManager.instance.LoadCutscene();
+    }
     public void LoadGame()
     {
         GameManager.instance.LoadGame();

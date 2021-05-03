@@ -43,7 +43,8 @@ public class Item : MonoBehaviour,IInventoryItem
         }
         else if (Name == "First Aid S")
         {
-
+            player.GetHealth().TakeHeal(25);
+            inventory.RemoveItem(this);
         }
     }
     public void ShowUI(bool show)

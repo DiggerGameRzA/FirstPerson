@@ -29,17 +29,26 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
     }
-    public void LoadGame()
+    public void LoadCutscene()
     {
         loadingPrefab.SetActive(true);
 
         sceneLoading.Add(SceneManager.UnloadSceneAsync(1));
         sceneLoading.Add(SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive));
 
-        StartCoroutine(GetSceneLoadProgess());
+        StartCoroutine(GetSceneLoadProgess(false));
+    }
+    public void LoadGame()
+    {
+        loadingPrefab.SetActive(true);
+
+        sceneLoading.Add(SceneManager.UnloadSceneAsync(2));
+        sceneLoading.Add(SceneManager.LoadSceneAsync(3, LoadSceneMode.Additive));
+
+        StartCoroutine(GetSceneLoadProgess(true));
     }
 
-    public IEnumerator GetSceneLoadProgess()
+    public IEnumerator GetSceneLoadProgess(bool level)
     {
         for (int i = 0; i < sceneLoading.Count; i++)
         {
@@ -62,9 +71,12 @@ public class GameManager : MonoBehaviour
         loadingPrefab.SetActive(false);
         Debug.Log("Load game successful!");
 
-        cameraManager.enabled = true;
-        weaponManager.enabled = true;
-        inputManager.enabled = true;
-        dialogueManager.enabled = true;
+        if (level)
+        {
+            cameraManager.enabled = true;
+            weaponManager.enabled = true;
+            inputManager.enabled = true;
+            dialogueManager.enabled = true;
+        }
     }
 }

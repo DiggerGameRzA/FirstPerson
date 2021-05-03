@@ -153,8 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: First Aid S
-  _image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  _image: {fileID: 21300000, guid: 0fc26bd23129265448fcc5f721e399e0, type: 3}
   _weapon: 0
+  inventory: {fileID: 0}
 --- !u!65 &3886769021324590520
 BoxCollider:
   m_ObjectHideFlags: 0

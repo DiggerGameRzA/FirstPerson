@@ -153,8 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Assualt Rifle
-  _image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  _image: {fileID: 21300000, guid: 8b75c978d0eb88740912292c17a65224, type: 3}
   _weapon: 2
+  inventory: {fileID: 0}
 --- !u!65 &3549595443815918597
 BoxCollider:
   m_ObjectHideFlags: 0

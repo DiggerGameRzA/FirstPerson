@@ -153,8 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Ammo Box
-  _image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  _image: {fileID: 21300000, guid: 2756c5775300fe64dbd781a5375349b4, type: 3}
   _weapon: 0
+  inventory: {fileID: 0}
 --- !u!65 &9207275942048388624
 BoxCollider:
   m_ObjectHideFlags: 0

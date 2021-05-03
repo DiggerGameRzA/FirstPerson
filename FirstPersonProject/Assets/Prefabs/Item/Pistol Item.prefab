@@ -153,8 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Pistol
-  _image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  _image: {fileID: 21300000, guid: 3133440a4e3f4a14090727eed9c5e618, type: 3}
   _weapon: 1
+  inventory: {fileID: 0}
 --- !u!65 &9042193043552708021
 BoxCollider:
   m_ObjectHideFlags: 0

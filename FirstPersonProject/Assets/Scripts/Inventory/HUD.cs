@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    public Inventory inventory;
+    [SerializeField] Inventory inventory;
 
     private void Awake()
     {
@@ -101,6 +101,18 @@ public class HUD : MonoBehaviour
 
                 break;
             }
+        }
+    }
+    public void UseItemInSlot(int slot)
+    {
+        IInventoryItem item = inventory.GetPeekItem(slot, "Item");
+        if (item != null)
+        {
+            item.OnUse();
+        }
+        else
+        {
+            Debug.Log("There is no item in this slot.");
         }
     }
 }

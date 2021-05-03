@@ -53,7 +53,10 @@ public class Sedat : MonoBehaviour, IWeapon
         SedatPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(1).gameObject;
         foreach (Transform i in SedatPrefab.transform.parent)
         {
-            i.gameObject.SetActive(false);
+            if (i.name != "Arm_R")
+            {
+                i.gameObject.SetActive(false);
+            }
         }
         SedatPrefab.SetActive(true);
     }

@@ -165,7 +165,7 @@ public class Inventory : MonoBehaviour
     public IInventoryItem GetPeekItem(int slot, string type)
     {
         slot -= 1;
-        IInventoryItem item;
+        IInventoryItem item = null;
         if (wSlots[slot].mItemStack.Count != 0 || iSlots[slot].mItemStack.Count != 0)
         {
             if (type == "Item")
@@ -176,14 +176,6 @@ public class Inventory : MonoBehaviour
             {
                 item = wSlots[slot].mItemStack.Peek();
             }
-            else
-            {
-                item = null;
-            }
-        }
-        else
-        {
-            item = null;
         }
         return item;
     }

@@ -53,7 +53,10 @@ public class Pistol : MonoBehaviour, IWeapon
         PistolPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
         foreach (Transform i in PistolPrefab.transform.parent)
         {
-            i.gameObject.SetActive(false);
+            if(i.name != "Arm_R")
+            {
+                i.gameObject.SetActive(false);
+            }
         }
         PistolPrefab.SetActive(true);
     }

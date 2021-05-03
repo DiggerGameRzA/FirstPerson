@@ -9,10 +9,10 @@ public class InputManager : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] WeaponManager weaponManager;
     [SerializeField] CameraManager cameraManager;
+    bool canShoot = true;
     private void Awake()
     {
         inventory = FindObjectOfType<Inventory>();
-        uiManager = FindObjectOfType<UIManager>();
         weaponManager = FindObjectOfType<WeaponManager>();
         cameraManager = FindObjectOfType<CameraManager>();
     }
@@ -33,6 +33,7 @@ public class InputManager : MonoBehaviour
                 cameraManager.ShowCursor();
                 cameraManager.CanNotLookAround();
                 player.CanWalk = false;
+                canShoot = false;
             }
             else
             {
@@ -40,6 +41,7 @@ public class InputManager : MonoBehaviour
                 cameraManager.HideCursor();
                 cameraManager.CanLookAround();
                 player.CanWalk = true;
+                canShoot = true;
             }
         }
 
@@ -63,32 +65,31 @@ public class InputManager : MonoBehaviour
         {
             EquipWeaponInSlot(2);
         }
-        else if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            UseItemInSlot(1);
-        }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (canShoot)
         {
-            if (player.GetWeapon() != null)
+            if (Input.GetButtonDown("Fire1"))
             {
-                weaponManager.Fire();
-            }
-        }
-        else if (Input.GetButton("Fire1"))
-        {
-            if (player.GetWeapon() != null)
-            {
-                if (player.GetWeapon().WeaponType == WeaponEnum.AssaultRifle)
+                if (player.GetWeapon() != null)
                 {
                     weaponManager.Fire();
                 }
             }
-        }
-        else if (Input.GetButtonDown("Reload"))
-        {
-            if (player.GetWeapon() != null)
-                weaponManager.Reload();
+            else if (Input.GetButton("Fire1"))
+            {
+                if (player.GetWeapon() != null)
+                {
+                    if (player.GetWeapon().WeaponType == WeaponEnum.AssaultRifle)
+                    {
+                        weaponManager.Fire();
+                    }
+                }
+            }
+            else if (Input.GetButtonDown("Reload"))
+            {
+                if (player.GetWeapon() != null)
+                    weaponManager.Reload();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.P))
@@ -135,7 +136,7 @@ public class InputManager : MonoBehaviour
             Debug.Log("There is no weapon in this slot.");
         }
     }
-    void UseItemInSlot(int slot)
+    public void UseItemInSlot(int slot)
     {
         IInventoryItem item = inventory.GetPeekItem(slot, "Item");
         if (item != null && item.Weapon == WeaponEnum.None)

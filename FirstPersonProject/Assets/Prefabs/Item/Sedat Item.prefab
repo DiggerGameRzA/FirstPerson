@@ -153,8 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Sedat
-  _image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  _image: {fileID: 21300000, guid: 56cd2d21205cd9848ae92af79453fba4, type: 3}
   _weapon: 3
+  inventory: {fileID: 0}
 --- !u!65 &7479242635385011218
 BoxCollider:
   m_ObjectHideFlags: 0
