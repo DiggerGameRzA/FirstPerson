@@ -32,6 +32,7 @@ public class Movement : IMovement
     }
     public void Jump(float jumpForce)
     {
-        rb.AddForce(0, jumpForce, 0);
+        //rb.AddForce(0, jumpForce, 0);
+        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
     }
 }

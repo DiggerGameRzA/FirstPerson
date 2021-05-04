@@ -16,6 +16,8 @@ public class Player : MonoBehaviour, IPlayer
     GameObject weaponManager;
     public UIManager uiManager;
     public bool CanWalk { get; set; }
+
+    Collider col;
     //Transform handPrefabs;
 
     void Start()
@@ -32,16 +34,18 @@ public class Player : MonoBehaviour, IPlayer
         health = GetComponent<Health>();
 
         CanWalk = true;
+        col = GetComponent<Collider>();
     }
 
     void Update()
     {
         //movement.RotateHand(CameraManager.GetCameraRotation());
-        movement.RotateBody(CameraManager.GetCameraRotationY());
+        //movement.RotateBody(CameraManager.GetCameraRotationY());
+        print(movementDir.GetMovementDir());
     }
     void FixedUpdate()
     {
-        rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        //rb.velocity = new Vector3(0, rb.velocity.y, 0);
 
         if (CanWalk)
         {
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour, IPlayer
             }
         }
 
-        if (Input.GetButton("Jump") && rb.velocity.y == 0)
+        if (Input.GetButton("Jump") && IsGrounded())
         {
             movement.Jump(stats.JumpForce);
         }
@@ -106,5 +110,11 @@ public class Player : MonoBehaviour, IPlayer
             this.weapon.Equip();
             uiManager.UpdateAmmo(this.weapon.CurrentAmmo, this.weapon.CurrentSpare);
         }
+    }
+    bool IsGrounded()
+    {
+        RaycastHit hit;
+        Physics.Raycast(col.bounds.center, Vector3.down, out hit, col.bounds.extents.y + 0.01f);
+        return hit.collider != null;
     }
 }
