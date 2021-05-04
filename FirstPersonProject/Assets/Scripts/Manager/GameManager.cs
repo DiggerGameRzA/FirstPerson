@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public GameObject loadingPrefab;
     public GameObject bar;
+    public GameObject percent;
     [SerializeField] float totalProgress;
 
     WeaponManager weaponManager;
@@ -19,7 +20,15 @@ public class GameManager : MonoBehaviour
     List<AsyncOperation> sceneLoading = new List<AsyncOperation>();
     private void Awake()
     {
-        instance = this;
+        if(instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(this.gameObject);
+        }
         weaponManager = FindObjectOfType<WeaponManager>();
         inputManager = FindObjectOfType<InputManager>();
         cameraManager = FindObjectOfType<CameraManager>();
@@ -27,23 +36,23 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive);
     }
-    public void LoadCutscene()
+    public void LoadCutscene(int scene)
     {
         loadingPrefab.SetActive(true);
 
         sceneLoading.Add(SceneManager.UnloadSceneAsync(1));
-        sceneLoading.Add(SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive));
+        sceneLoading.Add(SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive));
 
         StartCoroutine(GetSceneLoadProgess(false));
     }
-    public void LoadGame()
+    public void LoadGame(int scene)
     {
         loadingPrefab.SetActive(true);
 
         sceneLoading.Add(SceneManager.UnloadSceneAsync(2));
-        sceneLoading.Add(SceneManager.LoadSceneAsync(3, LoadSceneMode.Additive));
+        sceneLoading.Add(SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive));
 
         StartCoroutine(GetSceneLoadProgess(true));
     }
@@ -63,13 +72,18 @@ public class GameManager : MonoBehaviour
                 totalProgress = (totalProgress / sceneLoading.Count) * 100f;
 
                 bar.GetComponent<RectTransform>().sizeDelta = new Vector2(totalProgress, 100);
+                percent.GetComponent<Text>().text = Mathf.RoundToInt(totalProgress) + " %";
 
                 yield return null;
             }
         }
 
-        loadingPrefab.SetActive(false);
-        Debug.Log("Load game successful!");
+        //Finished loading
+        totalProgress = 100f;
+        bar.GetComponent<RectTransform>().sizeDelta = new Vector2(totalProgress, 100);
+        percent.GetComponent<Text>().text = Mathf.RoundToInt(totalProgress) + " %";
+
+        LeanTween.alphaCanvas(loadingPrefab.GetComponent<CanvasGroup>(), 0f, 0.5f).setOnComplete(FinishedLoading);
 
         if (level)
         {
@@ -78,5 +92,11 @@ public class GameManager : MonoBehaviour
             inputManager.enabled = true;
             dialogueManager.enabled = true;
         }
+    }
+    void FinishedLoading()
+    {
+        loadingPrefab.SetActive(false);
+        loadingPrefab.GetComponent<CanvasGroup>().alpha = 1;
+        Debug.Log("Load game successful!");
     }
 }

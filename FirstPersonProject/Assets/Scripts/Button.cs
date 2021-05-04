@@ -13,12 +13,12 @@ public class Button : MonoBehaviour
     {
         Application.Quit();
     }
-    public void LoadCutscene()
+    public void LoadCutscene(int scene)
     {
-        GameManager.instance.LoadCutscene();
+        GameManager.instance.LoadCutscene(scene);
     }
-    public void LoadGame()
+    public void LoadGame(int scene)
     {
-        GameManager.instance.LoadGame();
+        GameManager.instance.LoadGame(scene);
     }
 }

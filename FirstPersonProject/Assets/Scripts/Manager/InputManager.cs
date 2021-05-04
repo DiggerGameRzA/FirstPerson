@@ -24,8 +24,9 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         RaycastItem();
+        RaycastDoor();
 
-        if(Input.GetButtonDown("Open Inventory"))
+        if (Input.GetButtonDown("Open Inventory"))
         {
             if (!uiManager.GetInventoryVisible())
             {
@@ -120,6 +121,21 @@ public class InputManager : MonoBehaviour
                 else if (hit.transform.CompareTag("Weapon"))
                 {
                     inventory.AddItem(item, "Weapon");
+                }
+            }
+        }
+    }
+    private void RaycastDoor()
+    {
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+        if (hit.transform)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                Door door = hit.transform.GetComponent<Door>();
+                if (hit.transform.CompareTag("Interactable"))
+                {
+                    door.OnEnter();
                 }
             }
         }
