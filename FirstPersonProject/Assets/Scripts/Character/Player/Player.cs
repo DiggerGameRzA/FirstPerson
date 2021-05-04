@@ -41,7 +41,6 @@ public class Player : MonoBehaviour, IPlayer
     {
         //movement.RotateHand(CameraManager.GetCameraRotation());
         //movement.RotateBody(CameraManager.GetCameraRotationY());
-        print(movementDir.GetMovementDir());
     }
     void FixedUpdate()
     {

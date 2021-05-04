@@ -136,16 +136,4 @@ public class InputManager : MonoBehaviour
             Debug.Log("There is no weapon in this slot.");
         }
     }
-    public void UseItemInSlot(int slot)
-    {
-        IInventoryItem item = inventory.GetPeekItem(slot, "Item");
-        if (item != null && item.Weapon == WeaponEnum.None)
-        {
-            item.OnUse();
-        }
-        else
-        {
-            Debug.Log("There is no item in this slot.");
-        }
-    }
 }

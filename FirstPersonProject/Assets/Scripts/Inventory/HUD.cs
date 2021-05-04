@@ -18,6 +18,10 @@ public class HUD : MonoBehaviour
 
         inventory.WeaponAdded += InventoryScript_WeaponAdd;
     }
+    private void Update()
+    {
+        
+    }
     private void InventoryScript_ItemAdd(object sender,InventoryEventArgs e)
     {
         Transform inventoryPanel = transform.GetChild(1).GetChild(2);
@@ -105,10 +109,11 @@ public class HUD : MonoBehaviour
     }
     public void UseItemInSlot(int slot)
     {
-        IInventoryItem item = inventory.GetPeekItem(slot, "Item");
-        if (item != null)
+        IInventoryItem item = null;
+        if (inventory.iSlots[slot - 1].mItemStack.Count != 0)
         {
-            //item.OnUse();
+            item = inventory.iSlots[slot - 1].mItemStack.Peek();
+            inventory.UseItem(item);
         }
         else
         {

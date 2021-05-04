@@ -166,7 +166,7 @@ public class Inventory : MonoBehaviour
     {
         slot -= 1;
         IInventoryItem item = null;
-        if (wSlots[slot].mItemStack.Count != 0 || iSlots[slot].mItemStack.Count != 0)
+        if (wSlots[slot].Count != 0 || iSlots[slot].Count != 0)
         {
             if (type == "Item")
             {
