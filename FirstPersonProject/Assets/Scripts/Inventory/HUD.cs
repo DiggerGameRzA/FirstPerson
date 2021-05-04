@@ -108,7 +108,7 @@ public class HUD : MonoBehaviour
         IInventoryItem item = inventory.GetPeekItem(slot, "Item");
         if (item != null)
         {
-            item.OnUse();
+            //item.OnUse();
         }
         else
         {
