@@ -9,7 +9,7 @@ public class Health : MonoBehaviour, IHealth
     [SerializeField] float healthPoint;
     [SerializeField] float maxHealthPoint;
 
-    RectTransform HPBar;
+    [SerializeField] RectTransform HPBar;
 
     public float HealthPoint
     {
@@ -29,7 +29,7 @@ public class Health : MonoBehaviour, IHealth
         }
         else
         {
-            HPBar = transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<RectTransform>();
+            
         }
     }
     public void TakeDamage(float damage)

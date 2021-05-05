@@ -11,7 +11,6 @@ public class Compy : MonoBehaviour
 
     //bool
     public bool IsChase = false;
-    bool isAtNest = false;
 
     //gameObject
     public GameObject nest;
@@ -20,6 +19,7 @@ public class Compy : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     Animator anim;
+    IHealth health;
 
     void Start()
     {
@@ -27,6 +27,7 @@ public class Compy : MonoBehaviour
         agent.speed = speed;
         anim = GetComponent<Animator>();
         target = FindObjectOfType<Player>().transform;
+        health = GetComponent<IHealth>();
     }
 
     // Update is called once per frame
@@ -35,33 +36,36 @@ public class Compy : MonoBehaviour
         float distance = Vector3.Distance(target.position, transform.position);
         float disToNest = Vector3.Distance(transform.position, nest.transform.position);
 
-        if (distance < visionRange && disToNest > 2)
-        {
-            IsChase = true;
-        }
-        else if (disToNest < 2)
-        {
-            IsChase = false;
-        }
-
-        if (!IsChase)
+        if (health.HealthPoint <= 0)
         {
             agent.SetDestination(transform.position);
-            anim.SetBool("isIdling", true);
-            anim.SetBool("isRunning", false);
+            agent.speed = 0;
+            anim.SetBool("isDead", true);
+            anim.Play("Velociraptor_Death");
         }
-        else if (IsChase)
+        else
         {
-            agent.SetDestination(nest.transform.position);
-            anim.SetBool("isIdling", false);
-            anim.SetBool("isRunning", true);
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Nest")
-        {
-            print("aaaa");
+            if (distance < visionRange && disToNest > 2)
+            {
+                IsChase = true;
+            }
+            else if (disToNest < 2)
+            {
+                IsChase = false;
+            }
+
+            if (!IsChase)
+            {
+                agent.SetDestination(transform.position);
+                anim.SetBool("isIdling", true);
+                anim.SetBool("isRunning", false);
+            }
+            else if (IsChase)
+            {
+                agent.SetDestination(nest.transform.position);
+                anim.SetBool("isIdling", false);
+                anim.SetBool("isRunning", true);
+            }
         }
     }
     private void OnDrawGizmos()

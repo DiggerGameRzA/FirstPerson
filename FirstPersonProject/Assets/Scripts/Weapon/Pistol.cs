@@ -60,10 +60,6 @@ public class Pistol : MonoBehaviour, IWeapon
         }
         PistolPrefab.SetActive(true);
     }
-    private void Start()
-    {
-        
-    }
     public Animator GetAnimator()
     {
         return PistolPrefab.GetComponent<Animator>();
