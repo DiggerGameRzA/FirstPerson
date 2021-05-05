@@ -247,14 +247,11 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 2610356544941220764, guid: c4eb07d5e5b41ab4181c53491e8df427,
+    m_HighlightedSprite: {fileID: 21300000, guid: da063a46a3ed6b143922f20333ce465e,
       type: 3}
-    m_PressedSprite: {fileID: 7634936489924690996, guid: faf87db3f3d3de44cb7edc4edac57932,
-      type: 3}
-    m_SelectedSprite: {fileID: 7634936489924690996, guid: faf87db3f3d3de44cb7edc4edac57932,
-      type: 3}
-    m_DisabledSprite: {fileID: 7634936489924690996, guid: faf87db3f3d3de44cb7edc4edac57932,
-      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: c74de18ce447c104aab6d4df04e0e933, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: c74de18ce447c104aab6d4df04e0e933, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: c74de18ce447c104aab6d4df04e0e933, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -284,8 +281,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7634936489924690996, guid: faf87db3f3d3de44cb7edc4edac57932,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: c74de18ce447c104aab6d4df04e0e933, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -312,7 +308,7 @@ RectTransform:
   m_GameObject: {fileID: 381207080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.62757, y: 0.62757, z: 0.62757}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 2029954224}
   m_RootOrder: 3
@@ -320,7 +316,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -45.6}
-  m_SizeDelta: {x: 500, y: 93.75}
+  m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &641211238
 GameObject:
@@ -356,7 +352,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &641211240
 MonoBehaviour:
@@ -618,7 +614,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 151.4}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 418.02, y: 59.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &919267445
 GameObject:
@@ -843,7 +839,7 @@ RectTransform:
   m_GameObject: {fileID: 1220691144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.62, y: 0.62, z: 0.62}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children: []
   m_Father: {fileID: 2029954224}
   m_RootOrder: 2
@@ -851,7 +847,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 32}
-  m_SizeDelta: {x: 500, y: 93.75}
+  m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!114 &1220691146
 MonoBehaviour:
@@ -881,14 +877,11 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: -9111267136089734323, guid: 8228a9d6ea730fd4583b5d1d549f0db8,
+    m_HighlightedSprite: {fileID: 21300000, guid: 70fabddbbdcf3ab4e80ebd8ee5bf96ce,
       type: 3}
-    m_PressedSprite: {fileID: -1387638928893720202, guid: 425cfb44522825248a71fc22049f951c,
-      type: 3}
-    m_SelectedSprite: {fileID: -1387638928893720202, guid: 425cfb44522825248a71fc22049f951c,
-      type: 3}
-    m_DisabledSprite: {fileID: -1387638928893720202, guid: 425cfb44522825248a71fc22049f951c,
-      type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 06ac4275a15e6894b9d08615ac5f9cfa, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 06ac4275a15e6894b9d08615ac5f9cfa, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 06ac4275a15e6894b9d08615ac5f9cfa, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -929,8 +922,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1387638928893720202, guid: 425cfb44522825248a71fc22049f951c,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 06ac4275a15e6894b9d08615ac5f9cfa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

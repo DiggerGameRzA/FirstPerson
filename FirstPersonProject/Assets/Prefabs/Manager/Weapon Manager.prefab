@@ -46,11 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d0f674d613465418107a35960af466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fireDelay: 0.5
+  _fireDelay: 0.1
   _currentAmmo: 10
   _maxAmmo: 10
   _currentSpare: 30
   _maxSpare: 30
+  _damage: 10
 --- !u!114 &3735935088031216111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,6 +69,7 @@ MonoBehaviour:
   _maxAmmo: 1
   _currentSpare: 10
   _maxSpare: 10
+  _damage: 10
 --- !u!114 &8047852489406641720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +87,7 @@ MonoBehaviour:
   _maxAmmo: 30
   _currentSpare: 90
   _maxSpare: 90
+  _damage: 10
 --- !u!114 &6184830440101684760
 MonoBehaviour:
   m_ObjectHideFlags: 0
