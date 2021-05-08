@@ -7,11 +7,26 @@ using UnityEngine;
 [RequireComponent(typeof(AssaultRifle))]
 public class WeaponManager : MonoBehaviour
 {
+    public static WeaponManager instance;
+
     [SerializeField] IPlayer player;
     [SerializeField] IWeapon weapon;
     [SerializeField] UIManager uiManager;
 
     float tempTime = 0f;
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            print("Destroy myself");
+            Destroy(this.gameObject);
+        }
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(this.gameObject);
+        }
+    }
     void Start()
     {
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
@@ -62,5 +77,10 @@ public class WeaponManager : MonoBehaviour
     void ResetAnimation()
     {
         weapon.GetAnimator().SetBool("fire", false);
+    }
+    public void Restart()
+    {
+        player = FindObjectOfType<Player>().GetComponent<IPlayer>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 }

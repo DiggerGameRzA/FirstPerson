@@ -13,7 +13,7 @@ public class Item : MonoBehaviour,IInventoryItem
     private void Start()
     {
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
-        inventory = FindObjectOfType<Inventory>();
+        inventory = Inventory.instance;
     }
 
     public string Name

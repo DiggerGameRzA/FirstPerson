@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour
     //Dialogue
     public Text dialogueName;
     public Text dialogueSentence;
+
+    public Text subtitle;
     void Start()
     {
         inventoryUI = transform.GetChild(1).gameObject;
@@ -64,5 +66,16 @@ public class UIManager : MonoBehaviour
     public void UpdateHealth(float hp)
     {
         hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2(hp, 100);
+    }
+    public void UpdateSubtitle(string sentence)
+    {
+        subtitle.text = "";
+        LeanTween.alphaText(subtitle.gameObject.GetComponent<RectTransform>(), 1f, 0f);
+        subtitle.text = sentence;
+        Invoke("TextFadeOut", 3f);
+    }
+    void TextFadeOut()
+    {
+        LeanTween.alphaText(subtitle.gameObject.GetComponent<RectTransform>(), 0f, 1f);
     }
 }

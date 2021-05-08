@@ -7,12 +7,9 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] Inventory inventory;
 
-    private void Awake()
-    {
-        inventory = FindObjectOfType<Inventory>();
-    }
     void Start()
     {
+        inventory = Inventory.instance;
         inventory.ItemAdded += InventoryScript_ItemAdd;
         inventory.ItemRemoved += InventoryScript_ItemRemoved;
 

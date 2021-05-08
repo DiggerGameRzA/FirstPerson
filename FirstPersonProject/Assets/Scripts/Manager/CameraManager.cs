@@ -4,11 +4,26 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
+    public static CameraManager instance;
     [SerializeField] public static new UnityEngine.Camera camera;
     [SerializeField] GameObject FPSCamera;
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            print("Destroy myself");
+            Destroy(this.gameObject);
+        }
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(this.gameObject);
+        }
+    }
     void Start()
     {
         camera = UnityEngine.Camera.main;
+        DontDestroyOnLoad(UnityEngine.Camera.main);
         FPSCamera = GameObject.Find("FPS Camera");
         HideCursor();
     }
@@ -51,6 +66,7 @@ public class CameraManager : MonoBehaviour
     }
     public static RaycastHit GetCameraRaycast(float range)
     {
+        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         RaycastHit hit;
         Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range);
         return hit;
@@ -72,5 +88,11 @@ public class CameraManager : MonoBehaviour
     public void CanNotLookAround()
     {
         FPSCamera.SetActive(false);
+    }
+    public void Restart()
+    {
+        camera = UnityEngine.Camera.main;
+        FPSCamera = GameObject.Find("FPS Camera");
+        HideCursor();
     }
 }

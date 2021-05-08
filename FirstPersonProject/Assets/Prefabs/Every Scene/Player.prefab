@@ -46,9 +46,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.1180217
   m_Direction: 1
-  m_Center: {x: 0, y: -1, z: 0}
+  m_Center: {x: 0, y: -0.94098914, z: 0}
 --- !u!54 &1645916590929611412
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -58,12 +58,12 @@ Rigidbody:
   m_GameObject: {fileID: 1645916590929611407}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 2
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1645916590929611403
 MonoBehaviour:
@@ -78,9 +78,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractRange: 10
-  WalkSpeed: 400
-  RunSpeed: 700
-  JumpForce: 300
+  WalkSpeed: 30
+  RunSpeed: 35
+  JumpForce: 10
 --- !u!114 &2048213019097142177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthPoint: 100
   maxHealthPoint: 100
+  HPBar: {fileID: 0}
 --- !u!114 &8278974617320623581
 MonoBehaviour:
   m_ObjectHideFlags: 0

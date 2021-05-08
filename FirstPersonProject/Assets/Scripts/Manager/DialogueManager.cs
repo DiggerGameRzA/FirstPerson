@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager instance;
+
     [SerializeField] UIManager uiManager;
     public Queue<string> Sentences;
     public Queue<string> Name;
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            print("Destroy myself");
+            Destroy(this.gameObject);
+        }
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(this.gameObject);
+        }
+    }
     void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
@@ -44,5 +59,11 @@ public class DialogueManager : MonoBehaviour
 
         uiManager.DialogueUpdateName(_name);
         StartCoroutine(uiManager.TypeSentence(_sentence));
+    }
+    public void Restart()
+    {
+        uiManager = FindObjectOfType<UIManager>();
+        Sentences = new Queue<string>();
+        Name = new Queue<string>();
     }
 }

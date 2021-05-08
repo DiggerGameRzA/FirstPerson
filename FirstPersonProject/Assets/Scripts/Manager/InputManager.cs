@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public static InputManager instance;
+
     [SerializeField] IPlayer player;
     [SerializeField] Inventory inventory;
     [SerializeField] UIManager uiManager;
@@ -12,9 +14,19 @@ public class InputManager : MonoBehaviour
     bool canShoot = true;
     private void Awake()
     {
-        inventory = FindObjectOfType<Inventory>();
-        weaponManager = FindObjectOfType<WeaponManager>();
-        cameraManager = FindObjectOfType<CameraManager>();
+        if (instance != null && instance != this)
+        {
+            print("Destroy myself");
+            Destroy(this.gameObject);
+        }
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(this.gameObject);
+        }
+        inventory = Inventory.instance;
+        weaponManager = WeaponManager.instance;
+        cameraManager = CameraManager.instance;
     }
     void Start()
     {
@@ -135,7 +147,28 @@ public class InputManager : MonoBehaviour
                 Door door = hit.transform.GetComponent<Door>();
                 if (hit.transform.CompareTag("Interactable"))
                 {
-                    door.OnEnter();
+                    if (!door.needKey)
+                    {
+                        door.OnEnter();
+                    }
+                    else if (door.needKey)
+                    {
+                        if(inventory.FindKeyItem(door.keyName) != null)
+                        {
+                            inventory.RemoveItem(inventory.FindKeyItem(door.keyName));
+                            door.needKey = false;
+
+                            door.OnEnter();
+                        }
+                        else
+                        {
+                            uiManager.UpdateSubtitle("You need " + door.keyName + " to enter");
+                        }
+                    }
+                }
+                else
+                {
+                    print("This object isn't have tag!");
                 }
             }
         }
@@ -151,5 +184,10 @@ public class InputManager : MonoBehaviour
         {
             Debug.Log("There is no weapon in this slot.");
         }
+    }
+    public void Restart()
+    {
+        player = FindObjectOfType<Player>().GetComponent<IPlayer>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 }

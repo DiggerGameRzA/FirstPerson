@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory instance;
+
     private const int itemSlots = 5;
     private const int weaponSlots = 2;
     //public List<IInventoryItem> mItems = new List<IInventoryItem>();
@@ -17,7 +19,19 @@ public class Inventory : MonoBehaviour
     public event EventHandler<InventoryEventArgs> ItemRemoved;
 
     public event EventHandler<InventoryEventArgs> WeaponAdded;
-
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            print("Destroy myself");
+            Destroy(this.gameObject);
+        }
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(this.gameObject);
+        }
+    }
     public Inventory()
     {
         for (int i = 0; i < itemSlots; i++)
@@ -179,5 +193,37 @@ public class Inventory : MonoBehaviour
         }
         return item;
     }
-
+    public IInventoryItem FindKeyItem(string name)
+    {
+        
+        IInventoryItem item = null;
+        for (int i = 0; i < iSlots.Count; i++)
+        {
+            if (iSlots[i].mItemStack.Count != 0)
+            {
+                item = iSlots[i].mItemStack.Peek();
+            }
+            if(item != null)
+            {
+                item = iSlots[i].mItemStack.Peek();
+                if(item.Name == name)
+                {
+                    break;
+                }
+                else
+                {
+                    item = null;
+                }
+            }
+        }
+        if(item != null)
+        {
+            print("Key is found!");
+        }
+        else
+        {
+            print("Key is not found");
+        }
+        return item;
+    }
 }
