@@ -83,7 +83,7 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_HorizontalAxis:
-    Value: 0
+    Value: 90
     m_SpeedMode: 1
     m_MaxSpeed: 4
     m_AccelTime: 0.1
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: 0.73}
+  m_FollowOffset: {x: 0, y: 0, z: 0.1}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -190,10 +190,10 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7770833, y: 1}
+    m_SensorSize: {x: 1.7788104, y: 1}
   m_Transitions:
     m_BlendHint: 0
-    m_InheritPosition: 0
+    m_InheritPosition: 1
     m_OnCameraLive:
       m_PersistentCalls:
         m_Calls: []

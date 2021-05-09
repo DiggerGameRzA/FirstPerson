@@ -66,20 +66,18 @@ public class Sedat : MonoBehaviour, IWeapon
     }
     public void Fire()
     {
-        print("pew");
         RaycastHit hit = CameraManager.GetCameraRaycast(100f);
-        if (hit.collider.gameObject.GetComponent<Health>())
+        if (hit.collider.gameObject.GetComponent<SedatPoint>())
         {
-            print("hit entity!");
-            hit.transform.gameObject.GetComponent<Health>().TakeDamage(Damage);
+            hit.transform.gameObject.GetComponent<SedatPoint>().TakeSedat(Damage);
         }
         else if (!hit.collider.gameObject.GetComponent<Health>())
         {
-            print("doesn't hit entity");
+
         }
         else if (hit.collider == null)
         {
-            print("doesn't hit anything");
+
         }
     }
 }

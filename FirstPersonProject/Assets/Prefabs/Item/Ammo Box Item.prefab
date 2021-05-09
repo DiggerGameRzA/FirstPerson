@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9207275942048388653}
   - component: {fileID: 9207275942048388625}
-  - component: {fileID: 9207275942048388624}
+  - component: {fileID: 2088072986679915457}
   m_Layer: 8
   m_Name: Ammo Box Item
   m_TagString: Item
@@ -156,8 +156,8 @@ MonoBehaviour:
   _image: {fileID: 21300000, guid: 2756c5775300fe64dbd781a5375349b4, type: 3}
   _weapon: 0
   inventory: {fileID: 0}
---- !u!65 &9207275942048388624
-BoxCollider:
+--- !u!136 &2088072986679915457
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -166,9 +166,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 2, z: 1.5}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8097845089132922392
 PrefabInstance:
   m_ObjectHideFlags: 0

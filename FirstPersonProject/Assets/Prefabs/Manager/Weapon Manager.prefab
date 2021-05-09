@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  currentSlot: 0
 --- !u!114 &6071176560937073810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ MonoBehaviour:
   _maxAmmo: 1
   _currentSpare: 10
   _maxSpare: 10
-  _damage: 10
+  _damage: 1
 --- !u!114 &8047852489406641720
 MonoBehaviour:
   m_ObjectHideFlags: 0

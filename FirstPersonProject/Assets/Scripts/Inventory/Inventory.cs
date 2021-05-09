@@ -124,7 +124,7 @@ public class Inventory : MonoBehaviour
             {
                 if (ItemAdded != null)
                 {
-                    ItemAdded(this, new InventoryEventArgs(item));
+                    ItemAdded(instance, new InventoryEventArgs(item));
                     Debug.Log("Added Item : " + item.Name);
                 }
             }
@@ -132,7 +132,7 @@ public class Inventory : MonoBehaviour
             {
                 if (WeaponAdded != null)
                 {
-                    WeaponAdded(this, new InventoryEventArgs(item));
+                    WeaponAdded(instance, new InventoryEventArgs(item));
                     Debug.Log("Added Weapon : " + item.Name);
                 }
             }
@@ -170,7 +170,7 @@ public class Inventory : MonoBehaviour
             {
                 if (ItemRemoved != null)
                 {
-                    ItemRemoved(this, new InventoryEventArgs(item));
+                    ItemRemoved(instance, new InventoryEventArgs(item));
                 }
                 break;
             }
@@ -225,5 +225,9 @@ public class Inventory : MonoBehaviour
             print("Key is not found");
         }
         return item;
+    }
+    public void Restart()
+    {
+
     }
 }

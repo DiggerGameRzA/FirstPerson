@@ -9,17 +9,23 @@ public class Compy : MonoBehaviour
     public float visionRange; //Compy's detection range.
     public float speed; //Compy's speed.
 
-    //bool
-    public bool IsChase = false;
+    //states
+    bool isDead = false;
+    bool isSleep = false;
 
+    bool isInRange = false;
+    bool isNest = false;
+    
     //gameObject
     public GameObject nest;
+    public GameObject escape;
 
     //Component
     Transform target;
     NavMeshAgent agent;
     Animator anim;
     IHealth health;
+    ISedat sedat;
 
     void Start()
     {
@@ -28,6 +34,7 @@ public class Compy : MonoBehaviour
         anim = GetComponent<Animator>();
         target = FindObjectOfType<Player>().transform;
         health = GetComponent<IHealth>();
+        sedat = GetComponent<SedatPoint>();
     }
 
     // Update is called once per frame
@@ -38,34 +45,64 @@ public class Compy : MonoBehaviour
 
         if (health.HealthPoint <= 0)
         {
+            health.OnDead();
+            isDead = true;
+        }
+        else if (sedat.SedatPoints <= 0)
+        {
+            isSleep = true;
+        }
+        else if (disToNest < 2)
+        {
+            isNest = true;
+        }
+        
+        if (distance < visionRange)
+        {
+            isInRange = true;
+        }
+        else if (distance > visionRange)
+        {
+            isInRange = false;
+        }
+
+        if (isDead)
+        {
             agent.SetDestination(transform.position);
             agent.speed = 0;
             anim.SetBool("isDead", true);
-            anim.Play("Velociraptor_Death");
+            anim.Play("Death");
         }
-        else
+        else if (isSleep)
         {
-            if (distance < visionRange && disToNest > 2)
-            {
-                IsChase = true;
-            }
-            else if (disToNest < 2)
-            {
-                IsChase = false;
-            }
-
-            if (!IsChase)
-            {
-                agent.SetDestination(transform.position);
-                anim.SetBool("isIdling", true);
-                anim.SetBool("isRunning", false);
-            }
-            else if (IsChase)
-            {
-                agent.SetDestination(nest.transform.position);
-                anim.SetBool("isIdling", false);
-                anim.SetBool("isRunning", true);
-            }
+            agent.SetDestination(transform.position);
+            agent.speed = 0;
+            anim.SetBool("isDead", true);
+            anim.Play("Death");
+        }
+        else if (isNest && isInRange)
+        {
+            agent.SetDestination(escape.transform.position);
+            anim.SetBool("isIdling", false);
+            anim.SetBool("isRunning", true);
+        }
+        else if (isNest)
+        {
+            agent.SetDestination(transform.position);
+            anim.SetBool("isIdling", true);
+            anim.SetBool("isRunning", false);
+        }
+        else if (isInRange)
+        {
+            agent.SetDestination(nest.transform.position);
+            anim.SetBool("isIdling", false);
+            anim.SetBool("isRunning", true);
+        }
+        else if (!isInRange)
+        {
+            agent.SetDestination(transform.position);
+            anim.SetBool("isIdling", true);
+            anim.SetBool("isRunning", false);
         }
     }
     private void OnDrawGizmos()

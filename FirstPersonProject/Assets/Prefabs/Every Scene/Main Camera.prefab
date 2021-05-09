@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 6208377627769438016}
   - component: {fileID: 6208377627769438017}
   - component: {fileID: 6208377627769438022}
+  - component: {fileID: 8443493808284709}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -176,7 +177,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 5000
   field of view: 40
   orthographic: 0
@@ -238,6 +239,18 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8443493808284709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6208377627769438018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 425564b876a4523418b5b6d65da76e03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6208377628565797106
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +655,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6208377628832174395}
     m_Modifications:
+    - target: {fileID: -7766664806210261044, guid: b03a64b5b3de1b14895333706bf5acb3,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 23d50b38166671749a4b974726c9f185, type: 2}
     - target: {fileID: 717645882489872103, guid: b03a64b5b3de1b14895333706bf5acb3,
         type: 3}
       propertyPath: m_Layer

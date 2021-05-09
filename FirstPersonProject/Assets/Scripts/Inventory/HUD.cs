@@ -6,18 +6,21 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     [SerializeField] Inventory inventory;
+    IPlayer player;
+    UIManager uiManager;
 
     void Start()
     {
+        uiManager = FindObjectOfType<UIManager>();
+
         inventory = Inventory.instance;
         inventory.ItemAdded += InventoryScript_ItemAdd;
         inventory.ItemRemoved += InventoryScript_ItemRemoved;
 
         inventory.WeaponAdded += InventoryScript_WeaponAdd;
-    }
-    private void Update()
-    {
         
+        player = FindObjectOfType<Player>().GetComponent<IPlayer>();
+        Invoke("ResetUI", 0.1f);
     }
     private void InventoryScript_ItemAdd(object sender,InventoryEventArgs e)
     {
@@ -116,5 +119,28 @@ public class HUD : MonoBehaviour
         {
             Debug.Log("There is no item in this slot.");
         }
+    }
+    void ResetUI()
+    {
+        IInventoryItem item;
+
+        for (int i = 0; i < inventory.wSlots.Count; i++)
+        {
+            if (inventory.wSlots[i].mItemStack.Count != 0)
+            {
+                item = inventory.wSlots[i].mItemStack.Peek();
+                InventoryScript_WeaponAdd(inventory, new InventoryEventArgs(item));
+            }
+        }
+        for (int i = 0; i < inventory.wSlots.Count; i++)
+        {
+            if (inventory.iSlots[i].mItemStack.Count != 0)
+            {
+                item = inventory.iSlots[i].mItemStack.Peek();
+                InventoryScript_ItemAdd(inventory, new InventoryEventArgs(item));
+            }
+        }
+        player.GetHealth().HealthPoint = SaveManager.instance.HP;
+        uiManager.UpdateHealth(player.GetHealth().HealthPoint);
     }
 }

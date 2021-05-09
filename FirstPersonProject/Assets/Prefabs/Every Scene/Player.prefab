@@ -93,9 +93,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726bd38926f170646b1d1716b001856e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoint: 100
-  maxHealthPoint: 100
+  isPlayer: 1
+  _healthPoint: 100
+  _maxHealthPoint: 100
   HPBar: {fileID: 0}
+  uiManager: {fileID: 0}
 --- !u!114 &8278974617320623581
 MonoBehaviour:
   m_ObjectHideFlags: 0

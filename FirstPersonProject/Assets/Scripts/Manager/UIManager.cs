@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    IPlayer player;
     //Inventory
     GameObject inventoryUI;
 
@@ -14,7 +15,7 @@ public class UIManager : MonoBehaviour
     GameObject currentSpare;
 
     //Health Point
-    GameObject hpBar;
+    [SerializeField] RectTransform hpBar;
     IHealth playerHealth;
 
     //Dialogue
@@ -24,18 +25,24 @@ public class UIManager : MonoBehaviour
     public Text subtitle;
     void Start()
     {
+        player = FindObjectOfType<Player>();
         inventoryUI = transform.GetChild(1).gameObject;
 
         ammoUI = transform.GetChild(2).gameObject;
         currentAmmo = ammoUI.transform.GetChild(2).gameObject;
         currentSpare = ammoUI.transform.GetChild(0).gameObject;
 
-        hpBar = transform.GetChild(3).GetChild(0).GetChild(0).gameObject;
+        hpBar = transform.GetChild(3).GetChild(0).GetChild(0).GetComponent<RectTransform>();
         playerHealth = FindObjectOfType<Player>().GetHealth();
     }
     public void ShowInventory(bool show)
     {
         inventoryUI.SetActive(show);
+        CameraManager.instance.ShowCursor(show);
+
+        player.CanWalk = !show;
+        InputManager.instance.canShoot = !show;
+        CameraManager.instance.CanLookAround(!show);
     }
     public bool GetInventoryVisible()
     {
@@ -65,11 +72,13 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateHealth(float hp)
     {
-        hpBar.GetComponent<RectTransform>().sizeDelta = new Vector2(hp, 100);
+        SaveManager.instance.HP = hp;
+        hpBar.sizeDelta = new Vector2(hp, 100);
     }
     public void UpdateSubtitle(string sentence)
     {
         subtitle.text = "";
+        LeanTween.cancelAll();
         LeanTween.alphaText(subtitle.gameObject.GetComponent<RectTransform>(), 1f, 0f);
         subtitle.text = sentence;
         Invoke("TextFadeOut", 3f);

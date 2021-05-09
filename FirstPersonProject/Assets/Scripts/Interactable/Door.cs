@@ -6,15 +6,32 @@ using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
     IPlayer player;
+    public int id = 1;
     public bool needKey = false;
     public string keyName;
+
+    [Header("Enter Zone")]
+    public bool enterZone = false;
+    public GameObject gate;
 
     [Header("Change Scene")]
     public string from;
     public string goTo;
+    /*
+     * Door id
+     * 
+     * Checkpoint Door = 0
+     * SecurityRoom = 1
+     * SecurityRoom_Out = 2
+     * MedicalRoom = 3
+     * MedicalRoom_Out = 4
+     * 
+     */
     void Start()
     {
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
+
+        needKey = SaveManager.instance.doorNeedKey[id];
     }
 
     void Update()
@@ -47,5 +64,18 @@ public class Door : MonoBehaviour
         {
             GameManager.instance.LoadMedToLevel01();
         }
+        else if (from == "Level01" && goTo == "SecurityRoom")
+        {
+            GameManager.instance.LoadSecRoom();
+        }
+        else if(from == "SecurityRoom" && goTo == "Level01")
+        {
+            GameManager.instance.LoadSecToLevel01();
+        }
+    }
+    public void OnOpen()
+    {
+        print("Openning " + gameObject.name);
+        gate.GetComponent<Animator>().Play("Open");
     }
 }

@@ -11,7 +11,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] WeaponManager weaponManager;
     [SerializeField] CameraManager cameraManager;
-    bool canShoot = true;
+
+    public bool canShoot = true;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -24,9 +25,6 @@ public class InputManager : MonoBehaviour
             instance = this;
             //DontDestroyOnLoad(this.gameObject);
         }
-        inventory = Inventory.instance;
-        weaponManager = WeaponManager.instance;
-        cameraManager = CameraManager.instance;
     }
     void Start()
     {
@@ -43,18 +41,10 @@ public class InputManager : MonoBehaviour
             if (!uiManager.GetInventoryVisible())
             {
                 uiManager.ShowInventory(true);
-                cameraManager.ShowCursor();
-                cameraManager.CanNotLookAround();
-                player.CanWalk = false;
-                canShoot = false;
             }
             else
             {
                 uiManager.ShowInventory(false);
-                cameraManager.HideCursor();
-                cameraManager.CanLookAround();
-                player.CanWalk = true;
-                canShoot = true;
             }
         }
 
@@ -62,11 +52,11 @@ public class InputManager : MonoBehaviour
         {
             if (Cursor.lockState == CursorLockMode.Locked)
             {
-                cameraManager.ShowCursor();
+                cameraManager.ShowCursor(true);
             }
             else
             {
-                cameraManager.HideCursor();
+                cameraManager.ShowCursor(false);
             }
         }
 
@@ -149,7 +139,10 @@ public class InputManager : MonoBehaviour
                 {
                     if (!door.needKey)
                     {
-                        door.OnEnter();
+                        if (door.enterZone)
+                            door.OnOpen();
+                        else
+                            door.OnEnter();
                     }
                     else if (door.needKey)
                     {
@@ -157,8 +150,12 @@ public class InputManager : MonoBehaviour
                         {
                             inventory.RemoveItem(inventory.FindKeyItem(door.keyName));
                             door.needKey = false;
-
-                            door.OnEnter();
+                            SaveManager.instance.UnlockDoor(door.id);
+                            
+                            if (door.enterZone)
+                                door.OnOpen();
+                            else
+                                door.OnEnter();
                         }
                         else
                         {
@@ -166,18 +163,15 @@ public class InputManager : MonoBehaviour
                         }
                     }
                 }
-                else
-                {
-                    print("This object isn't have tag!");
-                }
             }
         }
     }
-    void EquipWeaponInSlot(int slot)
+    public void EquipWeaponInSlot(int slot)
     {
         IInventoryItem item = inventory.GetPeekItem(slot, "Weapon");
         if (item != null && item.Weapon != WeaponEnum.None)
         {
+            weaponManager.currentSlot = slot;
             player.EquipWeapon(item.Weapon);
         }
         else

@@ -23,9 +23,8 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         camera = UnityEngine.Camera.main;
-        DontDestroyOnLoad(UnityEngine.Camera.main);
         FPSCamera = GameObject.Find("FPS Camera");
-        HideCursor();
+        ShowCursor(false);
     }
     public static Vector3 GetCameraForwardDirectionNormalized()
     {
@@ -71,28 +70,22 @@ public class CameraManager : MonoBehaviour
         Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range);
         return hit;
     }
-    public void HideCursor()
+    public void ShowCursor(bool show)
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (show)
+            Cursor.lockState = CursorLockMode.None;
+        else if (!show)
+            Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = show;
     }
-    public void ShowCursor()
+    public void CanLookAround(bool can)
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-    public void CanLookAround()
-    {
-        FPSCamera.SetActive(true);
-    }
-    public void CanNotLookAround()
-    {
-        FPSCamera.SetActive(false);
+        FPSCamera.SetActive(can);
     }
     public void Restart()
     {
         camera = UnityEngine.Camera.main;
         FPSCamera = GameObject.Find("FPS Camera");
-        HideCursor();
+        ShowCursor(false);
     }
 }

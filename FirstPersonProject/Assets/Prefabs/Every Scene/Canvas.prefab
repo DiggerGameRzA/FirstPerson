@@ -1604,6 +1604,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventory: {fileID: 0}
+  itemSlot: {fileID: 1822413037632400191}
+  weaponSlot: {fileID: 1822413038767015275}
 --- !u!1 &1822413038102903487
 GameObject:
   m_ObjectHideFlags: 0

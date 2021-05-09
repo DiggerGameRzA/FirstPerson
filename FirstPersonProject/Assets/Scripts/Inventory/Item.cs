@@ -35,6 +35,8 @@ public class Item : MonoBehaviour,IInventoryItem
     }
     public virtual void OnUse()
     {
+        player = FindObjectOfType<Player>().GetComponent<IPlayer>();
+
         print("Using Item : " + Name);
         if (Name == "First Aid M")
         {

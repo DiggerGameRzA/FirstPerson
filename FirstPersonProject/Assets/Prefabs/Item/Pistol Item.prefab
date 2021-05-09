@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9042193043552708027}
   - component: {fileID: 9042193043552708020}
-  - component: {fileID: 9042193043552708021}
+  - component: {fileID: 5588648718812474348}
   m_Layer: 8
   m_Name: Pistol Item
   m_TagString: Weapon
@@ -156,8 +156,8 @@ MonoBehaviour:
   _image: {fileID: 21300000, guid: 3133440a4e3f4a14090727eed9c5e618, type: 3}
   _weapon: 1
   inventory: {fileID: 0}
---- !u!65 &9042193043552708021
-BoxCollider:
+--- !u!136 &5588648718812474348
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -166,9 +166,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 2, z: 1.5}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7909479990427924699
 PrefabInstance:
   m_ObjectHideFlags: 0

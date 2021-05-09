@@ -1712,6 +1712,7 @@ GameObject:
   - component: {fileID: 3302647345974793305}
   - component: {fileID: 4441030684111409020}
   - component: {fileID: 3890660112865672923}
+  - component: {fileID: 8985832967679968228}
   m_Layer: 0
   m_Name: Compy
   m_TagString: Untagged
@@ -1727,7 +1728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371751140791920785}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 53.49, y: 0, z: 27.223133}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 371751140970364935}
@@ -1819,9 +1820,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726bd38926f170646b1d1716b001856e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoint: 20
-  maxHealthPoint: 20
+  isPlayer: 0
+  _healthPoint: 50
+  _maxHealthPoint: 50
   HPBar: {fileID: 8204483519013535345}
+  uiManager: {fileID: 0}
+--- !u!114 &8985832967679968228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371751140791920785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77c725bacb992824b966a6ec9fffbbe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sedatPoint: 1
 --- !u!1 &371751140841479415
 GameObject:
   m_ObjectHideFlags: 0

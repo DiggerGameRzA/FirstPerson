@@ -30,14 +30,14 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
     }
     private void Start()
     {
         SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive);
     }
-    public IEnumerator GetSceneLoadProgess(bool level, Scene scene)
+    public IEnumerator GetSceneLoadProgess(bool level, int scene)
     {
         for (int i = 0; i < sceneLoading.Count; i++)
         {
@@ -59,19 +59,15 @@ public class GameManager : MonoBehaviour
         }
 
         //Finished loading
-        SceneManager.SetActiveScene(scene);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(scene));
         totalProgress = 100f;
         bar.GetComponent<RectTransform>().sizeDelta = new Vector2(totalProgress, 100);
         percent.GetComponent<Text>().text = Mathf.RoundToInt(totalProgress) + " %";
 
         LeanTween.alphaCanvas(loadingPrefab.GetComponent<CanvasGroup>(), 0f, 0.5f).setOnComplete(FinishedLoading);
-
-        if (level)
-        {
-            EnableManagers(level);
-        }
+        EnableManagers(level);
     }
-    public IEnumerator GetSceneLoadProgess(bool level,Scene scene, Vector3 position)
+    public IEnumerator GetSceneLoadProgess(bool level, int scene, Vector3 position)
     {
         for (int i = 0; i < sceneLoading.Count; i++)
         {
@@ -93,7 +89,7 @@ public class GameManager : MonoBehaviour
         }
 
         //Finished loading
-        SceneManager.SetActiveScene(scene);
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(scene));
         totalProgress = 100f;
         bar.GetComponent<RectTransform>().sizeDelta = new Vector2(totalProgress, 100);
         percent.GetComponent<Text>().text = Mathf.RoundToInt(totalProgress) + " %";
@@ -101,11 +97,7 @@ public class GameManager : MonoBehaviour
         GameObject.FindObjectOfType<Player>().transform.position = position;
 
         LeanTween.alphaCanvas(loadingPrefab.GetComponent<CanvasGroup>(), 0f, 0.5f).setOnComplete(FinishedLoading);
-
-        if (level)
-        {
-            EnableManagers(level);
-        }
+        EnableManagers(level);
     }
     void FinishedLoading()
     {
@@ -125,6 +117,7 @@ public class GameManager : MonoBehaviour
             weaponManager.Restart();
             inputManager.Restart();
             dialogueManager.Restart();
+            inventory.Restart();
         }
     }
     public void LoadCutscene01()
@@ -139,38 +132,43 @@ public class GameManager : MonoBehaviour
     {
         LoadScene((int)SceneEnum.Level01, (int)SceneEnum.MedicalRoom);
     }
+    public void LoadSecRoom()
+    {
+        LoadScene((int)SceneEnum.Level01, (int)SceneEnum.SecurityRoom);
+    }
     public void LoadMedToLevel01()
     {
-        LoadScene((int)SceneEnum.MedicalRoom, (int)SceneEnum.Level01, new Vector3(19, 4, 72));
+        LoadScene((int)SceneEnum.MedicalRoom, (int)SceneEnum.Level01, new Vector3(19, 4, 74));
+    }
+    public void LoadSecToLevel01()
+    {
+        LoadScene((int)SceneEnum.SecurityRoom, (int)SceneEnum.Level01, new Vector3(-7, 4, 74));
     }
     void LoadCutscene(int unload, int load)
     {
-        Scene getScene = SceneManager.GetSceneByBuildIndex(load);
         loadingPrefab.SetActive(true);
 
-        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload);
+        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload));
         sceneLoading.Add(SceneManager.LoadSceneAsync(load, LoadSceneMode.Additive));
 
-        StartCoroutine(GetSceneLoadProgess(false, getScene));
+        StartCoroutine(GetSceneLoadProgess(false, load));
     }
     void LoadScene(int unload, int load)
     {
-        Scene getScene = SceneManager.GetSceneByBuildIndex(load);
         loadingPrefab.SetActive(true);
 
-        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload);
+        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload));
         sceneLoading.Add(SceneManager.LoadSceneAsync(load, LoadSceneMode.Additive));
 
-        StartCoroutine(GetSceneLoadProgess(true, getScene));
+        StartCoroutine(GetSceneLoadProgess(true, load));
     }
     void LoadScene(int unload, int load, Vector3 position)
     {
-        Scene getScene = SceneManager.GetSceneByBuildIndex(load);
         loadingPrefab.SetActive(true);
 
-        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload);
+        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload));
         sceneLoading.Add(SceneManager.LoadSceneAsync(load, LoadSceneMode.Additive));
 
-        StartCoroutine(GetSceneLoadProgess(true, getScene, position));
+        StartCoroutine(GetSceneLoadProgess(true, load, position));
     }
 }

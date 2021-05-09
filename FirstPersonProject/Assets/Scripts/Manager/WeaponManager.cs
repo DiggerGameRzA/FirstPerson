@@ -13,6 +13,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] IWeapon weapon;
     [SerializeField] UIManager uiManager;
 
+    public int currentSlot;
     float tempTime = 0f;
     private void Awake()
     {
@@ -31,6 +32,10 @@ public class WeaponManager : MonoBehaviour
     {
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
         uiManager = FindObjectOfType<UIManager>();
+        if (player.GetWeapon() != null)
+        {
+            InputManager.instance.EquipWeaponInSlot(currentSlot);
+        }
     }
     void Update()
     {
@@ -82,5 +87,9 @@ public class WeaponManager : MonoBehaviour
     {
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
         uiManager = FindObjectOfType<UIManager>();
+        if (player.GetWeapon()!= null)
+        {
+            InputManager.instance.EquipWeaponInSlot(currentSlot);
+        }
     }
 }

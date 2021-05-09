@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3549595443815918603}
   - component: {fileID: 3549595443815918596}
-  - component: {fileID: 3549595443815918597}
+  - component: {fileID: 858319275760898041}
   m_Layer: 8
   m_Name: Assault Rifle Item
   m_TagString: Weapon
@@ -156,8 +156,8 @@ MonoBehaviour:
   _image: {fileID: 21300000, guid: 8b75c978d0eb88740912292c17a65224, type: 3}
   _weapon: 2
   inventory: {fileID: 0}
---- !u!65 &3549595443815918597
-BoxCollider:
+--- !u!136 &858319275760898041
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -166,9 +166,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 2, z: 1.5}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5472521862096887586
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,25 +5,26 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour, IHealth
 {
-    UIManager uiManager;
-    [SerializeField] float healthPoint;
-    [SerializeField] float maxHealthPoint;
+    [SerializeField] bool isPlayer = false;
+    [SerializeField] float _healthPoint;
+    [SerializeField] float _maxHealthPoint;
 
     [SerializeField] RectTransform HPBar;
+    [SerializeField] UIManager uiManager;
 
     public float HealthPoint
     {
-        get { return healthPoint; }
-        set { healthPoint = value; }
+        get { return _healthPoint; }
+        set { _healthPoint = value; }
     }
     public float MaxHealthPoint
     {
-        get { return maxHealthPoint; }
-        set { maxHealthPoint = value; }
+        get { return _maxHealthPoint; }
+        set { _maxHealthPoint = value; }
     }
     private void Start()
     {
-        if (GetComponent<Player>())
+        if (isPlayer)
         {
             uiManager = FindObjectOfType<UIManager>();
         }
@@ -40,7 +41,7 @@ public class Health : MonoBehaviour, IHealth
             OnDead();
         }
 
-        if (GetComponent<Player>())
+        if (isPlayer)
         {
             uiManager.UpdateHealth(HealthPoint);
         }
@@ -51,19 +52,34 @@ public class Health : MonoBehaviour, IHealth
     }
     public void TakeHeal(float heal)
     {
+        //80 + 50 = 130 > 100
+        //100 - 80 = 20
+        //heal 20
         if(HealthPoint + heal > MaxHealthPoint)
         {
             heal = MaxHealthPoint - HealthPoint;
         }
         HealthPoint += heal;
         print("healing : " + heal);
-        if (GetComponent<Player>())
+        if (isPlayer)
         {
             uiManager.UpdateHealth(HealthPoint);
         }
     }
     public void OnDead()
     {
-        print(this.name + " die");
+        if (!isPlayer)
+        {
+            GetComponent<Collider>().enabled = false;
+        }
+        else
+        {
+            GameObject FPSCam = GameObject.Find("FPS Camera");
+            FPSCam.SetActive(false);
+            FindObjectOfType<Player>().enabled = false;
+            uiManager.ShowInventory(false);
+            InputManager.instance.enabled = false;
+
+        }
     }
 }
