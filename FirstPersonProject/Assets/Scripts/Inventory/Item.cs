@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Item : MonoBehaviour,IInventoryItem
 {
+    [Header("Status")]
+    public bool _collected = false;
+
+    [Header("Item's Infomations")]
     public string _name = "Item";
     public Sprite _image = null;
     public WeaponEnum _weapon = WeaponEnum.None;

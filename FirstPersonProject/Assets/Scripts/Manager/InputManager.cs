@@ -11,23 +11,28 @@ public class InputManager : MonoBehaviour
     [SerializeField] UIManager uiManager;
     [SerializeField] WeaponManager weaponManager;
     [SerializeField] CameraManager cameraManager;
+    [SerializeField] HUD hud;
 
     public bool canShoot = true;
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            print("Destroy myself");
-            Destroy(this.gameObject);
-        }
         if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(this.gameObject);
         }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        //DontDestroyOnLoad(gameObject);
+
+        inventory = Inventory.instance;
+        cameraManager = CameraManager.instance;
+        weaponManager = WeaponManager.instance;
     }
     void Start()
     {
+        hud = FindObjectOfType<HUD>();
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
         uiManager = FindObjectOfType<UIManager>();
     }
@@ -62,11 +67,11 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            EquipWeaponInSlot(1);
+            EquipWeaponInSlot(0);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            EquipWeaponInSlot(2);
+            EquipWeaponInSlot(1);
         }
 
         if (canShoot)
@@ -176,7 +181,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("There is no weapon in this slot.");
+            Debug.Log("There is no weapon in slot : " + slot);
         }
     }
     public void Restart()

@@ -9,7 +9,7 @@ public class Health : MonoBehaviour, IHealth
     [SerializeField] float _healthPoint;
     [SerializeField] float _maxHealthPoint;
 
-    [SerializeField] RectTransform HPBar;
+    [SerializeField] RectTransform HPBar = null;
     [SerializeField] UIManager uiManager;
 
     public float HealthPoint
@@ -26,7 +26,7 @@ public class Health : MonoBehaviour, IHealth
     {
         if (isPlayer)
         {
-            uiManager = FindObjectOfType<UIManager>();
+            uiManager = UIManager.instance;
         }
         else
         {

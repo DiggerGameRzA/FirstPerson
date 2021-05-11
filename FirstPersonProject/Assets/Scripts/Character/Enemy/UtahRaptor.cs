@@ -18,8 +18,6 @@ public class UtahRaptor : MonoBehaviour
 
     bool isInRange = false;
     bool isInAtk = false;
-    bool isAttack = false; 
-    bool IsHit = false;
 
     float tempTime = 0f;
 
@@ -98,7 +96,7 @@ public class UtahRaptor : MonoBehaviour
             if (tempTime <= 0)
             {
                 tempTime = attackDelay;
-                Attack();
+                Invoke("Attack", 1f);
             }
             else
             {
@@ -122,7 +120,6 @@ public class UtahRaptor : MonoBehaviour
         else
         {
             isInRange = false;
-            isAttack = false;
         }
     }
     void FaceTarget()

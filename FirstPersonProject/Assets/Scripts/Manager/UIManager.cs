@@ -5,24 +5,38 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
+
     IPlayer player;
     //Inventory
-    GameObject inventoryUI;
+    [SerializeField] GameObject inventoryUI;
 
     //Ammo
-    GameObject ammoUI;
-    GameObject currentAmmo;
-    GameObject currentSpare;
+    [SerializeField] GameObject ammoUI;
+    [SerializeField] GameObject currentAmmo;
+    [SerializeField] GameObject currentSpare;
 
     //Health Point
     [SerializeField] RectTransform hpBar;
-    IHealth playerHealth;
 
     //Dialogue
     public Text dialogueName;
     public Text dialogueSentence;
 
     public Text subtitle;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
     void Start()
     {
         player = FindObjectOfType<Player>();
@@ -33,7 +47,6 @@ public class UIManager : MonoBehaviour
         currentSpare = ammoUI.transform.GetChild(0).gameObject;
 
         hpBar = transform.GetChild(3).GetChild(0).GetChild(0).GetComponent<RectTransform>();
-        playerHealth = FindObjectOfType<Player>().GetHealth();
     }
     public void ShowInventory(bool show)
     {
@@ -86,5 +99,11 @@ public class UIManager : MonoBehaviour
     void TextFadeOut()
     {
         LeanTween.alphaText(subtitle.gameObject.GetComponent<RectTransform>(), 0f, 1f);
+    }
+    public void ResetUI()
+    {
+        player = FindObjectOfType<Player>();
+        player.GetHealth().HealthPoint = SaveManager.instance.HP;
+        UpdateHealth(player.GetHealth().HealthPoint);
     }
 }

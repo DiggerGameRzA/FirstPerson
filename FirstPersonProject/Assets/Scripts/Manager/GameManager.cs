@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
     public GameObject loadingPrefab;
     public GameObject bar;
     public GameObject percent;
@@ -22,16 +23,24 @@ public class GameManager : MonoBehaviour
     List<AsyncOperation> sceneLoading = new List<AsyncOperation>();
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            print("Destroy myself");
-            Destroy(this.gameObject);
-        }
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
         }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+
+        /*
+        weaponManager = WeaponManager.instance;
+        inventory = Inventory.instance;
+        cameraManager = CameraManager.instance;
+        dialogueManager = DialogueManager.instance;
+        inputManager = InputManager.instance;
+        */
     }
     private void Start()
     {
@@ -118,6 +127,9 @@ public class GameManager : MonoBehaviour
             inputManager.Restart();
             dialogueManager.Restart();
             inventory.Restart();
+
+            if (UIManager.instance != null)
+                UIManager.instance.ResetUI();
         }
     }
     public void LoadCutscene01()

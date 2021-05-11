@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76485e3e620f7f3429c2b7a2d566747d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collected: 0
   _name: Checkpoint Keycard
-  _image: {fileID: 21300000, guid: b37b77341020d7e4cbef0e5295cc083d, type: 3}
+  _image: {fileID: 21300000, guid: ce1a97454ae16994a856d08318ab0183, type: 3}
   _weapon: 0
   inventory: {fileID: 0}
 --- !u!136 &7195904145922703501

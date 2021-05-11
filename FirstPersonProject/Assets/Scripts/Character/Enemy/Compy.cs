@@ -37,11 +37,16 @@ public class Compy : MonoBehaviour
         sedat = GetComponent<SedatPoint>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         float distance = Vector3.Distance(target.position, transform.position);
         float disToNest = Vector3.Distance(transform.position, nest.transform.position);
+        float disToEsc = Vector3.Distance(transform.position, escape.transform.position);
+
+        if(disToEsc < 1)
+        {
+            Destroy(this.gameObject);
+        }
 
         if (health.HealthPoint <= 0)
         {

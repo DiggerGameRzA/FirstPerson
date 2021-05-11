@@ -30,7 +30,7 @@ public class Player : MonoBehaviour, IPlayer
 
         weaponManager = GameObject.Find("Weapon Manager");
         weapon = null;
-        uiManager = FindObjectOfType<UIManager>();
+        uiManager = UIManager.instance;
         health = GetComponent<Health>();
 
         CanWalk = true;

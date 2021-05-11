@@ -11,16 +11,15 @@ public class DialogueManager : MonoBehaviour
     public Queue<string> Name;
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            print("Destroy myself");
-            Destroy(this.gameObject);
-        }
         if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(this.gameObject);
         }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        //DontDestroyOnLoad(gameObject);
     }
     void Start()
     {
@@ -65,5 +64,6 @@ public class DialogueManager : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         Sentences = new Queue<string>();
         Name = new Queue<string>();
+
     }
 }

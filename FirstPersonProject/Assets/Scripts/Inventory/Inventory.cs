@@ -21,16 +21,15 @@ public class Inventory : MonoBehaviour
     public event EventHandler<InventoryEventArgs> WeaponAdded;
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            print("Destroy myself");
-            Destroy(this.gameObject);
-        }
         if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(this.gameObject);
         }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        //DontDestroyOnLoad(gameObject);
     }
     public Inventory()
     {
@@ -178,18 +177,20 @@ public class Inventory : MonoBehaviour
     }
     public IInventoryItem GetPeekItem(int slot, string type)
     {
-        slot -= 1;
         IInventoryItem item = null;
-        if (wSlots[slot].Count != 0 || iSlots[slot].Count != 0)
+        if (type == "Item")
         {
-            if (type == "Item")
-            {
+            if (iSlots[slot].mItemStack.Count != 0)
                 item = iSlots[slot].mItemStack.Peek();
-            }
-            else if (type == "Weapon")
-            {
+            else
+                return null;
+        }
+        else if (type == "Weapon")
+        {
+            if (wSlots[slot].mItemStack.Count != 0)
                 item = wSlots[slot].mItemStack.Peek();
-            }
+            else
+                return null;
         }
         return item;
     }
@@ -215,14 +216,6 @@ public class Inventory : MonoBehaviour
                     item = null;
                 }
             }
-        }
-        if(item != null)
-        {
-            print("Key is found!");
-        }
-        else
-        {
-            print("Key is not found");
         }
         return item;
     }

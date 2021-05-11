@@ -17,16 +17,15 @@ public class WeaponManager : MonoBehaviour
     float tempTime = 0f;
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
-            print("Destroy myself");
-            Destroy(this.gameObject);
-        }
         if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(this.gameObject);
         }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        //DontDestroyOnLoad(gameObject);
     }
     void Start()
     {
@@ -86,10 +85,7 @@ public class WeaponManager : MonoBehaviour
     public void Restart()
     {
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
-        uiManager = FindObjectOfType<UIManager>();
-        if (player.GetWeapon()!= null)
-        {
-            InputManager.instance.EquipWeaponInSlot(currentSlot);
-        }
+        uiManager = UIManager.instance;
+        InputManager.instance.EquipWeaponInSlot(currentSlot);
     }
 }
