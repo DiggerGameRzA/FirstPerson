@@ -5,11 +5,13 @@ using UnityEngine;
 public class Item : MonoBehaviour,IInventoryItem
 {
     [Header("Status")]
+    public int _id = 0;
     public bool _collected = false;
 
     [Header("Item's Infomations")]
     public string _name = "Item";
     public Sprite _image = null;
+    public int _amount = 1;
     public WeaponEnum _weapon = WeaponEnum.None;
     IPlayer player;
     [SerializeField] Inventory inventory;
@@ -18,8 +20,20 @@ public class Item : MonoBehaviour,IInventoryItem
     {
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
         inventory = Inventory.instance;
-    }
 
+        _collected = SaveManager.instance.collected[_id];
+        if (_collected)
+            Destroy(this.gameObject);
+    }
+    public int Id
+    {
+        get { return _id; }
+    }
+    public bool Collected
+    {
+        get { return _collected; }
+        set { _collected = value; }
+    }
     public string Name
     {
         get { return _name; }
@@ -27,6 +41,10 @@ public class Item : MonoBehaviour,IInventoryItem
     public Sprite Image
     {
         get { return _image; }
+    }
+    public int Amount
+    {
+        get { return _amount; }
     }
     public WeaponEnum Weapon
     {

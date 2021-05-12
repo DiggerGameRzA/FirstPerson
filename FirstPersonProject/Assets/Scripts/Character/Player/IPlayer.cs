@@ -4,10 +4,10 @@ using UnityEngine;
 
 public interface IPlayer
 {
-    bool CanWalk { get; set; }
     Stats GetStats();
     Rigidbody GetRigidbody();
     Transform GetTransform();
+    CharacterController GetCharacterController();
     IWeapon GetWeapon();
     IHealth GetHealth();
     void EquipWeapon(WeaponEnum weapon);

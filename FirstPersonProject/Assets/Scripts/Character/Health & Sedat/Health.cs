@@ -47,7 +47,7 @@ public class Health : MonoBehaviour, IHealth
         }
         else
         {
-            HPBar.sizeDelta = new Vector2((HealthPoint/MaxHealthPoint) * 100, 100);
+            UpdateHealth(HealthPoint);
         }
     }
     public void TakeHeal(float heal)
@@ -66,20 +66,23 @@ public class Health : MonoBehaviour, IHealth
             uiManager.UpdateHealth(HealthPoint);
         }
     }
+    public void UpdateHealth(float hp)
+    {
+        HPBar.sizeDelta = new Vector2((hp / MaxHealthPoint) * 100, 100);
+    }
     public void OnDead()
     {
         if (!isPlayer)
         {
-            GetComponent<Collider>().enabled = false;
+            
         }
         else
         {
-            GameObject FPSCam = GameObject.Find("FPS Camera");
-            FPSCam.SetActive(false);
             FindObjectOfType<Player>().enabled = false;
-            uiManager.ShowInventory(false);
+            UIManager.instance.ShowInventory(false);
+            UIManager.instance.ShowMenu(false);
+            UIManager.instance.ShowGameOver(true);
             InputManager.instance.enabled = false;
-
         }
     }
 }

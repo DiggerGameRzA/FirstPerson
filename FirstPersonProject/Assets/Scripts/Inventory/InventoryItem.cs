@@ -5,8 +5,11 @@ using UnityEngine;
 
 public interface IInventoryItem
 {
+    int Id { get; }
+    bool Collected { get; set; }
     string Name { get; }
     Sprite Image { get; }
+    int Amount { get; }
     WeaponEnum Weapon { get; }
     InventorySlot Slot { get; set; }
     void OnPickUp();

@@ -8,6 +8,8 @@ TagManager:
   - Weapon
   - Interactable
   - Nest
+  - Ammo
+  - Dino
   layers:
   - Default
   - TransparentFX

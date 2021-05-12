@@ -68,4 +68,12 @@ public class AssaultRifle : MonoBehaviour, IWeapon
     {
 
     }
+    public void NoAmmo()
+    {
+
+    }
+    public void Reload()
+    {
+
+    }
 }

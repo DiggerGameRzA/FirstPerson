@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class UtahRaptor : MonoBehaviour
 {
+    public int id = 0;
+    public GameObject textPrefab;
+
     //float
     public float visionRange;
     public float attackRange;
@@ -18,6 +21,7 @@ public class UtahRaptor : MonoBehaviour
 
     bool isInRange = false;
     bool isInAtk = false;
+    bool isDied = false;
 
     float tempTime = 0f;
 
@@ -35,6 +39,29 @@ public class UtahRaptor : MonoBehaviour
         target = FindObjectOfType<Player>().transform;
         health = GetComponent<IHealth>();
         sedat = GetComponent<SedatPoint>();
+
+        GetInfo();
+        if (health.HealthPoint <= 0)
+        {
+            isDied = true;
+            health.OnDead();
+
+            anim.Play("Died");
+            anim.SetBool("isIdling", true);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isDead", false);
+            anim.Play("Died");
+        }
+        else if (sedat.SedatPoints <= 0)
+        {
+            isDied = true;
+
+            anim.Play("Died");
+            anim.SetBool("isIdling", true);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isDead", false);
+            anim.Play("Died");
+        }
     }
 
     void Update()
@@ -42,12 +69,12 @@ public class UtahRaptor : MonoBehaviour
         tempTime -= Time.deltaTime;
 
         float distance = Vector3.Distance(target.position, transform.position);
-        if (health.HealthPoint <= 0)
+        if (health.HealthPoint <= 0 && !isDied)
         {
             health.OnDead();
             isDead = true;
         }
-        else if (sedat.SedatPoints <= 0)
+        else if (sedat.SedatPoints <= 0 && !isDied)
         {
             isSleep = true;
         }
@@ -69,7 +96,17 @@ public class UtahRaptor : MonoBehaviour
             isInAtk = false;
         }
 
-        if (isDead)
+        if (isDied)
+        {
+            agent.SetDestination(transform.position);
+            anim.SetBool("isAttacking", false);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdling", true);
+            anim.SetBool("isDead", true);
+
+            anim.Play("Died");
+        }
+        else if (isDead)
         {
             agent.SetDestination(transform.position);
             anim.SetBool("isAttacking", false);
@@ -121,6 +158,11 @@ public class UtahRaptor : MonoBehaviour
         {
             isInRange = false;
         }
+
+        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
+        {
+            GetComponent<GatherSyringe>().ShowUI(textPrefab);
+        }
     }
     void FaceTarget()
     {
@@ -133,9 +175,42 @@ public class UtahRaptor : MonoBehaviour
         anim.Play("Attack");
         target.GetComponent<IHealth>().TakeDamage(damage);
     }
+    private void OnDestroy()
+    {
+        SaveInfo();
+    }
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, visionRange);
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    void GetInfo()
+    {
+        for (int i = 0; i < SaveManager.instance.dinos.Count; i++)
+        {
+            DinoInfo dinoInfo = SaveManager.instance.dinos[i];
+            if (id == i)
+            {
+                health.HealthPoint = dinoInfo.healthPoint;
+                sedat.SedatPoints = dinoInfo.sedatPoint;
+                transform.position = dinoInfo.position;
+                health.UpdateHealth(health.HealthPoint);
+                break;
+            }
+        }
+    }
+    void SaveInfo()
+    {
+        for (int i = 0; i < SaveManager.instance.dinos.Count; i++)
+        {
+            DinoInfo dinoInfo = SaveManager.instance.dinos[i];
+            if (id == i)
+            {
+                dinoInfo.healthPoint = health.HealthPoint;
+                dinoInfo.sedatPoint = sedat.SedatPoints;
+                dinoInfo.position = transform.position;
+                break;
+            }
+        }
     }
 }

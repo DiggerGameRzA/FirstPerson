@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] UIManager uiManager;
     public Queue<string> Sentences;
-    public Queue<string> Name;
+    public Queue<Sprite> Profile;
     private void Awake()
     {
         if (instance == null)
@@ -25,45 +26,66 @@ public class DialogueManager : MonoBehaviour
     {
         uiManager = FindObjectOfType<UIManager>();
         Sentences = new Queue<string>();
-        Name = new Queue<string>();
+        Profile = new Queue<Sprite>();
+    }
+    private void Update()
+    {
+
     }
 
     public void StartConversation(Dialogue dialogue)
     {
+        InputManager.instance.OnConversation(true);
+
         if(Sentences != null)
         {
             Sentences.Clear();
-            Name.Clear();
+            Profile.Clear();
         }
 
         foreach (string _sentence in dialogue.sentence)
         {
             Sentences.Enqueue(_sentence);
         }
-        foreach (string _name in dialogue.name)
+        foreach (Sprite _profile in dialogue.profile)
         {
-            Name.Enqueue(_name);
+            Profile.Enqueue(_profile);
         }
         DisplayNextSentence();
     }
 
     public void DisplayNextSentence()
     {
+        uiManager.ShowContinue(false);
+        InputManager.instance.canSkip = false;
+
         if(Sentences.Count == 0)
         {
+            EndConversation();
             return;
         }
         string _sentence = Sentences.Dequeue();
-        string _name = Name.Dequeue();
+        Sprite _profile = Profile.Dequeue();
 
-        uiManager.DialogueUpdateName(_name);
+        uiManager.DialogueUpdateProfile(_profile);
         StartCoroutine(uiManager.TypeSentence(_sentence));
+    }
+    void EndConversation()
+    {
+        uiManager.EndSentence();
     }
     public void Restart()
     {
         uiManager = FindObjectOfType<UIManager>();
-        Sentences = new Queue<string>();
-        Name = new Queue<string>();
 
+        foreach (FirstTimeScene i in SaveManager.instance.firstTimeScenes)
+        {
+            if(i.scene == "Level01" && i.firstTime)
+            {
+                GameObject.Find("First Con").GetComponent<NPCDialogue>().Invoke("TriggerDialogue", 0.2f);
+                i.firstTime = false;
+                break;
+            }
+        }
     }
 }

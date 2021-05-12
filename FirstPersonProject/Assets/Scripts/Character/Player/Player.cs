@@ -8,14 +8,19 @@ using UnityEngine;
 public class Player : MonoBehaviour, IPlayer
 {
     Stats stats;
+
     Rigidbody rb;
     IMovement movement;
     IMovementDir movementDir;
+    CharacterController controller;
+    Vector3 velocity;
+
     IWeapon weapon;
     IHealth health;
+
     GameObject weaponManager;
     public UIManager uiManager;
-    public bool CanWalk { get; set; }
+    public bool InputManagerinstancecanMove { get; set; }
 
     Collider col;
     //Transform handPrefabs;
@@ -27,26 +32,28 @@ public class Player : MonoBehaviour, IPlayer
         //handPrefabs = transform.GetChild(0);
         movement = new Movement(this);
         movementDir = new MovementDir();
+        controller = GetComponent<CharacterController>();
 
         weaponManager = GameObject.Find("Weapon Manager");
         weapon = null;
         uiManager = UIManager.instance;
         health = GetComponent<Health>();
 
-        CanWalk = true;
         col = GetComponent<Collider>();
     }
 
     void Update()
     {
         //movement.RotateHand(CameraManager.GetCameraRotation());
-        //movement.RotateBody(CameraManager.GetCameraRotationY());
+        movement.RotateBody(CameraManager.GetCameraRotationY());
     }
     void FixedUpdate()
     {
+        velocity.y += -stats.Gravity * Time.deltaTime;
         //rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        controller.Move(velocity);
 
-        if (CanWalk)
+        if (InputManager.instance.canMove)
         {
             if (Input.GetButton("Sprint"))
             {
@@ -58,9 +65,9 @@ public class Player : MonoBehaviour, IPlayer
             }
         }
 
-        if (Input.GetButton("Jump") && IsGrounded())
+        if (Input.GetButton("Jump") && controller.isGrounded)
         {
-            movement.Jump(stats.JumpForce);
+            velocity.y = Mathf.Sqrt(stats.JumpForce * stats.Gravity);
         }
     }
     public Stats GetStats()
@@ -74,6 +81,10 @@ public class Player : MonoBehaviour, IPlayer
     public Transform GetTransform()
     {
         return transform;
+    }
+    public CharacterController GetCharacterController()
+    {
+        return controller;
     }
     public IWeapon GetWeapon()
     {
@@ -94,18 +105,18 @@ public class Player : MonoBehaviour, IPlayer
         if(weapon == WeaponEnum.Pistol)
         {
             this.weapon = weaponManager.GetComponent<Pistol>();
-            this.weapon.Equip();
-            uiManager.UpdateAmmo(this.weapon.CurrentAmmo, this.weapon.CurrentSpare);
         }
         else if (weapon == WeaponEnum.Sedat)
         {
             this.weapon = weaponManager.GetComponent<Sedat>();
-            this.weapon.Equip();
-            uiManager.UpdateAmmo(this.weapon.CurrentAmmo, this.weapon.CurrentSpare);
         }
         else if (weapon == WeaponEnum.AssaultRifle)
         {
             this.weapon = weaponManager.GetComponent<AssaultRifle>();
+        }
+
+        if (this.weapon != null)
+        {
             this.weapon.Equip();
             uiManager.UpdateAmmo(this.weapon.CurrentAmmo, this.weapon.CurrentSpare);
         }

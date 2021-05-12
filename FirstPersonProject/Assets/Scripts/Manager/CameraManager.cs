@@ -75,6 +75,7 @@ public class CameraManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         else if (!show)
             Cursor.lockState = CursorLockMode.Locked;
+
         Cursor.visible = show;
     }
     public void CanLookAround(bool can)

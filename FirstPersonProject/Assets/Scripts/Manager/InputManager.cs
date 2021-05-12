@@ -13,7 +13,21 @@ public class InputManager : MonoBehaviour
     [SerializeField] CameraManager cameraManager;
     [SerializeField] HUD hud;
 
+    [Header("Bools")]
     public bool canShoot = true;
+    public bool canOpenInv = true;
+    public bool canEsc = true;
+    public bool canEquipWep = true;
+    public bool canMove = true;
+    public bool canInteract = true;
+    public bool canCollect = true;
+    public bool canSkip = false;
+
+    public bool onConversation = false;
+
+    public GameObject checkKey;
+    public GameObject medKey;
+    public GameObject syringe;
     private void Awake()
     {
         if (instance == null)
@@ -38,40 +52,82 @@ public class InputManager : MonoBehaviour
     }
     void Update()
     {
-        RaycastItem();
-        RaycastDoor();
-
-        if (Input.GetButtonDown("Open Inventory"))
+        if(canCollect)
+            RaycastItem();
+        if (canInteract)
         {
-            if (!uiManager.GetInventoryVisible())
+            RaycastDoor();
+            RaycastSyringe();
+            RaycastDNA();
+        }
+
+        if (onConversation)
+        {
+            OnConversation(true);
+            if (canSkip)
             {
-                uiManager.ShowInventory(true);
-            }
-            else
-            {
-                uiManager.ShowInventory(false);
+                if (Input.GetButtonDown("Interact"))
+                {
+                    GameObject.Find("First Con").GetComponent<NPCDialogue>().DisplayNextSentence();
+                }
             }
         }
 
-        if (Input.GetButtonDown("Cancel"))
+        if (canOpenInv)
         {
-            if (Cursor.lockState == CursorLockMode.Locked)
+            if (Input.GetButtonDown("Open Inventory"))
             {
-                cameraManager.ShowCursor(true);
+                if (!uiManager.GetInventoryVisible())
+                {
+                    uiManager.ShowInventory(true);
+                }
+                else
+                {
+                    uiManager.ShowInventory(false);
+                }
             }
-            else
+            if (Input.GetButtonDown("Cancel"))
             {
-                cameraManager.ShowCursor(false);
+                if (uiManager.GetInventoryVisible())
+                {
+                    uiManager.ShowInventory(false);
+                }
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (canEsc)
         {
-            EquipWeaponInSlot(0);
+            if (Input.GetButtonDown("Cancel"))
+            {
+                if (!uiManager.GetMenuVisible())
+                {
+                    uiManager.ShowMenu(true);
+                }
+                else if (uiManager.GetMenuVisible())
+                {
+                    uiManager.ShowMenu(false);
+                }
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+
+        if (canEquipWep)
         {
-            EquipWeaponInSlot(1);
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                EquipWeaponInSlot(0);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                EquipWeaponInSlot(1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                EquipWeaponInSlot(2);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                EquipWeaponInSlot(3);
+            }
         }
 
         if (canShoot)
@@ -104,6 +160,18 @@ public class InputManager : MonoBehaviour
         {
             player.GetHealth().TakeDamage(10f);
         }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            inventory.AddItem(syringe.GetComponent<IInventoryItem>(), "Item");
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            inventory.AddItem(medKey.GetComponent<IInventoryItem>(), "Item");
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            inventory.AddItem(checkKey.GetComponent<IInventoryItem>(), "Item");
+        }
     }
     public static float GetVerInput()
     {
@@ -115,18 +183,37 @@ public class InputManager : MonoBehaviour
     }
     private void RaycastItem()
     {
+        player = FindObjectOfType<Player>();
         RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
         if (hit.transform)
         {
             if (Input.GetButtonDown("Collect"))
             {
                 IInventoryItem item = hit.transform.GetComponent<IInventoryItem>();
-                if (hit.transform.CompareTag("Item"))
+                if(hit.transform.CompareTag("Ammo"))
                 {
+                    item.Collected = true;
+                    SaveManager.instance.collected[item.Id] = true;
+                    if (hit.transform.GetComponent<IInventoryItem>().Name == "Ammo 9mm")
+                    {
+                        WeaponManager.instance.GetComponent<Pistol>().CurrentSpare += item.Amount;
+                    }
+                    if (SaveManager.instance.currentWeapon == WeaponEnum.Pistol)
+                    {
+                        UIManager.instance.UpdateAmmo(WeaponManager.instance.GetComponent<Pistol>().CurrentAmmo, WeaponManager.instance.GetComponent<Pistol>().CurrentSpare);
+                    }
+                    item.OnPickUp();
+                }
+                else if (hit.transform.CompareTag("Item"))
+                {
+                    item.Collected = true;
+                    SaveManager.instance.collected[item.Id] = true;
                     inventory.AddItem(item, "Item");
                 }
                 else if (hit.transform.CompareTag("Weapon"))
                 {
+                    item.Collected = true;
+                    SaveManager.instance.collected[item.Id] = true;
                     inventory.AddItem(item, "Weapon");
                 }
             }
@@ -139,32 +226,111 @@ public class InputManager : MonoBehaviour
         {
             if (Input.GetButtonDown("Interact"))
             {
-                Door door = hit.transform.GetComponent<Door>();
                 if (hit.transform.CompareTag("Interactable"))
                 {
-                    if (!door.needKey)
+                    Door door = hit.transform.GetComponent<Door>();
+                    if (door != null)
                     {
-                        if (door.enterZone)
-                            door.OnOpen();
-                        else
-                            door.OnEnter();
-                    }
-                    else if (door.needKey)
-                    {
-                        if(inventory.FindKeyItem(door.keyName) != null)
+                        if (!door.needKey)
                         {
-                            inventory.RemoveItem(inventory.FindKeyItem(door.keyName));
-                            door.needKey = false;
-                            SaveManager.instance.UnlockDoor(door.id);
-                            
                             if (door.enterZone)
                                 door.OnOpen();
                             else
                                 door.OnEnter();
                         }
+                        else if (door.needKey)
+                        {
+                            if (inventory.FindKeyItem(door.keyName) != null)
+                            {
+                                inventory.RemoveItem(inventory.FindKeyItem(door.keyName));
+                                door.needKey = false;
+                                SaveManager.instance.UnlockDoor(door.id);
+                                if(door.id == 0)
+                                {
+                                    if (SaveManager.instance.firstTimeEvent[3])
+                                    {
+                                        FindObjectOfType<EventTrigger>().StartCon3();
+                                    }
+                                }
+
+                                if (door.enterZone)
+                                    door.OnOpen();
+                                else
+                                    door.OnEnter();
+                            }
+                            else
+                            {
+                                uiManager.UpdateSubtitle("You need " + door.keyName + " to enter");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private void RaycastSyringe()
+    {
+        player = FindObjectOfType<Player>();
+        inventory = Inventory.instance;
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+        if (hit.transform)
+        {
+            if (hit.transform.CompareTag("Dino"))
+            {
+                float health = hit.transform.GetComponent<Health>().HealthPoint;
+                float sedat = hit.transform.GetComponent<SedatPoint>().SedatPoints;
+
+                if (health <= 0 || sedat <= 0)
+                {
+                    //GameObject text = hit.transform.FindChild("HP Canvas").GetChild(1).gameObject;
+                    //hit.transform.GetComponent<GatherSyringe>().ShowUI(text);
+
+                    if (Input.GetButtonDown("Interact"))
+                    {
+                        IInventoryItem item = inventory.FindKeyItem("Syringe Empty");
+                        if (item != null)
+                        {
+                            print("Getherting DNA");
+                            GameObject dna = hit.transform.GetComponent<GatherSyringe>().dna;
+
+                            inventory.RemoveItem(item);
+                            inventory.AddItem(dna.GetComponent<IInventoryItem>(), "Item");
+                        }
                         else
                         {
-                            uiManager.UpdateSubtitle("You need " + door.keyName + " to enter");
+                            print("You don't have Syringe");
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private void RaycastDNA()
+    {
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+        if (hit.transform)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                if (hit.transform.CompareTag("Interactable"))
+                {
+                    DNAReader gate = hit.transform.GetComponent<DNAReader>();
+                    if (gate != null)
+                    {
+                        if (gate.needDNA)
+                        {
+                            if (inventory.FindKeyItem(gate.dnaName) != null)
+                            {
+                                inventory.RemoveItem(inventory.FindKeyItem(gate.dnaName));
+                                gate.gate.GetComponent<Door>().needKey = false;
+                                gate.needDNA = false;
+                                SaveManager.instance.doorNeedKey[gate.gate.GetComponent<Door>().id] = false;
+                                SaveManager.instance.gateNeedDNA[gate.id] = false;
+                            }
+                            else
+                            {
+                                uiManager.UpdateSubtitle("You need " + gate.dnaName + " to enter");
+                            }
                         }
                     }
                 }
@@ -173,16 +339,31 @@ public class InputManager : MonoBehaviour
     }
     public void EquipWeaponInSlot(int slot)
     {
+        inventory = Inventory.instance;
+        weaponManager = WeaponManager.instance;
+        player = FindObjectOfType<Player>();
+
         IInventoryItem item = inventory.GetPeekItem(slot, "Weapon");
         if (item != null && item.Weapon != WeaponEnum.None)
         {
-            weaponManager.currentSlot = slot;
             player.EquipWeapon(item.Weapon);
+            weaponManager.currentSlot = slot;
         }
         else
         {
             Debug.Log("There is no weapon in slot : " + slot);
         }
+    }
+    public void OnConversation(bool talking)
+    {
+        onConversation = talking;
+        canOpenInv = !talking;
+        canShoot = !talking;
+        canEquipWep = !talking;
+        canMove = !talking;
+        canInteract = !talking;
+        canCollect = !talking;
+        CameraManager.instance.CanLookAround(!talking);
     }
     public void Restart()
     {

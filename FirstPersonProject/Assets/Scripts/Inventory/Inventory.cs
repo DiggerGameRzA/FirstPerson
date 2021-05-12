@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     public static Inventory instance;
 
     private const int itemSlots = 5;
-    private const int weaponSlots = 2;
+    private const int weaponSlots = 4;
     //public List<IInventoryItem> mItems = new List<IInventoryItem>();
 
     public List<InventorySlot> iSlots = new List<InventorySlot>();

@@ -8,6 +8,7 @@ public class Movement : IMovement
     Stats stats;
     Rigidbody rb;
     Transform transform;
+    CharacterController controller;
     //Transform handTransform;
     public Movement(IPlayer player)
     {
@@ -15,12 +16,14 @@ public class Movement : IMovement
         stats = player.GetStats();
         rb = player.GetRigidbody();
         transform = player.GetTransform();
+        controller = this.player.GetCharacterController();
         //handTransform = player.GetHandTransform();
     }
-
     public void Walk(Vector3 direction, float speed)
     {
-        rb.AddForce(direction * speed);
+        //rb.AddForce(direction * speed);
+        controller = player.GetCharacterController();
+        controller.Move(direction * speed);
     }
     public void RotateBody(Quaternion direction)
     {
@@ -33,6 +36,7 @@ public class Movement : IMovement
     public void Jump(float jumpForce)
     {
         //rb.AddForce(0, jumpForce, 0);
-        rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+        //rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+        controller.Move(new Vector3(0, Mathf.Sqrt(jumpForce * player.GetStats().Gravity), 0));
     }
 }

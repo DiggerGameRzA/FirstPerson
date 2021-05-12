@@ -25,6 +25,7 @@ public class Door : MonoBehaviour
      * SecurityRoom_Out = 2
      * MedicalRoom = 3
      * MedicalRoom_Out = 4
+     * AGate = 5
      * 
      */
     void Start()
@@ -46,6 +47,14 @@ public class Door : MonoBehaviour
             else
             {
                 ShowUI(true);
+            }
+        }
+        if (!needKey)
+        {
+            if (transform.childCount == 2)
+            {
+                Material mat = transform.GetChild(1).GetComponent<MeshRenderer>().materials[2];
+                mat.color = Color.green;
             }
         }
     }
@@ -72,10 +81,13 @@ public class Door : MonoBehaviour
         {
             GameManager.instance.LoadSecToLevel01();
         }
+        else if (from == "Level01" && goTo == "Level02")
+        {
+            GameManager.instance.LoadLevel02();
+        }
     }
     public void OnOpen()
     {
-        print("Openning " + gameObject.name);
         gate.GetComponent<Animator>().Play("Open");
     }
 }

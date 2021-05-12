@@ -20,4 +20,6 @@ public interface IWeapon
     Animator GetAnimator();
     void Equip();
     void Fire();
+    void NoAmmo();
+    void Reload();
 }

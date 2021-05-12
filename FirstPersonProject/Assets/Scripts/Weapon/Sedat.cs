@@ -59,6 +59,7 @@ public class Sedat : MonoBehaviour, IWeapon
             }
         }
         SedatPrefab.SetActive(true);
+        SaveManager.instance.currentWeapon = WeaponEnum.Sedat;
     }
     public Animator GetAnimator()
     {
@@ -70,6 +71,16 @@ public class Sedat : MonoBehaviour, IWeapon
         if (hit.collider.gameObject.GetComponent<SedatPoint>())
         {
             hit.transform.gameObject.GetComponent<SedatPoint>().TakeSedat(Damage);
+            int index;
+            if (hit.transform.gameObject.GetComponent<UtahRaptor>())
+            {
+                index = hit.transform.gameObject.GetComponent<UtahRaptor>().id;
+            }
+            else
+            {
+                index = hit.transform.gameObject.GetComponent<Compy>().id;
+            }
+            SaveManager.instance.dinos[index].sedatPoint = hit.transform.gameObject.GetComponent<SedatPoint>().SedatPoints;
         }
         else if (!hit.collider.gameObject.GetComponent<Health>())
         {
@@ -79,5 +90,13 @@ public class Sedat : MonoBehaviour, IWeapon
         {
 
         }
+    }
+    public void NoAmmo()
+    {
+
+    }
+    public void Reload()
+    {
+
     }
 }

@@ -10,5 +10,6 @@ public class Stats : MonoBehaviour
     [Header("Movements")]
     public float WalkSpeed = 10f;
     public float RunSpeed = 20f;
+    public float Gravity = 1f;
     public float JumpForce = 20f;
 }

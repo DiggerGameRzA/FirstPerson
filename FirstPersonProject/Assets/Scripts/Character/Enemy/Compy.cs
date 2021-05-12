@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class Compy : MonoBehaviour
 {
+    public int id = 0;
+    public GameObject textPrefab;
+
     //float
     public float visionRange; //Compy's detection range.
     public float speed; //Compy's speed.
@@ -15,6 +18,8 @@ public class Compy : MonoBehaviour
 
     bool isInRange = false;
     bool isNest = false;
+    bool isEscaped = false;
+    bool isDied = false;
     
     //gameObject
     public GameObject nest;
@@ -35,6 +40,28 @@ public class Compy : MonoBehaviour
         target = FindObjectOfType<Player>().transform;
         health = GetComponent<IHealth>();
         sedat = GetComponent<SedatPoint>();
+
+        GetInfo();
+
+        if (health.HealthPoint <= 0)
+        {
+            isDied = true;
+            health.OnDead();
+
+            anim.Play("Died");
+            anim.SetBool("isIdling", true);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isDead", false);
+        }
+        else if(sedat.SedatPoints <= 0)
+        {
+            isDied = true;
+
+            anim.Play("Died");
+            anim.SetBool("isIdling", true);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isDead", false);
+        }
     }
 
     void Update()
@@ -45,15 +72,15 @@ public class Compy : MonoBehaviour
 
         if(disToEsc < 1)
         {
-            Destroy(this.gameObject);
+            isEscaped = true;
         }
-
-        if (health.HealthPoint <= 0)
+        
+        if (health.HealthPoint <= 0 && !isDied)
         {
             health.OnDead();
             isDead = true;
         }
-        else if (sedat.SedatPoints <= 0)
+        else if (sedat.SedatPoints <= 0 && !isDied)
         {
             isSleep = true;
         }
@@ -71,7 +98,17 @@ public class Compy : MonoBehaviour
             isInRange = false;
         }
 
-        if (isDead)
+        if (isEscaped)
+        {
+            gameObject.SetActive(false);
+        }
+
+        if (isDied)
+        {
+            agent.SetDestination(transform.position);
+            agent.speed = 0;
+        }
+        else if (isDead)
         {
             agent.SetDestination(transform.position);
             agent.speed = 0;
@@ -109,10 +146,50 @@ public class Compy : MonoBehaviour
             anim.SetBool("isIdling", true);
             anim.SetBool("isRunning", false);
         }
+
+        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
+        {
+            GetComponent<GatherSyringe>().ShowUI(textPrefab);
+        }
     }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, visionRange);
+    }
+    private void OnDestroy()
+    {
+        SaveInfo();
+    }
+    void GetInfo()
+    {
+        for (int i = 0; i < SaveManager.instance.dinos.Count; i++)
+        {
+            DinoInfo dinoInfo = SaveManager.instance.dinos[i];
+            if (id == i)
+            {
+                health.HealthPoint = dinoInfo.healthPoint;
+                sedat.SedatPoints = dinoInfo.sedatPoint;
+                transform.position = dinoInfo.position;
+                isEscaped = dinoInfo.escaped;
+                health.UpdateHealth(health.HealthPoint);
+                break;
+            }
+        }
+    }
+    void SaveInfo()
+    {
+        for (int i = 0; i < SaveManager.instance.dinos.Count; i++)
+        {
+            DinoInfo dinoInfo = SaveManager.instance.dinos[i];
+            if (id == i)
+            {
+                dinoInfo.healthPoint = health.HealthPoint;
+                dinoInfo.sedatPoint = sedat.SedatPoints;
+                dinoInfo.position = transform.position;
+                dinoInfo.escaped = isEscaped;
+                break;
+            }
+        }
     }
 }

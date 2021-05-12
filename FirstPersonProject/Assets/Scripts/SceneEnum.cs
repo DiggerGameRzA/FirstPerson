@@ -11,5 +11,7 @@ public enum SceneEnum
 
     Level01 = 3,
     SecurityRoom = 4,
-    MedicalRoom = 5
+    MedicalRoom = 5,
+
+    Level02 = 6
 }

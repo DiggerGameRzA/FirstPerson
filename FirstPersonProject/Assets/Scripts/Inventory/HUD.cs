@@ -7,7 +7,7 @@ public class HUD : MonoBehaviour
 {
     [SerializeField] Inventory inventory;
 
-    [SerializeField] Transform weaponSlots;
+    [SerializeField] Transform weaponSlots = null;
 
     IPlayer player;
     UIManager uiManager;
@@ -109,7 +109,8 @@ public class HUD : MonoBehaviour
     }
     public void UseItemInSlot(int slot)
     {
-        IInventoryItem item = inventory.GetPeekItem(slot - 1, "Item");
+        inventory = Inventory.instance;
+        IInventoryItem item = inventory.GetPeekItem(slot, "Item");
         if (item != null)
         {
             inventory.UseItem(item);

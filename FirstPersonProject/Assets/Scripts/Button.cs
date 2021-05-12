@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Button : MonoBehaviour
 {
-    public void ChangeScene(string name)
+    public void ResetGame()
     {
-        SceneManager.LoadScene(name);
+        GameManager.instance.ResetGame();
     }
     public void QuitGame()
     {

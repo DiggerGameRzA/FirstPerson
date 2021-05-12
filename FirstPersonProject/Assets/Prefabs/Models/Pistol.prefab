@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4856427125975224339}
   - component: {fileID: 3644452051224843682}
   - component: {fileID: 6611776017605809309}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 8644865927702640932}
   - component: {fileID: 8332983355891144410}
   - component: {fileID: 6226851471591012670}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 561864810798803316}
   - component: {fileID: 1092337883375186942}
   - component: {fileID: 4569272771251070444}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,13 +254,13 @@ GameObject:
   m_Component:
   - component: {fileID: 6565513301901693666}
   - component: {fileID: 6971880923104107698}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6565513301901693666
 Transform:
   m_ObjectHideFlags: 0
@@ -268,7 +268,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6565513301901693665}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 1102262896054693323}
   - component: {fileID: 1153873122800804161}
   - component: {fileID: 1877545172787008531}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5163391364704137886}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PistolModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

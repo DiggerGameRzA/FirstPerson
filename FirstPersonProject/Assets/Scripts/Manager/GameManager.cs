@@ -14,11 +14,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] float totalProgress;
     
     [Header("Managers")]
-    [SerializeField] WeaponManager weaponManager;
-    [SerializeField] InputManager inputManager;
-    [SerializeField] CameraManager cameraManager;
-    [SerializeField] DialogueManager dialogueManager;
-    [SerializeField] Inventory inventory;
+    [SerializeField] WeaponManager weaponManager = null;
+    [SerializeField] InputManager inputManager = null;
+    [SerializeField] CameraManager cameraManager = null;
+    [SerializeField] DialogueManager dialogueManager = null;
+    [SerializeField] Inventory inventory = null;
 
     List<AsyncOperation> sceneLoading = new List<AsyncOperation>();
     private void Awake()
@@ -103,7 +103,9 @@ public class GameManager : MonoBehaviour
         bar.GetComponent<RectTransform>().sizeDelta = new Vector2(totalProgress, 100);
         percent.GetComponent<Text>().text = Mathf.RoundToInt(totalProgress) + " %";
 
-        GameObject.FindObjectOfType<Player>().transform.position = position;
+        FindObjectOfType<Player>().transform.position = position;
+        FindObjectOfType<Player>().GetCharacterController().enabled = false;
+        Invoke("ResetPos", 0.2f);
 
         LeanTween.alphaCanvas(loadingPrefab.GetComponent<CanvasGroup>(), 0f, 0.5f).setOnComplete(FinishedLoading);
         EnableManagers(level);
@@ -139,6 +141,10 @@ public class GameManager : MonoBehaviour
     public void LoadLevel01()
     {
         LoadScene((int)SceneEnum.Cutscene01, (int)SceneEnum.Level01);
+    }
+    public void LoadLevel02()
+    {
+        LoadScene((int)SceneEnum.Level01, (int)SceneEnum.Level02);
     }
     public void LoadMedRoom()
     {
@@ -182,5 +188,13 @@ public class GameManager : MonoBehaviour
         sceneLoading.Add(SceneManager.LoadSceneAsync(load, LoadSceneMode.Additive));
 
         StartCoroutine(GetSceneLoadProgess(true, load, position));
+    }
+    public void ResetGame()
+    {
+        //SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive);
+    }
+    void ResetPos()
+    {
+        FindObjectOfType<Player>().GetCharacterController().enabled = true;
     }
 }

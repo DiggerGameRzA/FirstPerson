@@ -38,7 +38,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4135252932809711708}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1a55402775548c4cbf8d320a5946cb7, type: 3}
   m_Name: 
@@ -46,3 +46,18 @@ MonoBehaviour:
   inventory: {fileID: 0}
   uiManager: {fileID: 0}
   weaponManager: {fileID: 0}
+  cameraManager: {fileID: 0}
+  hud: {fileID: 0}
+  canShoot: 1
+  canOpenInv: 1
+  canEsc: 1
+  canEquipWep: 1
+  canMove: 1
+  canInteract: 1
+  canCollect: 1
+  canSkip: 0
+  onConversation: 0
+  checkKey: {fileID: 3126269870390390657, guid: 1478fa85c1fea4340a6da04c37e094c1,
+    type: 3}
+  medKey: {fileID: 1520805175617777857, guid: e9b9495484deed1469f55051905ee3c1, type: 3}
+  syringe: {fileID: 8907349213612104769, guid: ab50eddd3cb7fb0419baec686e30d1ab, type: 3}

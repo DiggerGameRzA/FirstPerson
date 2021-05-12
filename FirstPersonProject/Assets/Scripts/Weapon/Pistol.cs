@@ -17,6 +17,9 @@ public class Pistol : MonoBehaviour, IWeapon
     [Header("Damage")]
     public int _damage = 10;
 
+    public GameObject muzzlePrefab;
+    public Transform muzzleTranform;
+
     public float FireDelay 
     {
         get { return _fireDelay; }
@@ -67,10 +70,23 @@ public class Pistol : MonoBehaviour, IWeapon
     }
     public void Fire()
     {
+        SoundManager.instance.PlayPistolFire();
+
         RaycastHit hit = CameraManager.GetCameraRaycast(100f);
         if (hit.collider.gameObject.GetComponent<Health>())
         {
             hit.transform.gameObject.GetComponent<Health>().TakeDamage(Damage);
+            int index;
+            if (hit.transform.gameObject.GetComponent<UtahRaptor>())
+            {
+                index = hit.transform.gameObject.GetComponent<UtahRaptor>().id;
+            }
+            else
+            {
+                index = hit.transform.gameObject.GetComponent<Compy>().id;
+            }
+            SaveManager.instance.dinos[index].healthPoint = hit.transform.gameObject.GetComponent<Health>().HealthPoint;
+
         }
         else if (!hit.collider.gameObject.GetComponent<Health>())
         {
@@ -80,5 +96,18 @@ public class Pistol : MonoBehaviour, IWeapon
         {
 
         }
+        muzzleTranform = Camera.main.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
+        GameObject go = Instantiate(muzzlePrefab, muzzleTranform);
+        go.transform.parent = muzzleTranform;
+        //GameObject muzzlePrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
+        //muzzlePrefab.SetActive(true);
+    }
+    public void NoAmmo()
+    {
+        SoundManager.instance.PlayPistolNoAmmo();
+    }
+    public void Reload()
+    {
+        SoundManager.instance.PlayPistolReload();
     }
 }

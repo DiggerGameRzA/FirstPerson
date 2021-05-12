@@ -53,16 +53,19 @@ public class WeaponManager : MonoBehaviour
             Invoke("ResetAnimation", Mathf.Abs(weapon.FireDelay - 0.2f));
             weapon.Fire();
         }
+        else if(tempTime <= 0 && weapon.CurrentAmmo <= 0)
+        {
+            weapon.NoAmmo();
+        }
     }
     public void Reload()
     {
         if (weapon.CurrentSpare == 0)
         {
-            Debug.Log("Can not reload");
+
         }
         else
         {
-            Debug.Log("Reloading");
             for (int i = weapon.CurrentAmmo; i < weapon.MaxAmmo; i++)
             {
                 if (weapon.CurrentSpare == 0)
@@ -71,6 +74,7 @@ public class WeaponManager : MonoBehaviour
                 }
                 else
                 {
+                    weapon.Reload();
                     weapon.CurrentAmmo++;
                     weapon.CurrentSpare--;
                     uiManager.UpdateAmmo(weapon.CurrentAmmo, weapon.CurrentSpare);
