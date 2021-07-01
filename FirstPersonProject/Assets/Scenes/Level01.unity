@@ -4500,6 +4500,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8073335411959025698, guid: 1f183c97f36116d428a9dd10fe0bac0d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f183c97f36116d428a9dd10fe0bac0d, type: 3}
 --- !u!4 &1749577094575334590
@@ -6408,6 +6413,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3015288820852551848, guid: 9a90366d1a648614a8f638fabcf9db0d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6208377627769438016, guid: 9a90366d1a648614a8f638fabcf9db0d,
         type: 3}
       propertyPath: near clip plane
@@ -6471,6 +6481,11 @@ PrefabInstance:
     - target: {fileID: 6208377627769438023, guid: 9a90366d1a648614a8f638fabcf9db0d,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6208377628565797106, guid: 9a90366d1a648614a8f638fabcf9db0d,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -15,6 +15,7 @@ public class Compy : EnemyStats
     Animator anim;
     IHealth health;
     ISedat sedat;
+    AudioSource audioSource;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class Compy : EnemyStats
         target = FindObjectOfType<Player>().transform;
         health = GetComponent<IHealth>();
         sedat = GetComponent<SedatPoint>();
+        audioSource = GetComponent<AudioSource>();
 
         GetInfo();
 
@@ -50,6 +52,9 @@ public class Compy : EnemyStats
 
     void Update()
     {
+        tempIdleTime -= Time.deltaTime;
+        tempRunTime -= Time.deltaTime;
+
         float distance = Vector3.Distance(target.position, transform.position);
         float disToNest = Vector3.Distance(transform.position, nest.transform.position);
         float disToEsc = Vector3.Distance(transform.position, escape.transform.position);
@@ -103,6 +108,11 @@ public class Compy : EnemyStats
             agent.speed = 0;
             anim.SetBool("isDead", true);
             anim.Play("Death");
+            if (!playedDead)
+            {
+                PlayDeadSound(audioSource);
+                playedDead = true;
+            }
         }
         else if (isSleep)
         {
@@ -110,12 +120,23 @@ public class Compy : EnemyStats
             agent.speed = 0;
             anim.SetBool("isDead", true);
             anim.Play("Death");
+            if (!playedDead)
+            {
+                PlayDeadSound(audioSource);
+                playedDead = true;
+            }
         }
         else if (isNest && isInRange)
         {
             agent.SetDestination(escape.transform.position);
             anim.SetBool("isIdling", false);
             anim.SetBool("isRunning", true);
+
+            if (tempRunTime <= 0)
+            {
+                PlayRunSound(audioSource);
+                tempRunTime = 1f;
+            }
         }
         else if (isNest)
         {
@@ -128,12 +149,23 @@ public class Compy : EnemyStats
             agent.SetDestination(nest.transform.position);
             anim.SetBool("isIdling", false);
             anim.SetBool("isRunning", true);
+
+            if(tempRunTime <= 0)
+            {
+                PlayRunSound(audioSource);
+                tempRunTime = 1f;
+            }
         }
         else if (!isInRange)
         {
             agent.SetDestination(transform.position);
             anim.SetBool("isIdling", true);
             anim.SetBool("isRunning", false);
+            if (tempIdleTime <= 0)
+            {
+                PlayIdleSound(audioSource);
+                tempIdleTime = 5f;
+            }
         }
 
         if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)

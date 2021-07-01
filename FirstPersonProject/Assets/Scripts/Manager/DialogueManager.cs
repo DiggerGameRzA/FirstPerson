@@ -35,6 +35,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartConversation(Dialogue dialogue)
     {
+        print("Starting conversations");
         InputManager.instance.OnConversation(true);
 
         if(Sentences != null)

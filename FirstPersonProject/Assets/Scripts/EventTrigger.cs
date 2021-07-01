@@ -10,7 +10,6 @@ public class EventTrigger : MonoBehaviour
     public GameObject cargo;
     public GameObject[] ammo9mm;
     public GameObject[] meds;
-    bool triggered = false;
     void Start()
     {
         inventory = Inventory.instance;

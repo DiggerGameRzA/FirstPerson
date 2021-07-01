@@ -5,13 +5,12 @@ using UnityEngine.AI;
 
 public class UtahRaptor : EnemyStats
 {
-    float tempTime = 0f;
-
     Transform target;
     NavMeshAgent agent;
     Animator anim;
     IHealth health;
     ISedat sedat;
+    AudioSource audioSource;
 
     void Start()
     {
@@ -21,6 +20,7 @@ public class UtahRaptor : EnemyStats
         target = FindObjectOfType<Player>().transform;
         health = GetComponent<IHealth>();
         sedat = GetComponent<SedatPoint>();
+        audioSource = GetComponent<AudioSource>();
 
         GetInfo();
         if (health.HealthPoint <= 0)
@@ -48,7 +48,11 @@ public class UtahRaptor : EnemyStats
 
     void Update()
     {
-        tempTime -= Time.deltaTime;
+        tempIdleTime -= Time.deltaTime;
+        tempRunTime -= Time.deltaTime;
+        tempAttackTime -= Time.deltaTime;
+        tempHitTime -= Time.deltaTime;
+        tempSleepTime -= Time.deltaTime;
 
         if (isHit)
         {
@@ -88,6 +92,7 @@ public class UtahRaptor : EnemyStats
             agent.SetDestination(transform.position);
             anim.SetBool("isAttacking", false);
             anim.SetBool("isRunning", false);
+
             anim.SetBool("isIdling", true);
             anim.SetBool("isDead", true);
 
@@ -98,28 +103,42 @@ public class UtahRaptor : EnemyStats
             agent.SetDestination(transform.position);
             anim.SetBool("isAttacking", false);
             anim.SetBool("isRunning", false);
+
             anim.SetBool("isIdling", true);
             anim.SetBool("isDead", true);
             anim.Play("Death");
+            if (!playedDead)
+            {
+                PlayDeadSound(audioSource);
+                playedDead = true;
+            }
         }
         else if (isSleep)
         {
             agent.SetDestination(transform.position);
             anim.SetBool("isAttacking", false);
             anim.SetBool("isRunning", false);
+
             anim.SetBool("isIdling", true);
             anim.SetBool("isDead", true);
             anim.Play("Death");
+            if(tempSleepTime <= 0)
+            {
+                PlaySleepSound(audioSource);
+                tempSleepTime = 6f;
+            }
         }
         else if (isInAtk)
         {
             agent.SetDestination(transform.position);
-            anim.SetBool("isAttacking", true);
             anim.SetBool("isRunning", false);
             anim.SetBool("isIdling", false);
-            if (tempTime <= 0)
+
+            anim.SetBool("isAttacking", true);
+            if (tempAttackTime <= 0)
             {
-                tempTime = attackDelay;
+                PlayAttackSound(audioSource);
+                tempAttackTime = attackDelay;
                 Invoke("Attack", 1f);
             }
             else
@@ -130,16 +149,28 @@ public class UtahRaptor : EnemyStats
         else if (isInRange)
         {
             agent.SetDestination(target.position);
-            anim.SetBool("isRunning", true);
             anim.SetBool("isIdling", false);
             anim.SetBool("isAttacking", false);
+
+            anim.SetBool("isRunning", true);
+            if(tempRunTime <= 0)
+            {
+                PlayRunSound(audioSource);
+                tempRunTime = 0.2f;
+            }
         }
         else if (!isInAtk && !isInRange)
         {
             agent.SetDestination(transform.position);
-            anim.SetBool("isIdling", true);
             anim.SetBool("isRunning", false);
             anim.SetBool("isAttacking", false);
+
+            anim.SetBool("isIdling", true);
+            if(tempIdleTime <= 0)
+            {
+                PlayIdleSound(audioSource);
+                tempIdleTime = 5f;
+            }
         }
         else
         {
