@@ -11,13 +11,13 @@ GameObject:
   - component: {fileID: 8907349213612104826}
   - component: {fileID: 8907349213612104774}
   - component: {fileID: 2052485096911002960}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Syringe Compy Item
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8907349213612104826
 Transform:
   m_ObjectHideFlags: 0
@@ -49,9 +49,12 @@ MonoBehaviour:
   _id: 0
   _collected: 0
   _name: Syringe Comp DNA
-  _image: {fileID: 21300000, guid: 552e5ed88f2408b4e940154fac61972b, type: 3}
+  _image: {fileID: 21300000, guid: 69371ad2aebe59e4099ebf9827b6ac22, type: 3}
   _amount: 1
   _weapon: 0
+  interactable:
+    serializedVersion: 2
+    m_Bits: 1024
   inventory: {fileID: 0}
 --- !u!136 &2052485096911002960
 CapsuleCollider:

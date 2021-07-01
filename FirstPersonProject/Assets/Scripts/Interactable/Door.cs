@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Door : MonoBehaviour
 {
+    public LayerMask interactable;
     IPlayer player;
     public int id = 1;
     public bool needKey = false;
@@ -39,7 +40,7 @@ public class Door : MonoBehaviour
     {
         if (CameraManager.camera != null)
         {
-            RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+            RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, interactable);
             if (this.transform != hit.transform)
             {
                 ShowUI(false);

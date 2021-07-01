@@ -3,24 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Compy : MonoBehaviour
+public class Compy : EnemyStats
 {
-    public int id = 0;
-    public GameObject textPrefab;
-
-    //float
-    public float visionRange; //Compy's detection range.
-    public float speed; //Compy's speed.
-
-    //states
-    bool isDead = false;
-    bool isSleep = false;
-
-    bool isInRange = false;
-    bool isNest = false;
-    bool isEscaped = false;
-    bool isDied = false;
-    
     //gameObject
     public GameObject nest;
     public GameObject escape;
@@ -69,6 +53,11 @@ public class Compy : MonoBehaviour
         float distance = Vector3.Distance(target.position, transform.position);
         float disToNest = Vector3.Distance(transform.position, nest.transform.position);
         float disToEsc = Vector3.Distance(transform.position, escape.transform.position);
+
+        if (isHit)
+        {
+            visionRange = visionRange2;
+        }
 
         if(disToEsc < 1)
         {

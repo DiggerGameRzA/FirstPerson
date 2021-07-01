@@ -2366,7 +2366,7 @@ GameObject:
   - component: {fileID: 8718104151071325691}
   - component: {fileID: 3267024160258043850}
   - component: {fileID: 1135910920871099856}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Compy
   m_TagString: Dino
   m_Icon: {fileID: 0}
@@ -2459,7 +2459,9 @@ MonoBehaviour:
   id: 0
   textPrefab: {fileID: 88592270022990638}
   visionRange: 15
+  visionRange2: 25
   speed: 50
+  isHit: 0
   nest: {fileID: 0}
   escape: {fileID: 0}
 --- !u!114 &8718104151071325691
@@ -2504,6 +2506,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a5a93b43ddb924594ab23c3cf08aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entity:
+    serializedVersion: 2
+    m_Bits: 2048
   dna: {fileID: 8907349213612104769, guid: 7e326c865b210d74b9379001e6c3f1af, type: 3}
 --- !u!1001 &9055962018833152356
 PrefabInstance:

@@ -48,6 +48,12 @@ MonoBehaviour:
   weaponManager: {fileID: 0}
   cameraManager: {fileID: 0}
   hud: {fileID: 0}
+  interactable:
+    serializedVersion: 2
+    m_Bits: 1024
+  entity:
+    serializedVersion: 2
+    m_Bits: 2048
   canShoot: 1
   canOpenInv: 1
   canEsc: 1

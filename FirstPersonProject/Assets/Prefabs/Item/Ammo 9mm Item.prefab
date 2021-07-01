@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5176033490071952410}
   - component: {fileID: 5176033490071952422}
   - component: {fileID: 2659504186578565622}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Ammo 9mm Item
   m_TagString: Ammo
   m_Icon: {fileID: 0}
@@ -52,6 +52,9 @@ MonoBehaviour:
   _image: {fileID: 21300000, guid: 2756c5775300fe64dbd781a5375349b4, type: 3}
   _amount: 10
   _weapon: 0
+  interactable:
+    serializedVersion: 2
+    m_Bits: 1024
   inventory: {fileID: 0}
 --- !u!136 &2659504186578565622
 CapsuleCollider:

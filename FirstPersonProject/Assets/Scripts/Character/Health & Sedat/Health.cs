@@ -48,6 +48,18 @@ public class Health : MonoBehaviour, IHealth
         else
         {
             UpdateHealth(HealthPoint);
+
+            GetComponent<EnemyStats>().isHit = true;
+            /*
+            if (GetComponent<UtahRaptor>())
+            {
+                GetComponent<UtahRaptor>().isHit = true;
+            }
+            else if(GetComponent<Compy>())
+            {
+                GetComponent<Compy>().isHit = true;
+            }
+            */
         }
     }
     public void TakeHeal(float heal)

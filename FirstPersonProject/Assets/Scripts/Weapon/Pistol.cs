@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Pistol : MonoBehaviour, IWeapon
 {
+    public LayerMask entity;
     public WeaponEnum WeaponType { get { return WeaponEnum.Pistol; } }
     [Header("Firing")]
     public float _fireDelay = 0.5f;
@@ -53,6 +54,7 @@ public class Pistol : MonoBehaviour, IWeapon
     GameObject PistolPrefab;
     public void Equip()
     {
+        /*
         PistolPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
         foreach (Transform i in PistolPrefab.transform.parent)
         {
@@ -62,7 +64,13 @@ public class Pistol : MonoBehaviour, IWeapon
             }
         }
         PistolPrefab.SetActive(true);
+        */
+
+        IPlayer player = FindObjectOfType<Player>();
+        Animator hAnim = Camera.main.transform.GetChild(2).GetComponent<Animator>();
+        AnimationCon.SetPlayerPistol(hAnim, true);
         SaveManager.instance.currentWeapon = WeaponEnum.Pistol;
+
     }
     public Animator GetAnimator()
     {
@@ -72,11 +80,14 @@ public class Pistol : MonoBehaviour, IWeapon
     {
         SoundManager.instance.PlayPistolFire();
 
-        RaycastHit hit = CameraManager.GetCameraRaycast(100f);
+        RaycastHit hit = CameraManager.GetCameraRaycast(100f, entity);
         if (hit.collider.gameObject.GetComponent<Health>())
         {
             hit.transform.gameObject.GetComponent<Health>().TakeDamage(Damage);
             int index;
+            EnemyStats dino = hit.transform.GetComponent<EnemyStats>();
+            index = dino.id;
+            /*
             if (hit.transform.gameObject.GetComponent<UtahRaptor>())
             {
                 index = hit.transform.gameObject.GetComponent<UtahRaptor>().id;
@@ -85,6 +96,7 @@ public class Pistol : MonoBehaviour, IWeapon
             {
                 index = hit.transform.gameObject.GetComponent<Compy>().id;
             }
+            */
             SaveManager.instance.dinos[index].healthPoint = hit.transform.gameObject.GetComponent<Health>().HealthPoint;
 
         }

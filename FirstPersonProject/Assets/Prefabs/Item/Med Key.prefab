@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1520805175617777914}
   - component: {fileID: 1520805175617777862}
   - component: {fileID: 9057287717380267385}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Med Key
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -158,6 +158,9 @@ MonoBehaviour:
   _image: {fileID: 21300000, guid: 57c5208a72b33d9429987c3f4f5d3ac3, type: 3}
   _amount: 1
   _weapon: 0
+  interactable:
+    serializedVersion: 2
+    m_Bits: 1024
   inventory: {fileID: 0}
 --- !u!136 &9057287717380267385
 CapsuleCollider:

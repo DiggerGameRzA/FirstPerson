@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 9207275942048388653}
   - component: {fileID: 9207275942048388625}
   - component: {fileID: 2088072986679915457}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Ammo Box Item
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -152,9 +152,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76485e3e620f7f3429c2b7a2d566747d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
+  _collected: 0
   _name: Ammo Box
   _image: {fileID: 21300000, guid: 2756c5775300fe64dbd781a5375349b4, type: 3}
+  _amount: 1
   _weapon: 0
+  interactable:
+    serializedVersion: 2
+    m_Bits: 1024
   inventory: {fileID: 0}
 --- !u!136 &2088072986679915457
 CapsuleCollider:

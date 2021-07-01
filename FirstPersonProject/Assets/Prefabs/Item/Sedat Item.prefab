@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 7479242635385011228}
   - component: {fileID: 7479242635385011219}
   - component: {fileID: 3021595200731313601}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Sedat Item
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -152,10 +152,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76485e3e620f7f3429c2b7a2d566747d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 0
   _collected: 0
   _name: Sedat
   _image: {fileID: 21300000, guid: 05ca14ec5cc18ed4ea5e76cecdca0d59, type: 3}
+  _amount: 1
   _weapon: 3
+  interactable:
+    serializedVersion: 2
+    m_Bits: 1024
   inventory: {fileID: 0}
 --- !u!136 &3021595200731313601
 CapsuleCollider:

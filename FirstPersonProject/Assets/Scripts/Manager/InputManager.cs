@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
     [SerializeField] WeaponManager weaponManager;
     [SerializeField] CameraManager cameraManager;
     [SerializeField] HUD hud;
+    public LayerMask interactable;
+    public LayerMask entity;
 
     [Header("Bools")]
     public bool canShoot = true;
@@ -184,7 +186,7 @@ public class InputManager : MonoBehaviour
     private void RaycastItem()
     {
         player = FindObjectOfType<Player>();
-        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, interactable);
         if (hit.transform)
         {
             if (Input.GetButtonDown("Collect"))
@@ -221,7 +223,7 @@ public class InputManager : MonoBehaviour
     }
     private void RaycastDoor()
     {
-        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, interactable);
         if (hit.transform)
         {
             if (Input.GetButtonDown("Interact"))
@@ -272,7 +274,7 @@ public class InputManager : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         inventory = Inventory.instance;
-        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, entity);
         if (hit.transform)
         {
             if (hit.transform.CompareTag("Dino"))
@@ -280,7 +282,7 @@ public class InputManager : MonoBehaviour
                 float health = hit.transform.GetComponent<Health>().HealthPoint;
                 float sedat = hit.transform.GetComponent<SedatPoint>().SedatPoints;
 
-                if (health <= 0 || sedat <= 0)
+                if ((health <= 0 || sedat <= 0) && !hit.transform.GetComponent<GatherSyringe>().gathered)
                 {
                     //GameObject text = hit.transform.FindChild("HP Canvas").GetChild(1).gameObject;
                     //hit.transform.GetComponent<GatherSyringe>().ShowUI(text);
@@ -294,6 +296,18 @@ public class InputManager : MonoBehaviour
                             GameObject dna = hit.transform.GetComponent<GatherSyringe>().dna;
 
                             inventory.RemoveItem(item);
+                            hit.transform.GetComponent<GatherSyringe>().gathered = true;
+
+                            int index;
+                            EnemyStats dino = hit.transform.GetComponent<EnemyStats>();
+                            index = dino.id;
+                            /*
+                            if (hit.transform.GetComponent<UtahRaptor>())
+                                index = hit.transform.GetComponent<UtahRaptor>().id;
+                            else
+                                index = hit.transform.GetComponent<Compy>().id;
+                            */
+                            SaveManager.instance.gathered[index] = true;
                             inventory.AddItem(dna.GetComponent<IInventoryItem>(), "Item");
                         }
                         else
@@ -307,7 +321,7 @@ public class InputManager : MonoBehaviour
     }
     private void RaycastDNA()
     {
-        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, interactable);
         if (hit.transform)
         {
             if (Input.GetButtonDown("Interact"))

@@ -15,6 +15,7 @@ public class SaveManager : MonoBehaviour
 
     [Header("Dinos")]
     public List<DinoInfo> dinos = new List<DinoInfo>();
+    public List<bool> gathered = new List<bool>();
 
     [Header("Items")]
     public List<bool> collected = new List<bool>();
@@ -58,7 +59,12 @@ public class SaveManager : MonoBehaviour
         dinos.Add(new DinoInfo(4, 200f, 1, new Vector3(-6, 1, 87), false));
         dinos.Add(new DinoInfo(5, 200f, 1, new Vector3(-5, 1, 73), false));
 
-        for (int i = 0; i < 14; i++)
+        for (int i = 0; i < 6; i++)
+        {
+            gathered.Add(false);
+        }
+
+        for (int i = 0; i < 15; i++)
         {
             collected.Add(false);
         }

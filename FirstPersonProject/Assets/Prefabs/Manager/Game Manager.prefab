@@ -441,11 +441,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Input Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 4135252932809711708, guid: 053e43aff8a3e0d45a269fee75a3abcf,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4135252932809711709, guid: 053e43aff8a3e0d45a269fee75a3abcf,
         type: 3}
       propertyPath: m_LocalPosition.x

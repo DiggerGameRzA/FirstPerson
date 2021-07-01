@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sedat : MonoBehaviour, IWeapon
 {
+    public LayerMask entity;
     public WeaponEnum WeaponType { get { return WeaponEnum.Sedat; } }
     [Header("Firing")]
     public float _fireDelay = 0.5f;
@@ -67,11 +68,14 @@ public class Sedat : MonoBehaviour, IWeapon
     }
     public void Fire()
     {
-        RaycastHit hit = CameraManager.GetCameraRaycast(100f);
+        RaycastHit hit = CameraManager.GetCameraRaycast(100f, entity);
         if (hit.collider.gameObject.GetComponent<SedatPoint>())
         {
             hit.transform.gameObject.GetComponent<SedatPoint>().TakeSedat(Damage);
             int index;
+            EnemyStats dino = hit.transform.GetComponent<EnemyStats>();
+            index = dino.id;
+            /*
             if (hit.transform.gameObject.GetComponent<UtahRaptor>())
             {
                 index = hit.transform.gameObject.GetComponent<UtahRaptor>().id;
@@ -80,6 +84,7 @@ public class Sedat : MonoBehaviour, IWeapon
             {
                 index = hit.transform.gameObject.GetComponent<Compy>().id;
             }
+            */
             SaveManager.instance.dinos[index].sedatPoint = hit.transform.gameObject.GetComponent<SedatPoint>().SedatPoints;
         }
         else if (!hit.collider.gameObject.GetComponent<Health>())

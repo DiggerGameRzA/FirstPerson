@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DNAReader : MonoBehaviour
 {
+    public LayerMask interactable;
     IPlayer player;
     public int id = 0;
     public bool needDNA = true;
@@ -20,7 +21,7 @@ public class DNAReader : MonoBehaviour
         {
             if (needDNA)
             {
-                RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+                RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, interactable);
                 if (this.transform != hit.transform)
                 {
                     ShowUI(false);

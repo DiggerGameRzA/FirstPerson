@@ -10,6 +10,7 @@ public interface IPlayer
     CharacterController GetCharacterController();
     IWeapon GetWeapon();
     IHealth GetHealth();
+    Animator GetAnimator();
     void EquipWeapon(WeaponEnum weapon);
     //Transform GetHandTransform();
 }

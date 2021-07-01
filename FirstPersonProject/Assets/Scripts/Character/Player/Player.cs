@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, IPlayer
     IMovementDir movementDir;
     CharacterController controller;
     Vector3 velocity;
+    Animator anim;
 
     IWeapon weapon;
     IHealth health;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour, IPlayer
         movement = new Movement(this);
         movementDir = new MovementDir();
         controller = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
 
         weaponManager = GameObject.Find("Weapon Manager");
         weapon = null;
@@ -62,6 +64,19 @@ public class Player : MonoBehaviour, IPlayer
             else
             {
                 movement.Walk(movementDir.GetMovementDir(), stats.WalkSpeed);
+            }
+
+            if(movementDir.GetMovementDir() != Vector3.zero)
+            {
+                Animator hAnim = Camera.main.transform.GetChild(2).GetComponent<Animator>();
+                AnimationCon.SetPlayerRun(anim, true);
+                AnimationCon.SetPlayerRun(hAnim, true);
+            }
+            else
+            {
+                Animator hAnim = Camera.main.transform.GetChild(2).GetComponent<Animator>();
+                AnimationCon.SetPlayerRun(anim, false);
+                AnimationCon.SetPlayerRun(hAnim, false);
             }
         }
 
@@ -93,6 +108,10 @@ public class Player : MonoBehaviour, IPlayer
     public IHealth GetHealth()
     {
         return health;
+    }
+    public Animator GetAnimator()
+    {
+        return anim;
     }
     /*
     public Transform GetHandTransform()

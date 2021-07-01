@@ -3,26 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class UtahRaptor : MonoBehaviour
+public class UtahRaptor : EnemyStats
 {
-    public int id = 0;
-    public GameObject textPrefab;
-
-    //float
-    public float visionRange;
-    public float attackRange;
-    public float attackDelay;
-    public float damage;
-    public float speed;
-
-    //States
-    bool isDead = false;
-    bool isSleep = false;
-
-    bool isInRange = false;
-    bool isInAtk = false;
-    bool isDied = false;
-
     float tempTime = 0f;
 
     Transform target;
@@ -67,6 +49,11 @@ public class UtahRaptor : MonoBehaviour
     void Update()
     {
         tempTime -= Time.deltaTime;
+
+        if (isHit)
+        {
+            visionRange = visionRange2;
+        }
 
         float distance = Vector3.Distance(target.position, transform.position);
         if (health.HealthPoint <= 0 && !isDied)

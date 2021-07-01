@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 6557503681484406628}
   - component: {fileID: 8226054793146488096}
   - component: {fileID: 6065180395311583744}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: UtahR
   m_TagString: Dino
   m_Icon: {fileID: 0}
@@ -1011,10 +1011,12 @@ MonoBehaviour:
   id: 0
   textPrefab: {fileID: 5334043929752107266}
   visionRange: 20
+  visionRange2: 30
   attackRange: 5
   attackDelay: 3
   damage: 30
   speed: 20
+  isHit: 0
 --- !u!114 &6557503681484406628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1057,6 +1059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a5a93b43ddb924594ab23c3cf08aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entity:
+    serializedVersion: 2
+    m_Bits: 2048
   dna: {fileID: 8907349213612104769, guid: ab50eddd3cb7fb0419baec686e30d1ab, type: 3}
 --- !u!1 &8470666926022748037
 GameObject:
