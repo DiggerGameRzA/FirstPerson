@@ -128,6 +128,15 @@ public class UtahRaptor : EnemyStats
                 tempSleepTime = 6f;
             }
         }
+        else if (isAttacking)
+        {
+            agent.SetDestination(transform.position);
+            if (tempAttackTime <= 0)
+            {
+                Attack();
+                tempAttackTime = attackDelay;
+            }
+        }
         else if (isInAtk)
         {
             agent.SetDestination(transform.position);
@@ -135,16 +144,7 @@ public class UtahRaptor : EnemyStats
             anim.SetBool("isIdling", false);
 
             anim.SetBool("isAttacking", true);
-            if (tempAttackTime <= 0)
-            {
-                PlayAttackSound(audioSource);
-                tempAttackTime = attackDelay;
-                Invoke("Attack", 1f);
-            }
-            else
-            {
-                anim.SetBool("isAttacking", false);
-            }
+            anim.Play("Attack");
         }
         else if (isInRange)
         {
@@ -190,8 +190,13 @@ public class UtahRaptor : EnemyStats
     }
     void Attack()
     {
-        anim.Play("Attack");
-        target.GetComponent<IHealth>().TakeDamage(damage);
+        PlayAttackSound(audioSource);
+        float distance = Vector3.Distance(target.position, transform.position);
+        if (distance < attackRange)
+        {
+            if (isDealDamage)
+                target.GetComponent<IHealth>().TakeDamage(damage);
+        }
     }
     private void OnDestroy()
     {

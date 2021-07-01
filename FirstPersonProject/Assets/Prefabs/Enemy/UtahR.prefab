@@ -1014,7 +1014,7 @@ MonoBehaviour:
   visionRange: 20
   visionRange2: 30
   attackRange: 5
-  attackDelay: 3
+  attackDelay: 1
   damage: 30
   speed: 20
   isDead: 0
@@ -1045,6 +1045,7 @@ MonoBehaviour:
   tempHitTime: 0
   tempSleepTime: 0
   playedDead: 0
+  isAttacking: 0
 --- !u!114 &6557503681484406628
 MonoBehaviour:
   m_ObjectHideFlags: 0

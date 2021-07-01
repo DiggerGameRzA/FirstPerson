@@ -25,6 +25,8 @@ public class EnemyStats : MonoBehaviour
     public bool isHit = false;
     public bool isInRange = false;
     public bool isInAtk = false;
+    public bool isAttacking = false;
+    public bool isDealDamage = false;
     public bool isDied = false;
 
     public bool isEscaped = false;
