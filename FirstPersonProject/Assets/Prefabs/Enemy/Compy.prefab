@@ -2478,7 +2478,7 @@ MonoBehaviour:
   attackRange: 0
   attackDelay: 0
   damage: 0
-  speed: 15
+  speed: 10
   isDead: 0
   isSleep: 0
   isHit: 0

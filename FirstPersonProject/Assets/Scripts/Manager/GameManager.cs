@@ -44,9 +44,71 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive);
+        //SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive);
+
+        sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive));
+        StartCoroutine(GetSceneLoadProgess(false, (int)SceneEnum.MainMenu));
+
         Invoke("SetActive", 0.2f);
     }
+    //------------------------------------------------------------------------------------------------
+    public void LoadCutscene01()
+    {
+        LoadCutscene((int)SceneEnum.MainMenu, (int)SceneEnum.Cutscene01);
+    }
+    public void LoadLevel01()
+    {
+        LoadScene((int)SceneEnum.Cutscene01, (int)SceneEnum.Level01);
+    }
+    public void LoadLevel02()
+    {
+        LoadScene((int)SceneEnum.Level01, (int)SceneEnum.Level02);
+    }
+    public void LoadMedRoom()
+    {
+        LoadScene((int)SceneEnum.Level01, (int)SceneEnum.MedicalRoom);
+    }
+    public void LoadSecRoom()
+    {
+        LoadScene((int)SceneEnum.Level01, (int)SceneEnum.SecurityRoom);
+    }
+    public void LoadMedToLevel01()
+    {
+        LoadScene((int)SceneEnum.MedicalRoom, (int)SceneEnum.Level01, new Vector3(19, 4, 74));
+    }
+    public void LoadSecToLevel01()
+    {
+        LoadScene((int)SceneEnum.SecurityRoom, (int)SceneEnum.Level01, new Vector3(-7, 4, 74));
+    }
+    //------------------------------------------------------------------------------------------------
+    void LoadCutscene(int unload, int load)
+    {
+        loadingPrefab.SetActive(true);
+
+        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload));
+        sceneLoading.Add(SceneManager.LoadSceneAsync(load, LoadSceneMode.Additive));
+
+        StartCoroutine(GetSceneLoadProgess(false, load));
+    }
+    void LoadScene(int unload, int load)
+    {
+        loadingPrefab.SetActive(true);
+
+        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload));
+        sceneLoading.Add(SceneManager.LoadSceneAsync(load, LoadSceneMode.Additive));
+
+        StartCoroutine(GetSceneLoadProgess(true, load));
+    }
+    void LoadScene(int unload, int load, Vector3 position)
+    {
+        loadingPrefab.SetActive(true);
+
+        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload));
+        sceneLoading.Add(SceneManager.LoadSceneAsync(load, LoadSceneMode.Additive));
+
+        StartCoroutine(GetSceneLoadProgess(true, load, position));
+    }
+    //------------------------------------------------------------------------------------------------
     public IEnumerator GetSceneLoadProgess(bool level, int scene)
     {
         for (int i = 0; i < sceneLoading.Count; i++)
@@ -135,61 +197,7 @@ public class GameManager : MonoBehaviour
                 UIManager.instance.ResetUI();
         }
     }
-    public void LoadCutscene01()
-    {
-        LoadCutscene((int)SceneEnum.MainMenu, (int)SceneEnum.Cutscene01);
-    }
-    public void LoadLevel01()
-    {
-        LoadScene((int)SceneEnum.Cutscene01, (int)SceneEnum.Level01);
-    }
-    public void LoadLevel02()
-    {
-        LoadScene((int)SceneEnum.Level01, (int)SceneEnum.Level02);
-    }
-    public void LoadMedRoom()
-    {
-        LoadScene((int)SceneEnum.Level01, (int)SceneEnum.MedicalRoom);
-    }
-    public void LoadSecRoom()
-    {
-        LoadScene((int)SceneEnum.Level01, (int)SceneEnum.SecurityRoom);
-    }
-    public void LoadMedToLevel01()
-    {
-        LoadScene((int)SceneEnum.MedicalRoom, (int)SceneEnum.Level01, new Vector3(19, 4, 74));
-    }
-    public void LoadSecToLevel01()
-    {
-        LoadScene((int)SceneEnum.SecurityRoom, (int)SceneEnum.Level01, new Vector3(-7, 4, 74));
-    }
-    void LoadCutscene(int unload, int load)
-    {
-        loadingPrefab.SetActive(true);
-
-        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload));
-        sceneLoading.Add(SceneManager.LoadSceneAsync(load, LoadSceneMode.Additive));
-
-        StartCoroutine(GetSceneLoadProgess(false, load));
-    }
-    void LoadScene(int unload, int load)
-    {
-        loadingPrefab.SetActive(true);
-
-        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload));
-        sceneLoading.Add(SceneManager.LoadSceneAsync(load, LoadSceneMode.Additive));
-
-        StartCoroutine(GetSceneLoadProgess(true, load));
-    }
-    void LoadScene(int unload, int load, Vector3 position)
-    {
-        loadingPrefab.SetActive(true);
-
-        sceneLoading.Add(SceneManager.UnloadSceneAsync(unload));
-        sceneLoading.Add(SceneManager.LoadSceneAsync(load, LoadSceneMode.Additive));
-
-        StartCoroutine(GetSceneLoadProgess(true, load, position));
-    }
+    
     public void ResetGame()
     {
         //SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive);

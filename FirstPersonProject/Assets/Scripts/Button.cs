@@ -51,7 +51,7 @@ public class Button : MonoBehaviour
         {
             Destroy(root);
         }
-        Invoke("ActualLoadTitle", loadDelay);
+        SceneManager.LoadScene(0);
     }
     void ActualLoadTitle()
     {

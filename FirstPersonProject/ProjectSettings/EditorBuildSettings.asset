@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Cutscene01.unity
     guid: 6b3ec5341abdc004d8de1fce65dfa1c5
   - enabled: 1
-    path: Assets/Scenes/Level01Old.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/Level01.unity
+    guid: cb37c0b8016501f4d99b7b8685c384f6
   - enabled: 1
     path: Assets/Scenes/SecurityRoom.unity
     guid: 9921f0d9fe851144ea8557c66704b61f
