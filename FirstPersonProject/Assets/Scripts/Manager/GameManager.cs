@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive);
+        Invoke("SetActive", 0.2f);
     }
     public IEnumerator GetSceneLoadProgess(bool level, int scene)
     {
@@ -196,5 +197,9 @@ public class GameManager : MonoBehaviour
     void ResetPos()
     {
         FindObjectOfType<Player>().GetCharacterController().enabled = true;
+    }
+    void SetActive()
+    {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
     }
 }

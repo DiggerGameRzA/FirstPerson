@@ -75,6 +75,7 @@ public class UtahRaptor : EnemyStats
         }
         else if (distance < visionRange)
         {
+            visionRange = visionRange2;
             isInRange = true;
         }
 
@@ -156,7 +157,7 @@ public class UtahRaptor : EnemyStats
             if(tempRunTime <= 0)
             {
                 PlayRunSound(audioSource);
-                tempRunTime = 0.2f;
+                tempRunTime = 0.4f;
             }
         }
         else if (!isInAtk && !isInRange)
@@ -190,12 +191,14 @@ public class UtahRaptor : EnemyStats
     }
     void Attack()
     {
-        PlayAttackSound(audioSource);
         float distance = Vector3.Distance(target.position, transform.position);
-        if (distance < attackRange)
+        if (isDealDamage)
         {
-            if (isDealDamage)
+            PlayAttackSound(audioSource);
+            if (distance < attackRange)
+            {
                 target.GetComponent<IHealth>().TakeDamage(damage);
+            }
         }
     }
     private void OnDestroy()
