@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
 {
     public LayerMask interactable;
     IPlayer player;
-    public int id = 1;
+    public int id = 0;
     public bool needKey = false;
     public string keyName;
 
@@ -33,7 +33,7 @@ public class Door : MonoBehaviour
     {
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
 
-        needKey = SaveManager.instance.doorNeedKey[id];
+        //needKey = SaveManager.instance.doorNeedKey[id];
     }
 
     void Update()
@@ -52,7 +52,7 @@ public class Door : MonoBehaviour
         }
         if (!needKey)
         {
-            if (transform.childCount == 2)
+            if (transform.childCount >= 2)
             {
                 Material mat = transform.GetChild(1).GetComponent<MeshRenderer>().materials[2];
                 mat.color = Color.green;
@@ -89,6 +89,6 @@ public class Door : MonoBehaviour
     }
     public void OnOpen()
     {
-        gate.GetComponent<Animator>().Play("Open");
+        GetComponent<Animator>().Play("Open");
     }
 }

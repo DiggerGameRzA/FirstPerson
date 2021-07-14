@@ -41,11 +41,8 @@ public class EnemyStats : MonoBehaviour
     public AudioClip[] deadSound;
 
     //Temporary Time
-    public float tempIdleTime = 0f;
-    public float tempRunTime = 0f;
-    public float tempAttackTime = 0f;
-    public float tempHitTime = 0f;
-    public float tempSleepTime = 0f;
+    [HideInInspector]
+    public float tempIdleTime, tempRunTime, tempAttackTime, tempHitTime, tempSleepTime = 0f;
     public bool playedDead = false;
     public void PlayIdleSound(AudioSource audioSource)
     {

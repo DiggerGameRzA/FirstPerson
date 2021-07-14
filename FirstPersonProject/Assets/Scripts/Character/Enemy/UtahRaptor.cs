@@ -191,6 +191,7 @@ public class UtahRaptor : EnemyStats
     }
     void Attack()
     {
+        
         float distance = Vector3.Distance(target.position, transform.position);
         if (isDealDamage)
         {

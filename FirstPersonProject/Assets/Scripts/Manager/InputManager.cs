@@ -209,13 +209,13 @@ public class InputManager : MonoBehaviour
                 else if (hit.transform.CompareTag("Item"))
                 {
                     item.Collected = true;
-                    SaveManager.instance.collected[item.Id] = true;
+                    //SaveManager.instance.collected[item.Id] = true;
                     inventory.AddItem(item, "Item");
                 }
                 else if (hit.transform.CompareTag("Weapon"))
                 {
                     item.Collected = true;
-                    SaveManager.instance.collected[item.Id] = true;
+                    //SaveManager.instance.collected[item.Id] = true;
                     inventory.AddItem(item, "Weapon");
                 }
             }
@@ -246,7 +246,8 @@ public class InputManager : MonoBehaviour
                             {
                                 inventory.RemoveItem(inventory.FindKeyItem(door.keyName));
                                 door.needKey = false;
-                                SaveManager.instance.UnlockDoor(door.id);
+                                //SaveManager.instance.UnlockDoor(door.id);
+                                /*
                                 if(door.id == 0)
                                 {
                                     if (SaveManager.instance.firstTimeEvent[3])
@@ -254,6 +255,7 @@ public class InputManager : MonoBehaviour
                                         FindObjectOfType<EventTrigger>().StartCon3();
                                     }
                                 }
+                                */
 
                                 if (door.enterZone)
                                     door.OnOpen();

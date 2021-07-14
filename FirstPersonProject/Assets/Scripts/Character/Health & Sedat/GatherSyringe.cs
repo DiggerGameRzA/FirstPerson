@@ -16,7 +16,8 @@ public class GatherSyringe : MonoBehaviour
         else if(GetComponent<Compy>())
             gathered = SaveManager.instance.gathered[GetComponent<Compy>().id];
         */
-        gathered = SaveManager.instance.gathered[GetComponent<EnemyStats>().id];
+
+        //gathered = SaveManager.instance.gathered[GetComponent<EnemyStats>().id];
     }
     public void ShowUI(GameObject text)
     {
