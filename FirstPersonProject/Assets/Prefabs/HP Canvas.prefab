@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5249418355628189142}
   - component: {fileID: 5249418355628189141}
   - component: {fileID: 5249418355628189136}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HP Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 5249418356009494170}
   - component: {fileID: 5249418356009494164}
   - component: {fileID: 5249418356009494171}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 5249418356016680712}
   - component: {fileID: 5249418356016680714}
   - component: {fileID: 5249418356016680713}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HP BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 6926085217625628803}
   - component: {fileID: 8675543734843210875}
   - component: {fileID: 5121379198669264806}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}

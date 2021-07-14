@@ -173,11 +173,13 @@ public class Compy : EnemyStats
             GetComponent<GatherSyringe>().ShowUI(textPrefab);
         }
     }
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, visionRange);
     }
+    */
     private void OnDestroy()
     {
         SaveInfo();

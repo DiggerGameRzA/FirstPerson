@@ -25,13 +25,17 @@ public class GatherSyringe : MonoBehaviour
         if (CameraManager.camera != null)
         {
             RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, entity);
-            if (this.transform != hit.transform)
+
+            if (hit.transform)
             {
-                text.gameObject.SetActive(false);
+                if (hit.collider.GetComponentInParent<GatherSyringe>())
+                {
+                    text.gameObject.SetActive(true);
+                }
             }
             else
             {
-                text.gameObject.SetActive(true);
+                text.gameObject.SetActive(false);
             }
         }
     }

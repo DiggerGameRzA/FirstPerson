@@ -281,10 +281,10 @@ public class InputManager : MonoBehaviour
         {
             if (hit.transform.CompareTag("Dino"))
             {
-                float health = hit.transform.GetComponent<Health>().HealthPoint;
-                float sedat = hit.transform.GetComponent<SedatPoint>().SedatPoints;
+                float health = hit.collider.GetComponentInParent<Health>().HealthPoint;
+                float sedat = hit.collider.GetComponentInParent<SedatPoint>().SedatPoints;
 
-                if ((health <= 0 || sedat <= 0) && !hit.transform.GetComponent<GatherSyringe>().gathered)
+                if ((health <= 0 || sedat <= 0) && !hit.collider.GetComponentInParent<GatherSyringe>().gathered)
                 {
                     //GameObject text = hit.transform.FindChild("HP Canvas").GetChild(1).gameObject;
                     //hit.transform.GetComponent<GatherSyringe>().ShowUI(text);
@@ -295,13 +295,13 @@ public class InputManager : MonoBehaviour
                         if (item != null)
                         {
                             print("Getherting DNA");
-                            GameObject dna = hit.transform.GetComponent<GatherSyringe>().dna;
+                            GameObject dna = hit.collider.GetComponentInParent<GatherSyringe>().dna;
 
                             inventory.RemoveItem(item);
-                            hit.transform.GetComponent<GatherSyringe>().gathered = true;
+                            hit.collider.GetComponentInParent<GatherSyringe>().gathered = true;
 
                             int index;
-                            EnemyStats dino = hit.transform.GetComponent<EnemyStats>();
+                            EnemyStats dino = hit.collider.GetComponentInParent<EnemyStats>();
                             index = dino.id;
                             /*
                             if (hit.transform.GetComponent<UtahRaptor>())

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class UtahRaptor : EnemyStats
+public class Triceratops : EnemyStats
 {
     Transform target;
     NavMeshAgent agent;
@@ -123,7 +123,7 @@ public class UtahRaptor : EnemyStats
             anim.SetBool("isIdling", true);
             anim.SetBool("isDead", true);
             anim.Play("Death");
-            if(tempSleepTime <= 0)
+            if (tempSleepTime <= 0)
             {
                 PlaySleepSound(audioSource);
                 tempSleepTime = 6f;
@@ -154,7 +154,7 @@ public class UtahRaptor : EnemyStats
             anim.SetBool("isAttacking", false);
 
             anim.SetBool("isRunning", true);
-            if(tempRunTime <= 0)
+            if (tempRunTime <= 0)
             {
                 PlayRunSound(audioSource);
                 tempRunTime = 0.4f;
@@ -167,7 +167,7 @@ public class UtahRaptor : EnemyStats
             anim.SetBool("isAttacking", false);
 
             anim.SetBool("isIdling", true);
-            if(tempIdleTime <= 0)
+            if (tempIdleTime <= 0)
             {
                 PlayIdleSound(audioSource);
                 tempIdleTime = 5f;
@@ -188,7 +188,7 @@ public class UtahRaptor : EnemyStats
         float distance = Vector3.Distance(target.position, transform.position);
         if (isDealDamage)
         {
-            PlayAttackSound(audioSource);
+            //PlayAttackSound(audioSource);
             if (distance < attackRange)
             {
                 target.GetComponent<IHealth>().TakeDamage(damage);
