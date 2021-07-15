@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] CameraManager cameraManager;
     [SerializeField] HUD hud;
     public LayerMask interactable;
+    public LayerMask defualt;
     public LayerMask entity;
 
     [Header("Bools")]
@@ -223,7 +224,7 @@ public class InputManager : MonoBehaviour
     }
     private void RaycastDoor()
     {
-        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, interactable);
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, defualt);
         if (hit.transform)
         {
             if (Input.GetButtonDown("Interact"))

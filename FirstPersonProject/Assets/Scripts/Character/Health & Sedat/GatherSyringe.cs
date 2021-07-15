@@ -32,6 +32,10 @@ public class GatherSyringe : MonoBehaviour
                 {
                     text.gameObject.SetActive(true);
                 }
+                else
+                {
+                    text.gameObject.SetActive(false);
+                }
             }
             else
             {

@@ -41,21 +41,28 @@ public class Door : MonoBehaviour
         if (CameraManager.camera != null)
         {
             RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, interactable);
-            if (this.transform != hit.transform)
+            if (hit.transform)
             {
-                ShowUI(false);
+                if (this.transform.name == hit.collider.name)
+                {
+                    ShowUI(true);
+                }
+                else
+                {
+                    ShowUI(false);
+                }
             }
             else
             {
-                ShowUI(true);
+                ShowUI(false);
             }
         }
         if (!needKey)
         {
             if (transform.childCount >= 2)
             {
-                Material mat = transform.GetChild(1).GetComponent<MeshRenderer>().materials[2];
-                mat.color = Color.green;
+                //Material mat = transform.GetChild(1).GetComponent<MeshRenderer>().materials[2];
+                //mat.color = Color.green;
             }
         }
     }
@@ -89,6 +96,6 @@ public class Door : MonoBehaviour
     }
     public void OnOpen()
     {
-        GetComponent<Animator>().Play("Open");
+        gate.GetComponent<Animator>().Play("Open");
     }
 }

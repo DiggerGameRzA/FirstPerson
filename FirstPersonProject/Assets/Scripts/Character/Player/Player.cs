@@ -70,13 +70,13 @@ public class Player : MonoBehaviour, IPlayer
             {
                 Animator hAnim = Camera.main.transform.GetChild(2).GetComponent<Animator>();
                 AnimationCon.SetPlayerRun(anim, true);
-                AnimationCon.SetPlayerRun(hAnim, true);
+                //AnimationCon.SetPlayerRun(hAnim, true);
             }
             else
             {
                 Animator hAnim = Camera.main.transform.GetChild(2).GetComponent<Animator>();
                 AnimationCon.SetPlayerRun(anim, false);
-                AnimationCon.SetPlayerRun(hAnim, false);
+                //AnimationCon.SetPlayerRun(hAnim, false);
             }
         }
 
