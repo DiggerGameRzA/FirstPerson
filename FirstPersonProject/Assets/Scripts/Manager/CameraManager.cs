@@ -62,11 +62,11 @@ public class CameraManager : MonoBehaviour
         yDir.z = 0;
         return yDir;
     }
-    public static RaycastHit GetCameraRaycast(float range, LayerMask layer)
+    public static RaycastHit GetCameraRaycast(float range)
     {
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         RaycastHit hit;
-        Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range, layer);
+        Physics.Raycast(camera.transform.position, camera.transform.forward, out hit, range);
         return hit;
     }
     public void ShowCursor(bool show)

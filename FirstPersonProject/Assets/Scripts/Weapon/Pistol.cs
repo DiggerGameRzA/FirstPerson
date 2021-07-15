@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Pistol : MonoBehaviour, IWeapon
 {
-    public LayerMask entity;
     public WeaponEnum WeaponType { get { return WeaponEnum.Pistol; } }
     [Header("Firing")]
     public float _fireDelay = 0.5f;
@@ -80,7 +79,7 @@ public class Pistol : MonoBehaviour, IWeapon
     {
         SoundManager.instance.PlayPistolFire();
 
-        RaycastHit hit = CameraManager.GetCameraRaycast(100f, entity);
+        RaycastHit hit = CameraManager.GetCameraRaycast(100f);
         if (hit.transform)
         {
             if (hit.collider.GetComponentInParent<Health>())

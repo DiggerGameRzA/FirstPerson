@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Sedat : MonoBehaviour, IWeapon
 {
-    public LayerMask entity;
     public WeaponEnum WeaponType { get { return WeaponEnum.Sedat; } }
     [Header("Firing")]
     public float _fireDelay = 0.5f;
@@ -60,7 +59,7 @@ public class Sedat : MonoBehaviour, IWeapon
             }
         }
         SedatPrefab.SetActive(true);
-        SaveManager.instance.currentWeapon = WeaponEnum.Sedat;
+        //SaveManager.instance.currentWeapon = WeaponEnum.Sedat;
     }
     public Animator GetAnimator()
     {
@@ -68,12 +67,12 @@ public class Sedat : MonoBehaviour, IWeapon
     }
     public void Fire()
     {
-        RaycastHit hit = CameraManager.GetCameraRaycast(100f, entity);
-        if (hit.collider.gameObject.GetComponent<SedatPoint>())
+        RaycastHit hit = CameraManager.GetCameraRaycast(100f);
+        if (hit.collider.GetComponentInParent<SedatPoint>())
         {
-            hit.transform.gameObject.GetComponent<SedatPoint>().TakeSedat(Damage);
+            hit.transform.gameObject.GetComponentInParent<SedatPoint>().TakeSedat(Damage);
             int index;
-            EnemyStats dino = hit.transform.GetComponent<EnemyStats>();
+            EnemyStats dino = hit.transform.GetComponentInParent<EnemyStats>();
             index = dino.id;
             /*
             if (hit.transform.gameObject.GetComponent<UtahRaptor>())
@@ -85,7 +84,7 @@ public class Sedat : MonoBehaviour, IWeapon
                 index = hit.transform.gameObject.GetComponent<Compy>().id;
             }
             */
-            SaveManager.instance.dinos[index].sedatPoint = hit.transform.gameObject.GetComponent<SedatPoint>().SedatPoints;
+            //SaveManager.instance.dinos[index].sedatPoint = hit.transform.gameObject.GetComponent<SedatPoint>().SedatPoints;
         }
         else if (!hit.collider.gameObject.GetComponent<Health>())
         {

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GatherSyringe : MonoBehaviour
 {
-    public LayerMask entity;
     IPlayer player;
     public GameObject dna;
     public bool gathered = false;
@@ -24,7 +23,7 @@ public class GatherSyringe : MonoBehaviour
         player = FindObjectOfType<Player>();
         if (CameraManager.camera != null)
         {
-            RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, entity);
+            RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
 
             if (hit.transform)
             {

@@ -13,7 +13,6 @@ public class Item : MonoBehaviour,IInventoryItem
     public Sprite _image = null;
     public int _amount = 1;
     public WeaponEnum _weapon = WeaponEnum.None;
-    public LayerMask interactable;
     IPlayer player;
     [SerializeField] Inventory inventory;
 
@@ -80,7 +79,7 @@ public class Item : MonoBehaviour,IInventoryItem
     {
         if (CameraManager.camera != null)
         {
-            RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, interactable);
+            RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
             if (this.transform != hit.transform)
             {
                 ShowUI(false);

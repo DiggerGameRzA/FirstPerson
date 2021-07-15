@@ -12,9 +12,6 @@ public class InputManager : MonoBehaviour
     [SerializeField] WeaponManager weaponManager;
     [SerializeField] CameraManager cameraManager;
     [SerializeField] HUD hud;
-    public LayerMask interactable;
-    public LayerMask defualt;
-    public LayerMask entity;
 
     [Header("Bools")]
     public bool canShoot = true;
@@ -187,7 +184,7 @@ public class InputManager : MonoBehaviour
     private void RaycastItem()
     {
         player = FindObjectOfType<Player>();
-        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, interactable);
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
         if (hit.transform)
         {
             if (Input.GetButtonDown("Collect"))
@@ -224,7 +221,7 @@ public class InputManager : MonoBehaviour
     }
     private void RaycastDoor()
     {
-        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, defualt);
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
         if (hit.transform)
         {
             if (Input.GetButtonDown("Interact"))
@@ -277,7 +274,7 @@ public class InputManager : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         inventory = Inventory.instance;
-        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, entity);
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
         if (hit.transform)
         {
             if (hit.transform.CompareTag("Dino"))
@@ -324,7 +321,7 @@ public class InputManager : MonoBehaviour
     }
     private void RaycastDNA()
     {
-        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange, interactable);
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
         if (hit.transform)
         {
             if (Input.GetButtonDown("Interact"))

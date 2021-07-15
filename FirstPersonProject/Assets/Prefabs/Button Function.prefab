@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ab69e804904684aa28ec61d29cdda6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onHover: {fileID: 8300000, guid: b9883211d219ab044838f9e43ffbddf7, type: 3}
-  onClick: {fileID: 8300000, guid: 28aa9d689e9604140a71b827c77e9456, type: 3}
+  onHover: {fileID: 8300000, guid: cc65871fa5cdf2d488c1e7c247ee34d6, type: 3}
+  onClick: {fileID: 8300000, guid: 358703a456e95e149985535a76f9b1f0, type: 3}
 --- !u!82 &641211241
 AudioSource:
   m_ObjectHideFlags: 0
