@@ -12,7 +12,7 @@ public class Door : MonoBehaviour
 
     [Header("Enter Zone")]
     public bool enterZone = false;
-    public GameObject gate;
+    public GameObject[] gate;
 
     [Header("Change Scene")]
     public string from;
@@ -95,6 +95,9 @@ public class Door : MonoBehaviour
     }
     public void OnOpen()
     {
-        gate.GetComponent<Animator>().Play("Open");
+        for (int i = 0; i < gate.Length; i++)
+        {
+            gate[i].GetComponent<Animator>().Play("Open");
+        }
     }
 }

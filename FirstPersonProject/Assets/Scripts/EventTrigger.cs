@@ -6,14 +6,18 @@ public class EventTrigger : MonoBehaviour
 {
     public int id = 0;
     public Inventory inventory;
+    public GameObject[] conditionDino;
     public GameObject[] dino;
     public GameObject cargo;
-    public GameObject[] ammo9mm;
-    public GameObject[] meds;
+    public GameObject[] ammo9mm; //4
+    public GameObject[] meds; //2
+    public GameObject[] sedat; //8
     void Start()
     {
         inventory = Inventory.instance;
-
+    }
+    private void Update()
+    {
         if (SaveManager.instance.firstTimeEvent[0] && id == 0)
         {
             IInventoryItem item = inventory.FindKeyItem("Med R. Keycard");
@@ -23,27 +27,8 @@ public class EventTrigger : MonoBehaviour
                 {
                     dino[i].SetActive(true);
                 }
-                Invoke("StartCon2", 0.2f);
+                //Invoke("StartCon2", 0.2f);
                 SaveManager.instance.firstTimeEvent[0] = false;
-            }
-            else 
-            {
-                for (int i = 0; i < dino.Length; i++)
-                {
-                    dino[i].SetActive(false);
-                }
-            }
-        }
-
-        if (SaveManager.instance.firstTimeEvent[1] && id == 1)
-        {
-            if(SaveManager.instance.dinos[1].healthPoint <= 0)
-            {
-                for (int i = 0; i < dino.Length; i++)
-                {
-                    dino[i].SetActive(true);
-                }
-                SaveManager.instance.firstTimeEvent[1] = false;
             }
             else
             {
@@ -53,12 +38,53 @@ public class EventTrigger : MonoBehaviour
                 }
             }
         }
-    }
-    private void Update()
-    {
+        if (SaveManager.instance.firstTimeEvent[1] && id == 1)
+        {
+            bool condition = false;
+            for (int i = 0; i < conditionDino.Length; i++)
+            {
+                if (conditionDino[i].GetComponent<Health>().HealthPoint <= 0)
+                {
+                    condition = true;
+                }
+                else
+                {
+                    condition = false;
+                    break;
+                }
+            }
+            if (condition)
+            {
+                for (int i = 0; i < dino.Length; i++)
+                {
+                    dino[i].SetActive(true);
+                }
+                //SaveManager.instance.firstTimeEvent[1] = false;
+            }
+            else
+            {
+                for (int i = 0; i < dino.Length; i++)
+                {
+                    dino[i].SetActive(false);
+                }
+            }
+        }
         if (SaveManager.instance.firstTimeEvent[2] && id == 2)
         {
-            if (SaveManager.instance.dinos[1].healthPoint <= 0)
+            bool condition = false;
+            for (int i = 0; i < conditionDino.Length; i++)
+            {
+                if (conditionDino[i].GetComponent<Health>().HealthPoint <= 0)
+                {
+                    condition = true;
+                }
+                else
+                {
+                    condition = false;
+                    break;
+                }
+            }
+            if (condition)
             {
                 cargo.SetActive(true);
 

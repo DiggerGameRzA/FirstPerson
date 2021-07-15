@@ -38,9 +38,10 @@ public class SaveManager : MonoBehaviour
         }
         //DontDestroyOnLoad(gameObject);
     }
-    /*
+    
     private void Start()
     {
+        /*
         doorNeedKey.Add(true);      //0
         doorNeedKey.Add(false);     //1
         doorNeedKey.Add(false);     //2
@@ -69,13 +70,13 @@ public class SaveManager : MonoBehaviour
         {
             collected.Add(false);
         }
-
+        */
         firstTimeEvent.Add(true);
         firstTimeEvent.Add(true);
         firstTimeEvent.Add(true);
         firstTimeEvent.Add(true);
     }
-    */
+    
     public void UnlockDoor(int id)
     {
         doorNeedKey[id] = false;

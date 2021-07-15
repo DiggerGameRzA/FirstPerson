@@ -6,6 +6,9 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
+    [Header("BGM")]
+    public AudioClip bgm;
+
     [Header("Guns")]
     public AudioClip pistolFire;
     public AudioClip pistolReload;
@@ -24,19 +27,24 @@ public class SoundManager : MonoBehaviour
         }
         //DontDestroyOnLoad(gameObject);
     }
+    public void PlayBGM()
+    {
+        audioSource = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(bgm);
+    }
     public void PlayPistolFire()
     {
-        audioSource = FindObjectOfType<Player>().GetComponent<AudioSource>();
+        audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
         audioSource.PlayOneShot(pistolFire);
     }
     public void PlayPistolReload()
     {
-        audioSource = FindObjectOfType<Player>().GetComponent<AudioSource>();
+        audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
         audioSource.PlayOneShot(pistolReload);
     }
     public void PlayPistolNoAmmo()
     {
-        audioSource = FindObjectOfType<Player>().GetComponent<AudioSource>();
+        audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
         audioSource.PlayOneShot(pistolNoAmmo);
     }
 }

@@ -42,6 +42,8 @@ public class Player : MonoBehaviour, IPlayer
         health = GetComponent<Health>();
 
         col = GetComponent<Collider>();
+
+        SoundManager.instance.PlayBGM();
     }
 
     void Update()
