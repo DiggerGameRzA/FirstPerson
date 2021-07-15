@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ammoUI;
     [SerializeField] GameObject currentAmmo;
     [SerializeField] GameObject currentSpare;
+    [SerializeField] GameObject weaponIconParent;
 
     [Header("Health Point")]
     //Health Point
@@ -52,6 +53,7 @@ public class UIManager : MonoBehaviour
         player = FindObjectOfType<Player>();
         inventoryUI = transform.GetChild(1).gameObject;
 
+        ShowAmmoCanvas(false);
         ammoUI = transform.GetChild(2).gameObject;
         currentAmmo = ammoUI.transform.GetChild(2).gameObject;
         currentSpare = ammoUI.transform.GetChild(0).gameObject;
@@ -81,6 +83,18 @@ public class UIManager : MonoBehaviour
     {
         currentAmmo.GetComponent<Text>().text = ammo.ToString();
         currentSpare.GetComponent<Text>().text = spare.ToString();
+    }
+    public void ShowAmmoCanvas(bool show)
+    {
+        ammoUI.SetActive(show);
+    }
+    public void ShowWepIcon(int weapon)
+    {
+        foreach (Transform i in weaponIconParent.transform)
+        {
+            i.gameObject.SetActive(false);
+        }
+        weaponIconParent.transform.GetChild(weapon).gameObject.SetActive(true);
     }
     #endregion
     public void UpdateHealth(float hp)

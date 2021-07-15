@@ -50,6 +50,11 @@ public class Sedat : MonoBehaviour, IWeapon
     GameObject SedatPrefab;
     public void Equip()
     {
+        UIManager uiManager;
+        uiManager = FindObjectOfType<UIManager>();
+        uiManager.ShowAmmoCanvas(true);
+        uiManager.ShowWepIcon(1);
+
         SedatPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(1).gameObject;
         foreach (Transform i in SedatPrefab.transform.parent)
         {

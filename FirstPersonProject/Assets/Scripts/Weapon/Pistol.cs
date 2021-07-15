@@ -53,7 +53,11 @@ public class Pistol : MonoBehaviour, IWeapon
     GameObject PistolPrefab;
     public void Equip()
     {
-        
+        UIManager uiManager;
+        uiManager = FindObjectOfType<UIManager>();
+        uiManager.ShowAmmoCanvas(true);
+        uiManager.ShowWepIcon(0);
+
         PistolPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
         foreach (Transform i in PistolPrefab.transform.parent)
         {
@@ -65,10 +69,11 @@ public class Pistol : MonoBehaviour, IWeapon
         PistolPrefab.SetActive(true);
         
 
+
         IPlayer player = FindObjectOfType<Player>();
         Animator hAnim = Camera.main.transform.GetChild(2).GetComponent<Animator>();
         AnimationCon.SetPlayerPistol(hAnim, true);
-        SaveManager.instance.currentWeapon = WeaponEnum.Pistol;
+        //SaveManager.instance.currentWeapon = WeaponEnum.Pistol;
 
     }
     public Animator GetAnimator()
