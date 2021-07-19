@@ -60,9 +60,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d0f674d613465418107a35960af466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity:
+  hand:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 512
   _fireDelay: 0.1
   _currentAmmo: 10
   _maxAmmo: 10
@@ -83,9 +83,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b4655a28bd1cf438465ff7c696f672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity:
-    serializedVersion: 2
-    m_Bits: 2048
   _fireDelay: 0.5
   _currentAmmo: 1
   _maxAmmo: 1

@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
 
     [Header("BGM")]
     public AudioClip bgm;
+    public AudioClip inFight;
 
     [Header("Guns")]
     public AudioClip pistolFire;
@@ -30,6 +31,17 @@ public class SoundManager : MonoBehaviour
     public void PlayBGM()
     {
         audioSource = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(bgm);
+    }
+    public void PlayInFight()
+    {
+        audioSource = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(inFight);
+    }
+    public void StopPlayInFight()
+    {
+        audioSource = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
+        audioSource.Stop();
         audioSource.PlayOneShot(bgm);
     }
     public void PlayPistolFire()

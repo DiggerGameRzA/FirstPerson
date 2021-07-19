@@ -522,13 +522,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   textPrefab: {fileID: 8537532425263947965}
-  visionRange: 20
-  visionRange2: 30
+  visionRange: 30
+  visionRange2: 40
   attackRange: 8
   attackDelay: 1
   damage: 75
-  speed: 8
+  speed: 13
   isDead: 0
+  isDeadDrop: 0
   isSleep: 0
   isHit: 0
   isInRange: 0
@@ -538,12 +539,21 @@ MonoBehaviour:
   isDied: 0
   isEscaped: 0
   isNest: 0
-  idleSound: []
-  runSound: []
-  attackSound: []
+  idleSound:
+  - {fileID: 8300000, guid: 7153dbc3f597ab04dbb207e535e5dde5, type: 3}
+  - {fileID: 8300000, guid: 5200fdf826edfb349a3cdf32979be7ba, type: 3}
+  runSound:
+  - {fileID: 8300000, guid: 921ad696466da8343b9551e3a467514d, type: 3}
+  attackSound:
+  - {fileID: 8300000, guid: 019c6ad238eb6ab45acef40a9475f062, type: 3}
+  - {fileID: 8300000, guid: 2393234ad04acbd4fa97a8d3c807d72e, type: 3}
   hitSound: []
-  sleepSound: []
-  deadSound: []
+  sleepSound:
+  - {fileID: 8300000, guid: b70949376a2e5bd409bc6b00a6369e5d, type: 3}
+  deadSound:
+  - {fileID: 8300000, guid: f497721ddefb1f241b187697320ccda4, type: 3}
+  - {fileID: 8300000, guid: 36fb6ed31f0cac240a416d7d79285b1f, type: 3}
+  deadDrop: {fileID: 8300000, guid: e296e8131c2dd744a80c5151aaf1cbd5, type: 3}
   tempIdleTime: 0
   tempRunTime: 0
   tempAttackTime: 0

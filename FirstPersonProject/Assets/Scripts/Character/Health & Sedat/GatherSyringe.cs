@@ -27,18 +27,20 @@ public class GatherSyringe : MonoBehaviour
 
             if (hit.transform)
             {
+                GameObject go;
                 if (hit.collider.GetComponentInParent<GatherSyringe>())
                 {
-                    text.gameObject.SetActive(true);
+                    go = hit.collider.GetComponentInParent<GatherSyringe>().gameObject;
+                    go.GetComponent<EnemyStats>().textPrefab.SetActive(true);
                 }
                 else
                 {
-                    text.gameObject.SetActive(false);
+                    text.SetActive(false);
                 }
             }
             else
             {
-                text.gameObject.SetActive(false);
+                text.SetActive(false);
             }
         }
     }

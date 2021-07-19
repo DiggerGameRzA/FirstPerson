@@ -27,6 +27,8 @@ public class DialogueManager : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         Sentences = new Queue<string>();
         Profile = new Queue<Sprite>();
+
+        //Restart();
     }
     private void Update()
     {
@@ -78,6 +80,7 @@ public class DialogueManager : MonoBehaviour
     public void Restart()
     {
         uiManager = FindObjectOfType<UIManager>();
+        print("restart");
 
         foreach (FirstTimeScene i in SaveManager.instance.firstTimeScenes)
         {

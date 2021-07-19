@@ -108,10 +108,10 @@ public class UtahRaptor : EnemyStats
             anim.SetBool("isIdling", true);
             anim.SetBool("isDead", true);
             anim.Play("Death");
-            if (!playedDead)
+            if (!isPlayedDead)
             {
                 PlayDeadSound(audioSource);
-                playedDead = true;
+                isPlayedDead = true;
             }
         }
         else if (isSleep)

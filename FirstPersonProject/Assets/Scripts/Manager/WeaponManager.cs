@@ -14,7 +14,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] UIManager uiManager;
 
     public int currentSlot;
-    float tempTime = 0f;
+    float tempFireTime = 0f;
+    [SerializeField] float tempReloadTime = 0;
     private void Awake()
     {
         if (instance == null)
@@ -39,13 +40,23 @@ public class WeaponManager : MonoBehaviour
     void Update()
     {
         weapon = player.GetWeapon();
-        tempTime -= Time.deltaTime;
+        tempFireTime -= Time.deltaTime;
+        tempReloadTime -= Time.deltaTime;
+
+        if(tempReloadTime <= 0)
+        {
+            uiManager.HideReloading();
+        }
+        else
+        {
+            uiManager.ShowReloading();
+        }
     }
     public void Fire()
     {
-        if(tempTime <= 0 && weapon.CurrentAmmo > 0)
+        if(tempFireTime <= 0 && weapon.CurrentAmmo > 0 && tempReloadTime <= 0)
         {
-            tempTime = weapon.FireDelay;
+            tempFireTime = weapon.FireDelay;
             weapon.CurrentAmmo -= 1;
             uiManager.UpdateAmmo(weapon.CurrentAmmo, weapon.CurrentSpare);
             //weapon.GetAnimator().SetBool("fire", true);
@@ -53,7 +64,7 @@ public class WeaponManager : MonoBehaviour
             Invoke("ResetAnimation", Mathf.Abs(weapon.FireDelay - 0.2f));
             weapon.Fire();
         }
-        else if(tempTime <= 0 && weapon.CurrentAmmo <= 0)
+        else if(tempFireTime <= 0 && weapon.CurrentAmmo <= 0)
         {
             weapon.NoAmmo();
         }
@@ -66,18 +77,22 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            for (int i = weapon.CurrentAmmo; i < weapon.MaxAmmo; i++)
+            if (weapon.CurrentAmmo != weapon.MaxAmmo)
             {
-                if (weapon.CurrentSpare == 0)
+                tempReloadTime = weapon.ReloadDuration;
+                for (int i = weapon.CurrentAmmo; i < weapon.MaxAmmo; i++)
                 {
-                    break;
-                }
-                else
-                {
-                    weapon.Reload();
-                    weapon.CurrentAmmo++;
-                    weapon.CurrentSpare--;
-                    uiManager.UpdateAmmo(weapon.CurrentAmmo, weapon.CurrentSpare);
+                    if (weapon.CurrentSpare == 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        weapon.Reload();
+                        weapon.CurrentAmmo++;
+                        weapon.CurrentSpare--;
+                        uiManager.UpdateAmmo(weapon.CurrentAmmo, weapon.CurrentSpare);
+                    }
                 }
             }
         }

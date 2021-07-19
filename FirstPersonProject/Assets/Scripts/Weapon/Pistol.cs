@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Pistol : MonoBehaviour, IWeapon
 {
+    public LayerMask hand;
     public WeaponEnum WeaponType { get { return WeaponEnum.Pistol; } }
     [Header("Firing")]
     public float _fireDelay = 0.5f;
+
+    [Header("Reload")]
+    public float _reloadDuration = 2f;
 
     [Header("Ammo")]
     public int _currentAmmo = 0;
@@ -23,6 +27,11 @@ public class Pistol : MonoBehaviour, IWeapon
     public float FireDelay 
     {
         get { return _fireDelay; }
+    }
+    public float ReloadDuration
+    {
+        get { return _reloadDuration; }
+        set { _reloadDuration = value; }
     }
     public int CurrentAmmo
     {
@@ -67,13 +76,11 @@ public class Pistol : MonoBehaviour, IWeapon
             }
         }
         PistolPrefab.SetActive(true);
-        
-
 
         IPlayer player = FindObjectOfType<Player>();
         Animator hAnim = Camera.main.transform.GetChild(2).GetComponent<Animator>();
         AnimationCon.SetPlayerPistol(hAnim, true);
-        //SaveManager.instance.currentWeapon = WeaponEnum.Pistol;
+        SaveManager.instance.currentWeapon = WeaponEnum.Pistol;
 
     }
     public Animator GetAnimator()
@@ -89,19 +96,20 @@ public class Pistol : MonoBehaviour, IWeapon
         {
             if (hit.collider.GetComponentInParent<Health>())
             {
-                hit.collider.GetComponentInParent<Health>().TakeDamage(Damage);
+                print("hit");
+                if (hit.collider.GetComponentInParent<Health>().HealthPoint > 0)
+                {
+                    hit.collider.GetComponentInParent<Health>().TakeDamage(Damage);
+                    UIManager uiManager;
+                    uiManager = FindObjectOfType<UIManager>();
+
+                    uiManager.ShowHitMark();
+                    uiManager.Invoke("HideHitMark", 1f);
+                }
+                /*
                 int index;
                 EnemyStats dino = hit.collider.GetComponentInParent<EnemyStats>();
                 index = dino.id;
-                /*
-                if (hit.transform.gameObject.GetComponent<UtahRaptor>())
-                {
-                    index = hit.transform.gameObject.GetComponent<UtahRaptor>().id;
-                }
-                else
-                {
-                    index = hit.transform.gameObject.GetComponent<Compy>().id;
-                }
                 */
                 //SaveManager.instance.dinos[index].healthPoint = hit.transform.gameObject.GetComponent<Health>().HealthPoint;
 
@@ -111,9 +119,8 @@ public class Pistol : MonoBehaviour, IWeapon
         {
 
         }
-        muzzleTranform = Camera.main.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
+        muzzleTranform = Camera.main.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1);
         GameObject go = Instantiate(muzzlePrefab, muzzleTranform);
-        go.transform.parent = muzzleTranform;
         //GameObject muzzlePrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
         //muzzlePrefab.SetActive(true);
     }

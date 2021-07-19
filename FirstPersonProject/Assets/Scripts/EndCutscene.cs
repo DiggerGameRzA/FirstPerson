@@ -6,21 +6,36 @@ using UnityEngine.Video;
 public class EndCutscene : MonoBehaviour
 {
     public Button btt;
-    double time;
-    double currentTime;
+    [SerializeField] double time;
+    [SerializeField] double currentTime;
+
+    bool isStart = false;
+    bool isEnded = false;
     void Start()
     {
         time = GetComponent<VideoPlayer>().clip.length;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        currentTime = Time.time;
-        if(currentTime >= time)
+        if (isStart)
         {
-            print("Cutscene is end.");
-            btt.LoadLevel01();
+            if (!isEnded)
+            {
+                currentTime = GetComponent<VideoPlayer>().time;
+                if (currentTime >= time)
+                {
+                    print("Cutscene is end.");
+                    btt.LoadLevel01();
+
+                    isEnded = true;
+                }
+            }
         }
+    }
+    public void StartVideo()
+    {
+        print("Start a cutscene");
+        GetComponent<VideoPlayer>().Play();
+        isStart = true;
     }
 }

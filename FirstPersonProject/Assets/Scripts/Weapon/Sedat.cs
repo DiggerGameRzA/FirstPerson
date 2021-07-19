@@ -8,6 +8,9 @@ public class Sedat : MonoBehaviour, IWeapon
     [Header("Firing")]
     public float _fireDelay = 0.5f;
 
+    [Header("Reload")]
+    public float _reloadDuration = 2f;
+
     [Header("Ammo")]
     public int _currentAmmo = 0;
     public int _maxAmmo = 10;
@@ -20,6 +23,11 @@ public class Sedat : MonoBehaviour, IWeapon
     public float FireDelay
     {
         get { return _fireDelay; }
+    }
+    public float ReloadDuration
+    {
+        get { return _reloadDuration; }
+        set { _reloadDuration = value; }
     }
     public int CurrentAmmo
     {
@@ -64,7 +72,7 @@ public class Sedat : MonoBehaviour, IWeapon
             }
         }
         SedatPrefab.SetActive(true);
-        //SaveManager.instance.currentWeapon = WeaponEnum.Sedat;
+        SaveManager.instance.currentWeapon = WeaponEnum.Sedat;
     }
     public Animator GetAnimator()
     {

@@ -11,6 +11,11 @@ public class UIManager : MonoBehaviour
     //Inventory
     [SerializeField] GameObject inventoryUI;
 
+    [Header("Crosshair")]
+    [SerializeField] GameObject crosshair;
+    [SerializeField] GameObject hitMark;
+    [SerializeField] GameObject reloading;
+
     [Header("Ammo")]
     //Ammo
     [SerializeField] GameObject ammoUI;
@@ -150,6 +155,23 @@ public class UIManager : MonoBehaviour
         dialogueContinue.SetActive(show);
     }
     #endregion
+
+    public void ShowHitMark()
+    {
+        hitMark.SetActive(true);
+    }
+    public void HideHitMark()
+    {
+        hitMark.SetActive(false);
+    }
+    public void ShowReloading()
+    {
+        reloading.SetActive(true);
+    }
+    public void HideReloading()
+    {
+        reloading.SetActive(false);
+    }
     public void ShowMenu(bool show)
     {
         menuPrefab.SetActive(show);

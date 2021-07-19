@@ -108,10 +108,10 @@ public class Triceratops : EnemyStats
             anim.SetBool("isIdling", true);
             anim.SetBool("isDead", true);
             anim.Play("Death");
-            if (!playedDead)
+            if (!isPlayedDead)
             {
                 PlayDeadSound(audioSource);
-                playedDead = true;
+                isPlayedDead = true;
             }
         }
         else if (isSleep)
@@ -147,7 +147,7 @@ public class Triceratops : EnemyStats
             anim.SetBool("isAttacking", true);
             anim.Play("Attack");
         }
-        else if (isInRange)
+        else if (isInRange && isHit)
         {
             agent.SetDestination(target.position);
             anim.SetBool("isIdling", false);
@@ -157,7 +157,7 @@ public class Triceratops : EnemyStats
             if (tempRunTime <= 0)
             {
                 PlayRunSound(audioSource);
-                tempRunTime = 0.4f;
+                tempRunTime = 0.8f;
             }
         }
         else if (!isInAtk && !isInRange)
@@ -188,7 +188,7 @@ public class Triceratops : EnemyStats
         float distance = Vector3.Distance(target.position, transform.position);
         if (isDealDamage)
         {
-            //PlayAttackSound(audioSource);
+            PlayAttackSound(audioSource);
             if (distance < attackRange)
             {
                 target.GetComponent<IHealth>().TakeDamage(damage);

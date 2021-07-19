@@ -21,7 +21,7 @@ public class Item : MonoBehaviour,IInventoryItem
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
         inventory = Inventory.instance;
 
-        //_collected = SaveManager.instance.collected[_id];
+        _collected = SaveManager.instance.collected[_id];
         if (_collected)
             Destroy(this.gameObject);
     }

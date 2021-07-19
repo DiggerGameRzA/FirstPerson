@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
@@ -138,6 +139,10 @@ public class GameManager : MonoBehaviour
 
         LeanTween.alphaCanvas(loadingPrefab.GetComponent<CanvasGroup>(), 0f, 0.5f).setOnComplete(FinishedLoading);
         EnableManagers(level);
+        if (!level)
+        {
+            FindObjectOfType<EndCutscene>().StartVideo();
+        }
     }
     public IEnumerator GetSceneLoadProgess(bool level, int scene, Vector3 position)
     {

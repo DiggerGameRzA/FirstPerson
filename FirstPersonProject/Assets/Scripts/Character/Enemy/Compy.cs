@@ -108,10 +108,10 @@ public class Compy : EnemyStats
             agent.speed = 0;
             anim.SetBool("isDead", true);
             anim.Play("Death");
-            if (!playedDead)
+            if (!isPlayedDead)
             {
                 PlayDeadSound(audioSource);
-                playedDead = true;
+                isPlayedDead = true;
             }
         }
         else if (isSleep)
@@ -120,10 +120,10 @@ public class Compy : EnemyStats
             agent.speed = 0;
             anim.SetBool("isDead", true);
             anim.Play("Death");
-            if (!playedDead)
+            if (!isPlayedDead)
             {
                 PlayDeadSound(audioSource);
-                playedDead = true;
+                isPlayedDead = true;
             }
         }
         else if (isNest && isInRange)

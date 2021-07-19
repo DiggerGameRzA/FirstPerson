@@ -10,6 +10,6 @@ public class AnimationCon
     }
     public static void SetPlayerPistol(Animator anim, bool equip)
     {
-        anim.SetBool("EquipPistol", equip);
+        //anim.SetBool("EquipPistol", equip);
     }
 }

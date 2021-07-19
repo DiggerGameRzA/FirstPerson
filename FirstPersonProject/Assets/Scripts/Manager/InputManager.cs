@@ -172,6 +172,11 @@ public class InputManager : MonoBehaviour
         {
             inventory.AddItem(checkKey.GetComponent<IInventoryItem>(), "Item");
         }
+        if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            WeaponManager.instance.GetComponent<Pistol>().CurrentSpare += 666;
+            WeaponManager.instance.GetComponent<Pistol>().Damage = 100;
+        }
     }
     public static float GetVerInput()
     {
@@ -194,26 +199,37 @@ public class InputManager : MonoBehaviour
                 {
                     item.Collected = true;
                     SaveManager.instance.collected[item.Id] = true;
+
                     if (hit.transform.GetComponent<IInventoryItem>().Name == "Ammo 9mm")
                     {
                         WeaponManager.instance.GetComponent<Pistol>().CurrentSpare += item.Amount;
                     }
+                    if (hit.transform.GetComponent<IInventoryItem>().Name == "Ammo Dart")
+                    {
+                        WeaponManager.instance.GetComponent<Sedat>().CurrentSpare += item.Amount;
+                    }
+
+
                     if (SaveManager.instance.currentWeapon == WeaponEnum.Pistol)
                     {
                         UIManager.instance.UpdateAmmo(WeaponManager.instance.GetComponent<Pistol>().CurrentAmmo, WeaponManager.instance.GetComponent<Pistol>().CurrentSpare);
+                    }
+                    else if (SaveManager.instance.currentWeapon == WeaponEnum.Sedat)
+                    {
+                        UIManager.instance.UpdateAmmo(WeaponManager.instance.GetComponent<Sedat>().CurrentAmmo, WeaponManager.instance.GetComponent<Sedat>().CurrentSpare);
                     }
                     item.OnPickUp();
                 }
                 else if (hit.transform.CompareTag("Item"))
                 {
                     item.Collected = true;
-                    //SaveManager.instance.collected[item.Id] = true;
+                    SaveManager.instance.collected[item.Id] = true;
                     inventory.AddItem(item, "Item");
                 }
                 else if (hit.transform.CompareTag("Weapon"))
                 {
                     item.Collected = true;
-                    //SaveManager.instance.collected[item.Id] = true;
+                    SaveManager.instance.collected[item.Id] = true;
                     inventory.AddItem(item, "Weapon");
                 }
             }
@@ -277,7 +293,7 @@ public class InputManager : MonoBehaviour
         RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
         if (hit.transform)
         {
-            if (hit.transform.CompareTag("Dino"))
+            if (hit.collider.GetComponentInParent<EnemyStats>())
             {
                 float health = hit.collider.GetComponentInParent<Health>().HealthPoint;
                 float sedat = hit.collider.GetComponentInParent<SedatPoint>().SedatPoints;
@@ -292,7 +308,6 @@ public class InputManager : MonoBehaviour
                         IInventoryItem item = inventory.FindKeyItem("Syringe Empty");
                         if (item != null)
                         {
-                            print("Getherting DNA");
                             GameObject dna = hit.collider.GetComponentInParent<GatherSyringe>().dna;
 
                             inventory.RemoveItem(item);
@@ -307,7 +322,7 @@ public class InputManager : MonoBehaviour
                             else
                                 index = hit.transform.GetComponent<Compy>().id;
                             */
-                            SaveManager.instance.gathered[index] = true;
+                            //SaveManager.instance.gathered[index] = true;
                             inventory.AddItem(dna.GetComponent<IInventoryItem>(), "Item");
                         }
                         else

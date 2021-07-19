@@ -20,14 +20,26 @@ public class EnemyStats : MonoBehaviour
     public float speed;
 
     //States
+    public bool firstTimeSeen = true;
+
     public bool isDead = false;
+    public bool isDied = false;
+    public bool isPlayedDead = false;
+    public bool isDeadDrop = false;
+    public bool isDroped = false;
     public bool isSleep = false;
+
     public bool isHit = false;
+    public bool isDealDamage = false;
+
+    public bool isRoaring = false;
+    public bool isRoared = false;
+    public bool isInFight = false;
+    public bool isStopPlayFight = false;
+
     public bool isInRange = false;
     public bool isInAtk = false;
     public bool isAttacking = false;
-    public bool isDealDamage = false;
-    public bool isDied = false;
 
     public bool isEscaped = false;
     public bool isNest = false;
@@ -39,11 +51,12 @@ public class EnemyStats : MonoBehaviour
     public AudioClip[] hitSound;
     public AudioClip[] sleepSound;
     public AudioClip[] deadSound;
+    public AudioClip deadDrop;
+    public AudioClip roarSound;
 
     //Temporary Time
     [HideInInspector]
     public float tempIdleTime, tempRunTime, tempAttackTime, tempHitTime, tempSleepTime = 0f;
-    public bool playedDead = false;
     public void PlayIdleSound(AudioSource audioSource)
     {
         int index = Random.Range(0, idleSound.Length);
@@ -73,5 +86,13 @@ public class EnemyStats : MonoBehaviour
     {
         int index = Random.Range(0, deadSound.Length);
         audioSource.PlayOneShot(deadSound[index]);
+    }
+    public void PlayDeadDropSound(AudioSource audioSource)
+    {
+        audioSource.PlayOneShot(deadDrop);
+    }
+    public void PlayRoarSound(AudioSource audioSource)
+    {
+        audioSource.PlayOneShot(roarSound);
     }
 }

@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 2088072986679915457}
   m_Layer: 10
   m_Name: Ammo Box Item
-  m_TagString: Item
+  m_TagString: Ammo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,9 +158,6 @@ MonoBehaviour:
   _image: {fileID: 21300000, guid: 2756c5775300fe64dbd781a5375349b4, type: 3}
   _amount: 1
   _weapon: 0
-  interactable:
-    serializedVersion: 2
-    m_Bits: 1024
   inventory: {fileID: 0}
 --- !u!136 &2088072986679915457
 CapsuleCollider:

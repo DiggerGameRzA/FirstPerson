@@ -51,8 +51,6 @@ public class SaveManager : MonoBehaviour
 
         gateNeedDNA.Add(true);      //0
 
-        firstTimeScenes.Add(new FirstTimeScene("Level01", true));
-
         dinos.Add(new DinoInfo(0, 50f, 1, new Vector3(9, 1, 73), false));
         dinos.Add(new DinoInfo(1, 200f, 1, new Vector3(-27, 1, 81), false));
 
@@ -65,16 +63,17 @@ public class SaveManager : MonoBehaviour
         {
             gathered.Add(false);
         }
-
-        for (int i = 0; i < 15; i++)
+        */
+        firstTimeScenes.Add(new FirstTimeScene("Level01", true));
+        for (int i = 0; i < 26; i++)
         {
             collected.Add(false);
         }
-        */
-        firstTimeEvent.Add(true);
-        firstTimeEvent.Add(true);
-        firstTimeEvent.Add(true);
-        firstTimeEvent.Add(true);
+
+        for (int i = 0; i < 8; i++)
+        {
+            firstTimeEvent.Add(true);
+        }
     }
     
     public void UnlockDoor(int id)

@@ -9,6 +9,7 @@ public class Door : MonoBehaviour
     public int id = 0;
     public bool needKey = false;
     public string keyName;
+    public GameObject cardReader;
 
     [Header("Enter Zone")]
     public bool enterZone = false;
@@ -30,6 +31,10 @@ public class Door : MonoBehaviour
      */
     void Start()
     {
+        if(cardReader == null)
+        {
+
+        }
         player = FindObjectOfType<Player>().GetComponent<IPlayer>();
 
         //needKey = SaveManager.instance.doorNeedKey[id];
@@ -58,10 +63,10 @@ public class Door : MonoBehaviour
         }
         if (!needKey)
         {
-            if (transform.childCount >= 2)
+            if (cardReader != null)
             {
-                //Material mat = transform.GetChild(1).GetComponent<MeshRenderer>().materials[2];
-                //mat.color = Color.green;
+                Material mat = cardReader.GetComponent<MeshRenderer>().materials[1];
+                mat.color = Color.green;
             }
         }
     }

@@ -8,6 +8,8 @@ public interface IWeapon
 
     float FireDelay { get; }
 
+    float ReloadDuration { get; set; }
+
     int CurrentAmmo { get; set; }
     int MaxAmmo { get; set; }
     int CurrentSpare { get; set; }
