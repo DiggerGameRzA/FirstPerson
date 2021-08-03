@@ -13,6 +13,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] IWeapon weapon;
     [SerializeField] UIManager uiManager;
 
+    public LayerMask lDefault;
+
     public int currentSlot;
     float tempFireTime = 0f;
     [SerializeField] float tempReloadTime = 0;
@@ -63,6 +65,25 @@ public class WeaponManager : MonoBehaviour
             weapon.GetAnimator().Play("Fire");
             Invoke("ResetAnimation", Mathf.Abs(weapon.FireDelay - 0.2f));
             weapon.Fire();
+
+            RaycastHit hit = CameraManager.GetCameraRaycast(100f, lDefault);
+
+            if (hit.transform)
+            {
+                if(hit.collider.tag == "HurtBox")
+                {
+                    print("aaa");
+                }
+                else if (hit.collider.GetComponentInParent<EnemyStats>())
+                {
+                    EnemyStats es = hit.collider.GetComponentInParent<EnemyStats>();
+                    if (es.GetComponent<Health>().HealthPoint > 0)
+                    {
+                        uiManager.ShowHitMark();
+                        uiManager.Invoke("HideHitMark", 0.5f);
+                    }
+                }
+            }
         }
         else if(tempFireTime <= 0 && weapon.CurrentAmmo <= 0)
         {

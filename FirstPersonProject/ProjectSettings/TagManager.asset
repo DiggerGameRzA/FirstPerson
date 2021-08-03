@@ -10,6 +10,7 @@ TagManager:
   - Nest
   - Ammo
   - Dino
+  - HurtBox
   layers:
   - Default
   - TransparentFX

@@ -96,15 +96,9 @@ public class Pistol : MonoBehaviour, IWeapon
         {
             if (hit.collider.GetComponentInParent<Health>())
             {
-                print("hit");
                 if (hit.collider.GetComponentInParent<Health>().HealthPoint > 0)
                 {
                     hit.collider.GetComponentInParent<Health>().TakeDamage(Damage);
-                    UIManager uiManager;
-                    uiManager = FindObjectOfType<UIManager>();
-
-                    uiManager.ShowHitMark();
-                    uiManager.Invoke("HideHitMark", 1f);
                 }
                 /*
                 int index;

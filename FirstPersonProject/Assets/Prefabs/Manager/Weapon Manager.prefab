@@ -47,7 +47,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiManager: {fileID: 0}
+  lDefault:
+    serializedVersion: 2
+    m_Bits: 4096
   currentSlot: 0
+  tempReloadTime: 0
 --- !u!114 &6071176560937073810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,6 +68,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _fireDelay: 0.1
+  _reloadDuration: 2
   _currentAmmo: 10
   _maxAmmo: 10
   _currentSpare: 0
@@ -84,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fireDelay: 0.5
+  _reloadDuration: 2
   _currentAmmo: 1
   _maxAmmo: 1
   _currentSpare: 0
@@ -102,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fireDelay: 0.1
+  _reloadDuration: 2
   _currentAmmo: 30
   _maxAmmo: 30
   _currentSpare: 0

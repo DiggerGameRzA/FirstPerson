@@ -69,7 +69,7 @@ public class Allosaur : EnemyStats
         {
             isSleep = true;
         }
-        else if (distance < attackRange)
+        else if (HitPlayer())
         {
             isInAtk = true;
         }
@@ -83,7 +83,7 @@ public class Allosaur : EnemyStats
         {
             isInRange = false;
         }
-        else if (distance > attackRange)
+        else if (!HitPlayer())
         {
             isInAtk = false;
         }
@@ -125,7 +125,7 @@ public class Allosaur : EnemyStats
             if (tempAttackTime <= 0)
             {
                 Attack();
-                tempAttackTime = attackDelay;
+                
             }
         }
         else if (isInAtk)
@@ -200,16 +200,30 @@ public class Allosaur : EnemyStats
     }
     void Attack()
     {
-        float distance = Vector3.Distance(target.position, transform.position);
         if (isDealDamage)
         {
-            
             PlayAttackSound(audioSource);
-            if (distance < attackRange)
+            if (HitPlayer())
             {
                 target.GetComponent<IHealth>().TakeDamage(damage);
             }
         }
+        tempAttackTime = attackDelay;
+    }
+    bool HitPlayer()
+    {
+        foreach (var hurtBox in GetComponentsInChildren<HurtBox>())
+        {
+            if (hurtBox.hitPlayer)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
     }
     private void OnDestroy()
     {
