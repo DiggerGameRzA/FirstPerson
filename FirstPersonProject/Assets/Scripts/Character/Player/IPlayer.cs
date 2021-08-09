@@ -11,6 +11,7 @@ public interface IPlayer
     IWeapon GetWeapon();
     IHealth GetHealth();
     Animator GetAnimator();
+    PoisonState GetPoisonState();
     void EquipWeapon(WeaponEnum weapon);
     //Transform GetHandTransform();
 }

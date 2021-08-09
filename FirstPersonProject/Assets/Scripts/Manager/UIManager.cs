@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     [Header("Health Point")]
     //Health Point
     [SerializeField] RectTransform hpBar;
+    [SerializeField] GameObject poisonIcon;
 
     [Header("Dialogue")]
     //Dialogue
@@ -102,11 +103,17 @@ public class UIManager : MonoBehaviour
         weaponIconParent.transform.GetChild(weapon).gameObject.SetActive(true);
     }
     #endregion
+    #region Health
     public void UpdateHealth(float hp)
     {
         SaveManager.instance.HP = hp;
         hpBar.sizeDelta = new Vector2(hp, 100);
     }
+    public void ShowPoison(bool show)
+    {
+        poisonIcon.SetActive(show);
+    }
+    #endregion
     public void UpdateSubtitle(string sentence)
     {
         subtitle.text = "";

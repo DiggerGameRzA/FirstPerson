@@ -2480,14 +2480,22 @@ MonoBehaviour:
   attackDelay: 0
   damage: 0
   speed: 10
+  firstTimeSeen: 1
   isDead: 0
+  isDied: 0
+  isPlayedDead: 0
+  isDeadDrop: 0
+  isDroped: 0
   isSleep: 0
   isHit: 0
+  isDealDamage: 0
+  isRoaring: 0
+  isRoared: 0
+  isInFight: 0
+  isStopPlayFight: 0
   isInRange: 0
   isInAtk: 0
   isAttacking: 0
-  isDealDamage: 0
-  isDied: 0
   isEscaped: 0
   isNest: 0
   idleSound:
@@ -2499,12 +2507,13 @@ MonoBehaviour:
   sleepSound: []
   deadSound:
   - {fileID: 8300000, guid: 879199bb3ccbb2b4e88f4c5d0a35acb7, type: 3}
+  deadDrop: {fileID: 0}
+  roarSound: {fileID: 0}
   tempIdleTime: 0
   tempRunTime: 0
   tempAttackTime: 0
   tempHitTime: 0
   tempSleepTime: 0
-  playedDead: 0
   nest: {fileID: 0}
   escape: {fileID: 0}
 --- !u!114 &8718104151071325691
@@ -2575,7 +2584,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 20
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

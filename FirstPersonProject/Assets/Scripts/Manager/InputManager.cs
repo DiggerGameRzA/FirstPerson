@@ -177,6 +177,10 @@ public class InputManager : MonoBehaviour
             WeaponManager.instance.GetComponent<Pistol>().CurrentSpare += 666;
             WeaponManager.instance.GetComponent<Pistol>().Damage = 100;
         }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            player.GetPoisonState().tempPoisonTime = 10;
+        }
     }
     public static float GetVerInput()
     {

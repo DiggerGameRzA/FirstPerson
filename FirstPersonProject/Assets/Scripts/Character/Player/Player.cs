@@ -15,6 +15,7 @@ public class Player : MonoBehaviour, IPlayer
     CharacterController controller;
     Vector3 velocity;
     Animator anim;
+    PoisonState poison;
 
     IWeapon weapon;
     IHealth health;
@@ -35,6 +36,7 @@ public class Player : MonoBehaviour, IPlayer
         movementDir = new MovementDir();
         controller = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
+        poison = GetComponent<PoisonState>();
 
         weaponManager = GameObject.Find("Weapon Manager");
         weapon = null;
@@ -114,6 +116,10 @@ public class Player : MonoBehaviour, IPlayer
     public Animator GetAnimator()
     {
         return anim;
+    }
+    public PoisonState GetPoisonState()
+    {
+        return poison;
     }
     /*
     public Transform GetHandTransform()
