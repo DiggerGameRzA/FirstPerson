@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class OviRaptor : EnemyStats
+public class Tyranosaurus : EnemyStats
 {
     Transform target;
     NavMeshAgent agent;
@@ -54,11 +54,6 @@ public class OviRaptor : EnemyStats
         tempHitTime -= Time.deltaTime;
         tempSleepTime -= Time.deltaTime;
 
-        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
-        {
-            GetComponent<GatherSyringe>().ShowUI(textPrefab);
-        }
-
         if (isHit)
         {
             visionRange = visionRange2;
@@ -74,7 +69,7 @@ public class OviRaptor : EnemyStats
         {
             isSleep = true;
         }
-        else if (distance < attackRange)
+        else if (HitPlayer())
         {
             isInAtk = true;
         }
@@ -88,7 +83,7 @@ public class OviRaptor : EnemyStats
         {
             isInRange = false;
         }
-        else if (distance > attackRange)
+        else if (!HitPlayer())
         {
             isInAtk = false;
         }
@@ -113,11 +108,6 @@ public class OviRaptor : EnemyStats
             anim.SetBool("isIdling", true);
             anim.SetBool("isDead", true);
             anim.Play("Death");
-            if (!isPlayedDead)
-            {
-                PlayDeadSound(audioSource);
-                isPlayedDead = true;
-            }
         }
         else if (isSleep)
         {
@@ -128,11 +118,6 @@ public class OviRaptor : EnemyStats
             anim.SetBool("isIdling", true);
             anim.SetBool("isDead", true);
             anim.Play("Death");
-            if (tempSleepTime <= 0)
-            {
-                PlaySleepSound(audioSource);
-                tempSleepTime = 6f;
-            }
         }
         else if (isAttacking)
         {
@@ -140,7 +125,7 @@ public class OviRaptor : EnemyStats
             if (tempAttackTime <= 0)
             {
                 Attack();
-                tempAttackTime = attackDelay;
+
             }
         }
         else if (isInAtk)
@@ -154,15 +139,28 @@ public class OviRaptor : EnemyStats
         }
         else if (isInRange)
         {
-            agent.SetDestination(target.position);
-            anim.SetBool("isIdling", false);
-            anim.SetBool("isAttacking", false);
-
-            anim.SetBool("isRunning", true);
-            if (tempRunTime <= 0)
+            if (firstTimeSeen)
             {
-                PlayRunSound(audioSource);
-                tempRunTime = 0.4f;
+                agent.SetDestination(transform.position);
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isIdling", false);
+                anim.SetBool("isRoaring", true);
+                anim.Play("Roar");
+
+                Invoke("StopPlayRoarAnim", 4.4f);
+            }
+            else
+            {
+                agent.SetDestination(target.position);
+                anim.SetBool("isIdling", false);
+                anim.SetBool("isAttacking", false);
+
+                anim.SetBool("isRunning", true);
+                if (tempRunTime <= 0)
+                {
+                    PlayRunSound(audioSource);
+                    tempRunTime = 0.8f;
+                }
             }
         }
         else if (!isInAtk && !isInRange)
@@ -182,18 +180,50 @@ public class OviRaptor : EnemyStats
         {
             isInRange = false;
         }
+
+        if (isDeadDrop && !isDroped)
+        {
+            PlayDeadDropSound(audioSource);
+            isDroped = true;
+        }
+
+        if (isRoaring && !isRoared)
+        {
+            PlayRoarSound(audioSource);
+            isRoared = true;
+        }
+
+        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
+        {
+            GetComponent<GatherSyringe>().ShowUI(textPrefab);
+        }
     }
     void Attack()
     {
-        float distance = Vector3.Distance(target.position, transform.position);
         if (isDealDamage)
         {
             PlayAttackSound(audioSource);
-            if (distance < attackRange)
+            if (HitPlayer())
             {
                 target.GetComponent<IHealth>().TakeDamage(damage);
             }
         }
+        tempAttackTime = attackDelay;
+    }
+    bool HitPlayer()
+    {
+        foreach (var hurtBox in GetComponentsInChildren<HurtBox>())
+        {
+            if (hurtBox.hitPlayer)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
     }
     private void OnDestroy()
     {
@@ -234,5 +264,10 @@ public class OviRaptor : EnemyStats
                 break;
             }
         }
+    }
+    void StopPlayRoarAnim()
+    {
+        anim.SetBool("isRoaring", false);
+        firstTimeSeen = false;
     }
 }

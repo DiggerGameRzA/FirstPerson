@@ -54,6 +54,11 @@ public class Stego : EnemyStats
         tempHitTime -= Time.deltaTime;
         tempSleepTime -= Time.deltaTime;
 
+        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
+        {
+            GetComponent<GatherSyringe>().ShowUI(textPrefab);
+        }
+
         if (isHit)
         {
             visionRange = visionRange2;
@@ -176,11 +181,6 @@ public class Stego : EnemyStats
         else
         {
             isInRange = false;
-        }
-
-        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
-        {
-            GetComponent<GatherSyringe>().ShowUI(textPrefab);
         }
     }
     void Attack()
