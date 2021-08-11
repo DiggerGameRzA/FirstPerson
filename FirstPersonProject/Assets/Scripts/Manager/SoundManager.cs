@@ -28,6 +28,7 @@ public class SoundManager : MonoBehaviour
         }
         //DontDestroyOnLoad(gameObject);
     }
+    #region Music
     public void PlayBGM()
     {
         audioSource = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
@@ -44,6 +45,8 @@ public class SoundManager : MonoBehaviour
         audioSource.Stop();
         audioSource.PlayOneShot(bgm);
     }
+    #endregion
+    #region Guns
     public void PlayPistolFire()
     {
         audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
@@ -59,4 +62,23 @@ public class SoundManager : MonoBehaviour
         audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
         audioSource.PlayOneShot(pistolNoAmmo);
     }
+
+    public void PlayBazukaFire()
+    {
+
+    }
+    public void PlayBazukaReload()
+    {
+
+    }
+
+    public void PlayShotgunFire()
+    {
+
+    }
+    public void PlayShotgunReload()
+    {
+
+    }
+    #endregion
 }

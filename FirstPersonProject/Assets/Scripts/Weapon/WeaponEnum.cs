@@ -8,7 +8,6 @@ public enum WeaponEnum
     Pistol,
     AssaultRifle,
     Sedat,
-    M60,
-    RocketLauncher,
-
+    Bazuka,
+    Shotgun
 }

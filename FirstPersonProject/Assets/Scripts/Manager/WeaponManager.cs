@@ -17,7 +17,7 @@ public class WeaponManager : MonoBehaviour
 
     public int currentSlot;
     float tempFireTime = 0f;
-    [SerializeField] float tempReloadTime = 0;
+    public float tempReloadTime = 0;
     private void Awake()
     {
         if (instance == null)
@@ -62,7 +62,10 @@ public class WeaponManager : MonoBehaviour
             weapon.CurrentAmmo -= 1;
             uiManager.UpdateAmmo(weapon.CurrentAmmo, weapon.CurrentSpare);
             //weapon.GetAnimator().SetBool("fire", true);
-            weapon.GetAnimator().Play("Fire");
+            if (weapon.GetAnimator() != null)
+            {
+                weapon.GetAnimator().Play("Fire");
+            }
             Invoke("ResetAnimation", Mathf.Abs(weapon.FireDelay - 0.2f));
             weapon.Fire();
 
@@ -72,7 +75,7 @@ public class WeaponManager : MonoBehaviour
             {
                 if(hit.collider.tag == "HurtBox")
                 {
-                    print("aaa");
+                    
                 }
                 else if (hit.collider.GetComponentInParent<EnemyStats>())
                 {
@@ -120,7 +123,10 @@ public class WeaponManager : MonoBehaviour
     }
     void ResetAnimation()
     {
-        weapon.GetAnimator().SetBool("fire", false);
+        if (weapon.GetAnimator() != null)
+        {
+            weapon.GetAnimator().SetBool("fire", false);
+        }
     }
     public void Restart()
     {

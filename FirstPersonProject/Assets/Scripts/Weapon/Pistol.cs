@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Pistol : MonoBehaviour, IWeapon
 {
-    public LayerMask hand;
     public WeaponEnum WeaponType { get { return WeaponEnum.Pistol; } }
     [Header("Firing")]
     public float _fireDelay = 0.5f;

@@ -129,6 +129,8 @@ public class Player : MonoBehaviour, IPlayer
     */
     public void EquipWeapon(WeaponEnum weapon)
     {
+        weaponManager.GetComponent<WeaponManager>().tempReloadTime = 0;
+
         if(weapon == WeaponEnum.Pistol)
         {
             this.weapon = weaponManager.GetComponent<Pistol>();
@@ -140,6 +142,14 @@ public class Player : MonoBehaviour, IPlayer
         else if (weapon == WeaponEnum.AssaultRifle)
         {
             this.weapon = weaponManager.GetComponent<AssaultRifle>();
+        }
+        else if (weapon == WeaponEnum.Bazuka)
+        {
+            this.weapon = weaponManager.GetComponent<Bazuka>();
+        }
+        else if (weapon == WeaponEnum.Shotgun)
+        {
+            this.weapon = weaponManager.GetComponent<Shotgun>();
         }
 
         if (this.weapon != null)
