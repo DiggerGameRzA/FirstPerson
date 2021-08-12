@@ -10,8 +10,5 @@ public enum SceneEnum
     Cutscene01 = 2,
 
     Level01 = 3,
-    SecurityRoom = 4,
-    MedicalRoom = 5,
-
-    Level02 = 6
+    Level02 = 4
 }

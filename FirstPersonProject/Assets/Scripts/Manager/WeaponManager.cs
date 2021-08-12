@@ -83,6 +83,10 @@ public class WeaponManager : MonoBehaviour
                     if (es.GetComponent<Health>().HealthPoint > 0)
                     {
                         uiManager.ShowHitMark();
+                        if (weapon.WeaponType == WeaponEnum.Bazuka)
+                        {
+                            SoundManager.instance.PlayBazukaExplode();
+                        }
                         uiManager.Invoke("HideHitMark", 0.5f);
                     }
                 }

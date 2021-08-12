@@ -83,23 +83,7 @@ public class Door : MonoBehaviour
     public void OnEnter()
     {
         print("Entering " + gameObject.name);
-        if (from == "Level01" && goTo == "MedicalRoom")
-        {
-             GameManager.instance.LoadMedRoom();
-        }
-        else if (from == "MedicalRoom" && goTo == "Level01")
-        {
-            GameManager.instance.LoadMedToLevel01();
-        }
-        else if (from == "Level01" && goTo == "SecurityRoom")
-        {
-            GameManager.instance.LoadSecRoom();
-        }
-        else if(from == "SecurityRoom" && goTo == "Level01")
-        {
-            GameManager.instance.LoadSecToLevel01();
-        }
-        else if (from == "Level01" && goTo == "Level02")
+        if (from == "Level01" && goTo == "Level02")
         {
             GameManager.instance.LoadLevel02();
         }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6071176560937073810}
   - component: {fileID: 3735935088031216111}
   - component: {fileID: 8047852489406641720}
+  - component: {fileID: 863007394418716788}
   m_Layer: 0
   m_Name: Weapon Manager
   m_TagString: Untagged
@@ -64,9 +65,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d0f674d613465418107a35960af466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand:
-    serializedVersion: 2
-    m_Bits: 512
   _fireDelay: 0.1
   _reloadDuration: 2
   _currentAmmo: 10
@@ -109,8 +107,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fireDelay: 0.1
   _reloadDuration: 2
-  _currentAmmo: 30
-  _maxAmmo: 30
+  _currentAmmo: 150
+  _maxAmmo: 150
   _currentSpare: 0
-  _maxSpare: 90
-  _damage: 10
+  _maxSpare: 0
+  _damage: 20
+  muzzlePrefab: {fileID: 6858562023941979095, guid: cb274a929b8f2534a8c8ae686427523a,
+    type: 3}
+  muzzleTranform: {fileID: 0}
+--- !u!114 &863007394418716788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5964441784440074889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 842f64ea157a1984b8e71234051bab39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireDelay: 0.5
+  _reloadDuration: 2
+  _currentAmmo: 5
+  _maxAmmo: 5
+  _currentSpare: 0
+  _maxSpare: 0
+  _damage: 50
+  muzzlePrefab: {fileID: 0}
+  muzzleTranform: {fileID: 0}

@@ -20,6 +20,9 @@ public class AssaultRifle : MonoBehaviour, IWeapon
     [Header("Damage")]
     public int _damage = 10;
 
+    public GameObject muzzlePrefab;
+    public Transform muzzleTranform;
+
     public float FireDelay
     {
         get { return _fireDelay; }
@@ -55,26 +58,63 @@ public class AssaultRifle : MonoBehaviour, IWeapon
         set { _damage = value; }
     }
     public bool IsEquiped { get; set; }
-    GameObject ARPrefab;
+    GameObject gunPrefab;
     public void Equip()
     {
-        ARPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(2).gameObject;
-        foreach (Transform i in ARPrefab.transform.parent)
+        UIManager uiManager;
+        uiManager = FindObjectOfType<UIManager>();
+        uiManager.ShowAmmoCanvas(true);
+        uiManager.ShowWepIcon(1);
+
+        gunPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(2).gameObject;
+        foreach (Transform i in gunPrefab.transform.parent)
         {
             if (i.name != "Arm_R")
             {
                 i.gameObject.SetActive(false);
             }
         }
-        ARPrefab.SetActive(true);
+        gunPrefab.SetActive(true);
+
+        IPlayer player = FindObjectOfType<Player>();
+        Animator hAnim = Camera.main.transform.GetChild(2).GetComponent<Animator>();
+        AnimationCon.SetPlayerPistol(hAnim, true);
+        SaveManager.instance.currentWeapon = WeaponEnum.AssaultRifle;
     }
     public Animator GetAnimator()
     {
-        return ARPrefab.GetComponent<Animator>();
+        return gunPrefab.GetComponent<Animator>();
     }
     public void Fire()
     {
+        SoundManager.instance.PlayARFire();
 
+        RaycastHit hit = CameraManager.GetCameraRaycast(100f);
+        if (hit.transform)
+        {
+            if (hit.collider.GetComponentInParent<Health>())
+            {
+                if (hit.collider.GetComponentInParent<Health>().HealthPoint > 0)
+                {
+                    hit.collider.GetComponentInParent<Health>().TakeDamage(Damage);
+                }
+                /*
+                int index;
+                EnemyStats dino = hit.collider.GetComponentInParent<EnemyStats>();
+                index = dino.id;
+                */
+                //SaveManager.instance.dinos[index].healthPoint = hit.transform.gameObject.GetComponent<Health>().HealthPoint;
+
+            }
+        }
+        else if (hit.collider == null)
+        {
+
+        }
+        muzzleTranform = Camera.main.transform.GetChild(0).GetChild(0).GetChild(2).GetChild(0);
+        GameObject go = Instantiate(muzzlePrefab, muzzleTranform);
+        //GameObject muzzlePrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
+        //muzzlePrefab.SetActive(true);
     }
     public void NoAmmo()
     {

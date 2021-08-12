@@ -15,6 +15,15 @@ public class SoundManager : MonoBehaviour
     public AudioClip pistolReload;
     public AudioClip pistolNoAmmo;
 
+    public AudioClip arFire;
+    public AudioClip arReload;
+
+    public AudioClip shotgunFire;
+    public AudioClip shotgunReload;
+
+    public AudioClip bazukaFire;
+    public AudioClip bazukaExplode;
+
     AudioSource audioSource;
     void Awake()
     {
@@ -63,22 +72,36 @@ public class SoundManager : MonoBehaviour
         audioSource.PlayOneShot(pistolNoAmmo);
     }
 
+    public void PlayARFire()
+    {
+        audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(arFire);
+    }
+    public void PlayARReload()
+    {
+        audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(arReload);
+    }
+
     public void PlayBazukaFire()
     {
-
+        audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(bazukaFire);
     }
-    public void PlayBazukaReload()
+    public void PlayBazukaExplode()
     {
-
+        audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(bazukaExplode);
     }
-
     public void PlayShotgunFire()
     {
-
+        audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(shotgunFire);
     }
     public void PlayShotgunReload()
     {
-
+        audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(shotgunReload);
     }
     #endregion
 }

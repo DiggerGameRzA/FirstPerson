@@ -680,7 +680,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Now Loading
+  m_Text: "\u0E01\u0E33\u0E25\u0E31\u0E07\u0E42\u0E2B\u0E25\u0E14"
 --- !u!222 &2072902469
 CanvasRenderer:
   m_ObjectHideFlags: 0

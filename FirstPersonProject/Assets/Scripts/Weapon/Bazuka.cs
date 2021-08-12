@@ -64,7 +64,7 @@ public class Bazuka : MonoBehaviour, IWeapon
         UIManager uiManager;
         uiManager = FindObjectOfType<UIManager>();
         uiManager.ShowAmmoCanvas(true);
-        uiManager.ShowWepIcon(0);
+        uiManager.ShowWepIcon(1);
 
         gunPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(4).gameObject;
         foreach (Transform i in gunPrefab.transform.parent)
@@ -80,7 +80,6 @@ public class Bazuka : MonoBehaviour, IWeapon
         Animator hAnim = Camera.main.transform.GetChild(2).GetComponent<Animator>();
         AnimationCon.SetPlayerPistol(hAnim, true);
         SaveManager.instance.currentWeapon = WeaponEnum.Bazuka;
-
     }
     public Animator GetAnimator()
     {
@@ -123,6 +122,6 @@ public class Bazuka : MonoBehaviour, IWeapon
     }
     public void Reload()
     {
-        SoundManager.instance.PlayBazukaReload();
+
     }
 }

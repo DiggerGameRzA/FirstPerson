@@ -70,6 +70,11 @@ public class Item : MonoBehaviour,IInventoryItem
             player.GetHealth().TakeHeal(25);
             inventory.RemoveItem(this);
         }
+        else if (Name == "Antidote")
+        {
+            player.GetPoisonState().tempPoisonTime = 0;
+            inventory.RemoveItem(this);
+        }
     }
     public void ShowUI(bool show)
     {

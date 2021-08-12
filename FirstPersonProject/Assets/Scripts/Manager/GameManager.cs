@@ -65,22 +65,6 @@ public class GameManager : MonoBehaviour
     {
         LoadScene((int)SceneEnum.Level01, (int)SceneEnum.Level02);
     }
-    public void LoadMedRoom()
-    {
-        LoadScene((int)SceneEnum.Level01, (int)SceneEnum.MedicalRoom);
-    }
-    public void LoadSecRoom()
-    {
-        LoadScene((int)SceneEnum.Level01, (int)SceneEnum.SecurityRoom);
-    }
-    public void LoadMedToLevel01()
-    {
-        LoadScene((int)SceneEnum.MedicalRoom, (int)SceneEnum.Level01, new Vector3(19, 4, 74));
-    }
-    public void LoadSecToLevel01()
-    {
-        LoadScene((int)SceneEnum.SecurityRoom, (int)SceneEnum.Level01, new Vector3(-7, 4, 74));
-    }
     //------------------------------------------------------------------------------------------------
     void LoadCutscene(int unload, int load)
     {

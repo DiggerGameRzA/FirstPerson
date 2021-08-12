@@ -2265,7 +2265,7 @@ MonoBehaviour:
   visionRange2: 30
   attackRange: 5
   attackDelay: 1
-  damage: 30
+  damage: 15
   speed: 10
   firstTimeSeen: 1
   isDead: 0
@@ -2318,8 +2318,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  _healthPoint: 200
-  _maxHealthPoint: 200
+  _healthPoint: 100
+  _maxHealthPoint: 100
   HPBar: {fileID: 8872052114539325238}
   uiManager: {fileID: 0}
 --- !u!114 &3790487227903723218

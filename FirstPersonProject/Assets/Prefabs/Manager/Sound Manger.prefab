@@ -43,3 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f26857a98701e548b74354629e9eb23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgm: {fileID: 8300000, guid: ab748f924e9d8b94cb35c4ce49f68c2e, type: 3}
+  inFight: {fileID: 8300000, guid: a56a6970a15c52d4f997376e98be2940, type: 3}
+  pistolFire: {fileID: 8300000, guid: 14887c0d07ca53a439731d3d7f8efb96, type: 3}
+  pistolReload: {fileID: 8300000, guid: 4e7f48363a71da549af5568157df22cd, type: 3}
+  pistolNoAmmo: {fileID: 8300000, guid: 0e3ba0bc233b2454992e6642e12d60d2, type: 3}
+  arFire: {fileID: 8300000, guid: b26051703732f1e40b0e5bf578520226, type: 3}
+  arReload: {fileID: 0}
+  shotgunFire: {fileID: 8300000, guid: 6afd1b4e941a85b4a8af11320f84c768, type: 3}
+  shotgunReload: {fileID: 8300000, guid: 41e55e3e3f198d5408528ae9bdaf635e, type: 3}
+  bazukaFire: {fileID: 8300000, guid: 21b77e62fa8939240b7e849b7aae7124, type: 3}
+  bazukaExplode: {fileID: 8300000, guid: 6e533ea0526a3124daef65875f9e5826, type: 3}

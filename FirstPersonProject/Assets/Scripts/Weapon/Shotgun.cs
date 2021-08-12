@@ -64,7 +64,7 @@ public class Shotgun : MonoBehaviour, IWeapon
         UIManager uiManager;
         uiManager = FindObjectOfType<UIManager>();
         uiManager.ShowAmmoCanvas(true);
-        uiManager.ShowWepIcon(0);
+        uiManager.ShowWepIcon(1);
 
         gunPrefab = Camera.main.transform.GetChild(0).GetChild(0).GetChild(3).gameObject;
         foreach (Transform i in gunPrefab.transform.parent)

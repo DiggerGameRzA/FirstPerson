@@ -231,6 +231,10 @@ public class InputManager : MonoBehaviour
                     {
                         WeaponManager.instance.GetComponent<Sedat>().CurrentSpare += item.Amount;
                     }
+                    if (hit.transform.GetComponent<IInventoryItem>().Name == "Ammo Shotgun")
+                    {
+                        WeaponManager.instance.GetComponent<Shotgun>().CurrentSpare += item.Amount;
+                    }
 
 
                     if (SaveManager.instance.currentWeapon == WeaponEnum.Pistol)
@@ -330,7 +334,7 @@ public class InputManager : MonoBehaviour
             }
         }
     }
-                    private void RaycastSyringe()
+    private void RaycastSyringe()
     {
         player = FindObjectOfType<Player>();
         inventory = Inventory.instance;
@@ -371,7 +375,7 @@ public class InputManager : MonoBehaviour
                         }
                         else
                         {
-                            print("You don't have Syringe");
+                            uiManager.UpdateSubtitle("คุณต้องใช้ไซริงก์เพื่อดูดดีเอ็นเอ");
                         }
                     }
                 }

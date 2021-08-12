@@ -63,7 +63,6 @@ public class HUD : MonoBehaviour
             index++;
 
             Transform imageTransform = slot.GetChild(0);
-            Transform textTransform = slot.GetChild(1);
             Image image = imageTransform.GetComponent<Image>();
 
             if (index == e.Item.Slot.Id)

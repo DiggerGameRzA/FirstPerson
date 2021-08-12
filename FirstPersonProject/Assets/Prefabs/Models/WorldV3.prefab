@@ -9754,6 +9754,8 @@ GameObject:
   - component: {fileID: 8578062017542291827}
   - component: {fileID: 4109995127872920707}
   - component: {fileID: 7488938121788436069}
+  - component: {fileID: 5058601771791707822}
+  - component: {fileID: 8703789355457161682}
   m_Layer: 0
   m_Name: WorldV3
   m_TagString: Untagged
@@ -10095,6 +10097,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.7673645, y: 50, z: 42.781464}
   m_Center: {x: 417.8794, y: 188, z: -241.11238}
+--- !u!65 &5058601771791707822
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786420440693278698}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6627655, y: 50, z: 20.965878}
+  m_Center: {x: 208.70303, y: 188, z: -18.78758}
+--- !u!65 &8703789355457161682
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786420440693278698}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6627655, y: 50, z: 20.965878}
+  m_Center: {x: 208.70303, y: 188, z: -46}
 --- !u!1 &7800992489381555371
 GameObject:
   m_ObjectHideFlags: 0

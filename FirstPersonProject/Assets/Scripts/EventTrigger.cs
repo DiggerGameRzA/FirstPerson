@@ -7,8 +7,10 @@ public class EventTrigger : MonoBehaviour
     public int id = 0;
     public Inventory inventory;
     public GameObject[] conditionDino;
+    public GameObject[] conditionDinoB;
     public GameObject[] conditionDoor;
     public GameObject[] spawnDino;
+    public GameObject[] spawnItems;
     public GameObject cargo;
     public GameObject[] ammo9mm; //4
     public GameObject[] meds; //2
@@ -286,7 +288,206 @@ public class EventTrigger : MonoBehaviour
                 }
             }
         }
+        if (SaveManager.instance.firstTimeEvent[15] && id == 15)
+        {
+            bool conditionA = false;
+            if (conditionDino[0].GetComponent<Health>().HealthPoint <= 0)
+            {
+                conditionA = true;
+            }
+            else
+            {
+                conditionA = false;
+            }
 
+            bool conditionB = false;
+            if (conditionDino[0].GetComponent<SedatPoint>().SedatPoints <= 0)
+            {
+                conditionB = true;
+            }
+            else
+            {
+                conditionB = false;
+            }
+
+            if (conditionA)
+            {
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(true);
+                }
+                for (int i = 0; i < meds.Length; i++)
+                {
+                    meds[i].SetActive(false);
+                }
+                SaveManager.instance.firstTimeEvent[15] = false;
+            }
+            else if (conditionB)
+            {
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(false);
+                }
+                for (int i = 0; i < meds.Length; i++)
+                {
+                    meds[i].SetActive(true);
+                }
+                SaveManager.instance.firstTimeEvent[15] = false;
+            }
+            else
+            {
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(false);
+                }
+                for (int i = 0; i < meds.Length; i++)
+                {
+                    meds[i].SetActive(false);
+                }
+            }
+        }
+        if (SaveManager.instance.firstTimeEvent[16] && id == 16)
+        {
+            bool[] conditionA = new bool[2];
+            for (int i = 0; i < conditionDino.Length; i++)
+            {
+                if (conditionDino[i].GetComponent<IHealth>().HealthPoint <= 0)
+                {
+                    conditionA[i] = true;
+                }
+            }
+            if (conditionA[0] && conditionA[1])
+            {
+                for (int i = 0; i < spawnDino.Length; i++)
+                {
+                    spawnDino[i].SetActive(true);
+                }
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(true);
+                }
+                SaveManager.instance.firstTimeEvent[16] = false;
+            }
+            if (SaveManager.instance.firstTimeEvent[16])
+            {
+                for (int i = 0; i < spawnDino.Length; i++)
+                {
+                    spawnDino[i].SetActive(false);
+                }
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(false);
+                }
+            }
+        }
+        if (SaveManager.instance.firstTimeEvent[17] && id == 17)
+        {
+            bool[] conditionA = new bool[2];
+            for (int i = 0; i < conditionDino.Length; i++)
+            {
+                if (conditionDino[i].GetComponent<IHealth>().HealthPoint <= 0)
+                {
+                    conditionA[i] = true;
+                }
+            }
+            if (conditionA[0] && conditionA[1])
+            {
+                for (int i = 0; i < spawnDino.Length; i++)
+                {
+                    spawnDino[i].SetActive(true);
+                }
+                SaveManager.instance.firstTimeEvent[17] = false;
+            }
+            if (SaveManager.instance.firstTimeEvent[17])
+            {
+                for (int i = 0; i < spawnDino.Length; i++)
+                {
+                    spawnDino[i].SetActive(false);
+                }
+            }
+        }
+        if (SaveManager.instance.firstTimeEvent[18] && id == 18)
+        {
+            bool conditionA = false;
+            bool[] conA1 = new bool[3];
+            for (int i = 0; i < conditionDino.Length; i++)
+            {
+                if(conditionDino[i].GetComponent<IHealth>().HealthPoint <= 0)
+                {
+                    conA1[i] = true;
+                }
+            }
+            for (int i = 0; i < conditionDinoB.Length; i++)
+            {
+                if (conditionDinoB[i].GetComponent<IHealth>().HealthPoint <= 0)
+                {
+                    conA1[2] = true;
+                    break;
+                }
+            }
+            if (conA1[0] && conA1[1] && conA1[2])
+            {
+                conditionA = true;
+            }
+
+            bool conditionB = false;
+            bool[] conB = new bool[3];
+            for (int i = 0; i < conditionDino.Length; i++)
+            {
+                if (conditionDino[i].GetComponent<ISedat>().SedatPoints <= 0)
+                {
+                    conB[i] = true;
+                }
+            }
+            for (int i = 0; i < conditionDinoB.Length; i++)
+            {
+                if (conditionDinoB[i].GetComponent<ISedat>().SedatPoints <= 0)
+                {
+                    conA1[2] = true;
+                    break;
+                }
+            }
+            if (conB[0] && conB[1] && conB[2])
+            {
+                conditionB = true;
+            }
+
+            if (conditionA)
+            {
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(true);
+                }
+                for (int i = 0; i < meds.Length; i++)
+                {
+                    meds[i].SetActive(false);
+                }
+                SaveManager.instance.firstTimeEvent[18] = false;
+            }
+            else if (conditionB) 
+            {
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(false);
+                }
+                for (int i = 0; i < meds.Length; i++)
+                {
+                    meds[i].SetActive(true);
+                }
+                SaveManager.instance.firstTimeEvent[18] = false;
+            }
+            else
+            {
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(false);
+                }
+                for (int i = 0; i < meds.Length; i++)
+                {
+                    meds[i].SetActive(false);
+                }
+            }
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

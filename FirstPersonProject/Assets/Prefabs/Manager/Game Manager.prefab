@@ -33,6 +33,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842f64ea157a1984b8e71234051bab39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fireDelay: 0.5
+  _reloadDuration: 2
+  _currentAmmo: 0
+  _maxAmmo: 10
+  _currentSpare: 0
+  _maxSpare: 30
+  _damage: 10
+  muzzlePrefab: {fileID: 0}
+  muzzleTranform: {fileID: 0}
 --- !u!320 &1561450852
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -227,31 +236,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6872073005093507984}
     m_Modifications:
-    - target: {fileID: 1922747884173364995, guid: c87861952b749884eb4aa0ccddd195aa,
-        type: 3}
-      propertyPath: pistolFire
-      value: 
-      objectReference: {fileID: 8300000, guid: 748069f1b2664fb48a00cd7e092f9258, type: 3}
-    - target: {fileID: 1922747884173364995, guid: c87861952b749884eb4aa0ccddd195aa,
-        type: 3}
-      propertyPath: pistolReload
-      value: 
-      objectReference: {fileID: 8300000, guid: cfc9795588c652e47bc10370a16b1596, type: 3}
-    - target: {fileID: 1922747884173364995, guid: c87861952b749884eb4aa0ccddd195aa,
-        type: 3}
-      propertyPath: pistolNoAmmo
-      value: 
-      objectReference: {fileID: 8300000, guid: efb8b7897a157d54cb4d07c7620e0dfa, type: 3}
-    - target: {fileID: 1922747884173364995, guid: c87861952b749884eb4aa0ccddd195aa,
-        type: 3}
-      propertyPath: bgm
-      value: 
-      objectReference: {fileID: 8300000, guid: ab748f924e9d8b94cb35c4ce49f68c2e, type: 3}
-    - target: {fileID: 1922747884173364995, guid: c87861952b749884eb4aa0ccddd195aa,
-        type: 3}
-      propertyPath: inFight
-      value: 
-      objectReference: {fileID: 8300000, guid: a56a6970a15c52d4f997376e98be2940, type: 3}
     - target: {fileID: 5433229575717393439, guid: c87861952b749884eb4aa0ccddd195aa,
         type: 3}
       propertyPath: m_LocalPosition.x

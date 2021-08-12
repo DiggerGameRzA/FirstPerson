@@ -80,7 +80,6 @@ public class Pistol : MonoBehaviour, IWeapon
         Animator hAnim = Camera.main.transform.GetChild(2).GetComponent<Animator>();
         AnimationCon.SetPlayerPistol(hAnim, true);
         SaveManager.instance.currentWeapon = WeaponEnum.Pistol;
-
     }
     public Animator GetAnimator()
     {
