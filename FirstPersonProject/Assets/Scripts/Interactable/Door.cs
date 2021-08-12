@@ -8,7 +8,9 @@ public class Door : MonoBehaviour
     IPlayer player;
     public int id = 0;
     public bool needKey = false;
+    public bool isOpened = false;
     public string keyName;
+    public string keyDisplay;
     public GameObject cardReader;
 
     [Header("Enter Zone")]
@@ -68,6 +70,10 @@ public class Door : MonoBehaviour
                 Material mat = cardReader.GetComponent<MeshRenderer>().materials[1];
                 mat.color = Color.green;
             }
+        }
+        if (isOpened)
+        {
+            GetComponent<BoxCollider>().enabled = false;
         }
     }
     public void ShowUI(bool show)

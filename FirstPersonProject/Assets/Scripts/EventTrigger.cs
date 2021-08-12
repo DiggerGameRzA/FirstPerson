@@ -8,7 +8,7 @@ public class EventTrigger : MonoBehaviour
     public Inventory inventory;
     public GameObject[] conditionDino;
     public GameObject[] conditionDoor;
-    public GameObject[] dino;
+    public GameObject[] spawnDino;
     public GameObject cargo;
     public GameObject[] ammo9mm; //4
     public GameObject[] meds; //2
@@ -24,18 +24,18 @@ public class EventTrigger : MonoBehaviour
             IInventoryItem item = inventory.FindKeyItem("Med R. Keycard");
             if (item != null)
             {
-                for (int i = 0; i < dino.Length; i++)
+                for (int i = 0; i < spawnDino.Length; i++)
                 {
-                    dino[i].SetActive(true);
+                    spawnDino[i].SetActive(true);
                 }
                 //Invoke("StartCon2", 0.2f);
                 SaveManager.instance.firstTimeEvent[0] = false;
             }
             else
             {
-                for (int i = 0; i < dino.Length; i++)
+                for (int i = 0; i < spawnDino.Length; i++)
                 {
-                    dino[i].SetActive(false);
+                    spawnDino[i].SetActive(false);
                 }
             }
         }
@@ -56,17 +56,17 @@ public class EventTrigger : MonoBehaviour
             }
             if (condition)
             {
-                for (int i = 0; i < dino.Length; i++)
+                for (int i = 0; i < spawnDino.Length; i++)
                 {
-                    dino[i].SetActive(true);
+                    spawnDino[i].SetActive(true);
                 }
                 SaveManager.instance.firstTimeEvent[1] = false;
             }
             else
             {
-                for (int i = 0; i < dino.Length; i++)
+                for (int i = 0; i < spawnDino.Length; i++)
                 {
-                    dino[i].SetActive(false);
+                    spawnDino[i].SetActive(false);
                 }
             }
         }
@@ -163,7 +163,7 @@ public class EventTrigger : MonoBehaviour
                 }
                 for (int i = 0; i < ammo9mm.Length; i++)
                 {
-                    if(ammo9mm[i] != null)
+                    if (ammo9mm[i] != null)
                     {
                         int index = ammo9mm[i].GetComponent<IInventoryItem>().Id;
                         //SaveManager.instance.collected[index] = true;
@@ -193,6 +193,100 @@ public class EventTrigger : MonoBehaviour
                 SaveManager.instance.firstTimeEvent[4] = false;
             }
         }
+        if (SaveManager.instance.firstTimeEvent[8] && id == 8)
+        {
+            IInventoryItem item = inventory.FindKeyItem("Syringe Tricera DNA");
+            if (item != null)
+            {
+                StartCon5();
+                SaveManager.instance.firstTimeEvent[8] = false;
+            }
+        }
+        if (SaveManager.instance.firstTimeEvent[9] && id == 9)
+        {
+            if (conditionDoor[0].GetComponent<Door>().isOpened)
+            {
+                StartCon6();
+                SaveManager.instance.firstTimeEvent[9] = false;
+            }
+        }
+        if (SaveManager.instance.firstTimeEvent[10] && id == 10)
+        {
+            IInventoryItem item = inventory.FindKeyItem("Syringe Stego DNA");
+            if (item != null)
+            {
+                StartCon7();
+                SaveManager.instance.firstTimeEvent[10] = false;
+            }
+        }
+        if (SaveManager.instance.firstTimeEvent[11] && id == 11)
+        {
+            if (conditionDoor[0].GetComponent<Door>().isOpened)
+            {
+                StartCon8();
+                SaveManager.instance.firstTimeEvent[11] = false;
+            }
+        }
+        if (SaveManager.instance.firstTimeEvent[12] && id == 12)
+        {
+            IInventoryItem item = inventory.FindKeyItem("Syringe Brachio DNA");
+            if (item != null)
+            {
+                StartCon9();
+                SaveManager.instance.firstTimeEvent[12] = false;
+            }
+        }
+        if (SaveManager.instance.firstTimeEvent[13] && id == 13)
+        {
+            for (int i = 0; i < conditionDino.Length; i++)
+            {
+                IHealth conDino = conditionDino[i].GetComponent<IHealth>();
+                if (conDino.HealthPoint < conDino.MaxHealthPoint)
+                {
+                    for (int j = 0; j < spawnDino.Length; j++)
+                    {
+                        spawnDino[j].SetActive(true);
+                    }
+
+                    SaveManager.instance.firstTimeEvent[13] = false;
+                    break;
+                }
+                else
+                {
+                    for (int j = 0; j < spawnDino.Length; j++)
+                    {
+                        spawnDino[j].SetActive(false);
+                    }
+                }
+            }
+        }
+        if (SaveManager.instance.firstTimeEvent[14] && id == 14)
+        {
+            for (int i = 0; i < conditionDino.Length; i++)
+            {
+                IHealth conDino = conditionDino[i].GetComponent<IHealth>();
+                if (conDino.HealthPoint <= 0)
+                {
+                    SaveManager.instance.firstTimeEvent[14] = false;
+                    break;
+                }
+                if (SaveManager.instance.firstTimeEvent[7] && SaveManager.instance.firstTimeEvent[14])
+                {
+                    for (int j = 0; j < spawnDino.Length; j++)
+                    {
+                        spawnDino[j].SetActive(false);
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < spawnDino.Length; j++)
+                    {
+                        spawnDino[j].SetActive(true);
+                    }
+                }
+            }
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -237,33 +331,59 @@ public class EventTrigger : MonoBehaviour
                     }
                     if (condition)
                     {
-                        for (int i = 0; i < dino.Length; i++)
-                        {
-                            dino[i].SetActive(true);
-                        }
                         SaveManager.instance.firstTimeEvent[7] = false;
+                    }
+
+                    if (SaveManager.instance.firstTimeEvent[7] && SaveManager.instance.firstTimeEvent[14])
+                    {
+                        for (int i = 0; i < spawnDino.Length; i++)
+                        {
+                            spawnDino[i].SetActive(false);
+                        }
                     }
                     else
                     {
-                        for (int i = 0; i < dino.Length; i++)
+                        for (int i = 0; i < spawnDino.Length; i++)
                         {
-                            dino[i].SetActive(false);
+                            spawnDino[i].SetActive(true);
                         }
                     }
                 }
             }
         }
     }
+    #region Conversations
     void StartCon2()
     {
-        GameObject.Find("Second Con").GetComponent<NPCDialogue>().TriggerDialogue();
+        GameObject.Find("Con2").GetComponent<NPCDialogue>().TriggerDialogue();
     }
     void StartCon3()
     {
-        GameObject.Find("Third Con").GetComponent<NPCDialogue>().TriggerDialogue();
+        GameObject.Find("Con3").GetComponent<NPCDialogue>().TriggerDialogue();
     }
     void StartCon4()
     {
-        GameObject.Find("Fourth Con").GetComponent<NPCDialogue>().TriggerDialogue();
+        GameObject.Find("Con4").GetComponent<NPCDialogue>().TriggerDialogue();
     }
+    void StartCon5()
+    {
+        GameObject.Find("Con5").GetComponent<NPCDialogue>().TriggerDialogue();
+    }
+    void StartCon6()
+    {
+        GameObject.Find("Con6").GetComponent<NPCDialogue>().TriggerDialogue();
+    }
+    void StartCon7()
+    {
+        GameObject.Find("Con7").GetComponent<NPCDialogue>().TriggerDialogue();
+    }
+    void StartCon8()
+    {
+        GameObject.Find("Con8").GetComponent<NPCDialogue>().TriggerDialogue();
+    }
+    void StartCon9()
+    {
+        GameObject.Find("Con9").GetComponent<NPCDialogue>().TriggerDialogue();
+    }
+    #endregion
 }

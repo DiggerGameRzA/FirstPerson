@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CameraManager : MonoBehaviour
 {
     public static CameraManager instance;
     [SerializeField] public static new UnityEngine.Camera camera;
     [SerializeField] GameObject FPSCamera;
+    public CinemachineVirtualCamera cvc;
     private void Awake()
     {
         if (instance == null)
@@ -87,7 +89,7 @@ public class CameraManager : MonoBehaviour
     }
     public void CanLookAround(bool can)
     {
-        FPSCamera.SetActive(can);
+        FPSCamera.GetComponent<CinemachineVirtualCamera>().enabled = can;
     }
     public void Restart()
     {

@@ -86,7 +86,7 @@ public class DialogueManager : MonoBehaviour
         {
             if(i.scene == "Level01" && i.firstTime)
             {
-                GameObject.Find("First Con").GetComponent<NPCDialogue>().Invoke("TriggerDialogue", 0.2f);
+                GameObject.Find("Con1").GetComponent<NPCDialogue>().Invoke("TriggerDialogue", 0.2f);
                 i.firstTime = false;
                 break;
             }

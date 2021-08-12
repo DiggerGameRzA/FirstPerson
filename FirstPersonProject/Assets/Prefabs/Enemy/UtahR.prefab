@@ -995,7 +995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  textPrefab: {fileID: 5334043929752107266}
+  textPrefab: {fileID: 6967501968164184215}
   visionRange: 20
   visionRange2: 30
   attackRange: 5
@@ -1070,7 +1070,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c725bacb992824b966a6ec9fffbbe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sleepParticle: {fileID: 709260506865815158}
   _sedatPoint: 2
 --- !u!114 &6065180395311583744
 MonoBehaviour:
@@ -2796,9 +2795,9 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3932161425096153928}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5334043929752107266 stripped
+--- !u!1 &6967501968164184215 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8977788740322353738, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
+  m_CorrespondingSourceObject: {fileID: 6206063522063547359, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
     type: 3}
   m_PrefabInstance: {fileID: 3932161425096153928}
   m_PrefabAsset: {fileID: 0}
@@ -2879,12 +2878,6 @@ PrefabInstance:
 --- !u!4 &428076556257305757 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6421158954467749059, guid: 2d6f0c82db14d2045969f0c246238aab,
-    type: 3}
-  m_PrefabInstance: {fileID: 6695831545329862750}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &709260506865815158 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6141665228125799976, guid: 2d6f0c82db14d2045969f0c246238aab,
     type: 3}
   m_PrefabInstance: {fileID: 6695831545329862750}
   m_PrefabAsset: {fileID: 0}

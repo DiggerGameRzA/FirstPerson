@@ -27,7 +27,10 @@ public class InputManager : MonoBehaviour
 
     public GameObject checkKey;
     public GameObject medKey;
-    public GameObject syringe;
+    public GameObject utahSyringe;
+    public GameObject triceraSyringe;
+    public GameObject stegoSyringe;
+    public GameObject brachioSyringe;
     private void Awake()
     {
         if (instance == null)
@@ -59,6 +62,7 @@ public class InputManager : MonoBehaviour
             RaycastDoor();
             RaycastSyringe();
             RaycastDNA();
+            RaycastPanel();
         }
 
         if (onConversation)
@@ -68,7 +72,8 @@ public class InputManager : MonoBehaviour
             {
                 if (Input.GetButtonDown("Interact"))
                 {
-                    GameObject.Find("First Con").GetComponent<NPCDialogue>().DisplayNextSentence();
+                    FindObjectOfType<Button>().PlayClick();
+                    GameObject.Find("Con1").GetComponent<NPCDialogue>().DisplayNextSentence();
                 }
             }
         }
@@ -156,13 +161,14 @@ public class InputManager : MonoBehaviour
             }
         }
 
+        #region Cheat
         if (Input.GetKeyDown(KeyCode.P))
         {
             player.GetHealth().TakeDamage(10f);
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            inventory.AddItem(syringe.GetComponent<IInventoryItem>(), "Item");
+            inventory.AddItem(utahSyringe.GetComponent<IInventoryItem>(), "Item");
         }
         if (Input.GetKeyDown(KeyCode.O))
         {
@@ -171,6 +177,18 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             inventory.AddItem(checkKey.GetComponent<IInventoryItem>(), "Item");
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            inventory.AddItem(triceraSyringe.GetComponent<IInventoryItem>(), "Item");
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            inventory.AddItem(stegoSyringe.GetComponent<IInventoryItem>(), "Item");
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            inventory.AddItem(brachioSyringe.GetComponent<IInventoryItem>(), "Item");
         }
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
@@ -181,6 +199,7 @@ public class InputManager : MonoBehaviour
         {
             player.GetPoisonState().tempPoisonTime = 10;
         }
+        #endregion
     }
     public static float GetVerInput()
     {
@@ -254,7 +273,10 @@ public class InputManager : MonoBehaviour
                         if (!door.needKey)
                         {
                             if (door.enterZone)
+                            {
+                                door.isOpened = true;
                                 door.OnOpen();
+                            }
                             else
                                 door.OnEnter();
                         }
@@ -276,13 +298,16 @@ public class InputManager : MonoBehaviour
                                 */
 
                                 if (door.enterZone)
+                                {
+                                    door.isOpened = true;
                                     door.OnOpen();
+                                }
                                 else
                                     door.OnEnter();
                             }
                             else
                             {
-                                uiManager.UpdateSubtitle("You need " + door.keyName + " to enter");
+                                uiManager.UpdateSubtitle("คุณต้องใช้" + door.keyDisplay + " เพื่อดำเนินการต่อ");
                             }
                         }
                     }
@@ -290,7 +315,22 @@ public class InputManager : MonoBehaviour
             }
         }
     }
-    private void RaycastSyringe()
+    private void RaycastPanel()
+    {
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+        if (hit.transform)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                if (hit.transform.CompareTag("Interactable"))
+                {
+                    DamPanel panel = hit.transform.GetComponent<DamPanel>();
+                    panel.OnActive();
+                }
+            }
+        }
+    }
+                    private void RaycastSyringe()
     {
         player = FindObjectOfType<Player>();
         inventory = Inventory.instance;

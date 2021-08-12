@@ -19,4 +19,8 @@ public class DinoInfo
         position = _pos;
         escaped = _esc;
     }
+    public DinoInfo(int _id)
+    {
+        id = _id;
+    }
 }

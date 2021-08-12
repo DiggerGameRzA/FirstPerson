@@ -83,6 +83,10 @@ public class Player : MonoBehaviour, IPlayer
                 //AnimationCon.SetPlayerRun(hAnim, false);
             }
         }
+        else
+        {
+            AnimationCon.SetPlayerRun(anim, false);
+        }
 
         if (Input.GetButton("Jump") && controller.isGrounded)
         {

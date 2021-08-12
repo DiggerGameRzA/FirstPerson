@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SedatPoint : MonoBehaviour, ISedat
 {
-    public GameObject sleepParticle;
     [SerializeField] float _sedatPoint = 1;
 
     public float SedatPoints
@@ -22,6 +21,6 @@ public class SedatPoint : MonoBehaviour, ISedat
     }
     void OnSedat()
     {
-        sleepParticle.SetActive(true);
+
     }
 }

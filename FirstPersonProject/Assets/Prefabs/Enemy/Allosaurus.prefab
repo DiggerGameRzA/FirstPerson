@@ -3308,7 +3308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  textPrefab: {fileID: 8123157600081099666}
+  textPrefab: {fileID: 6488735307383972359}
   visionRange: 40
   visionRange2: 50
   attackRange: 5
@@ -3381,8 +3381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c725bacb992824b966a6ec9fffbbe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sleepParticle: {fileID: 6141665228125799976, guid: 2d6f0c82db14d2045969f0c246238aab,
-    type: 3}
   _sedatPoint: 1
 --- !u!114 &7368990138732976560
 MonoBehaviour:
@@ -3396,7 +3394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a5a93b43ddb924594ab23c3cf08aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dna: {fileID: 0}
+  dna: {fileID: 8907349213612104769, guid: 272cb367076616a40be1268e00725d3f, type: 3}
   gathered: 0
 --- !u!82 &7368990138732976561
 AudioSource:
@@ -3950,9 +3948,9 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 877291009740069336}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8123157600081099666 stripped
+--- !u!1 &6488735307383972359 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8977788740322353738, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
+  m_CorrespondingSourceObject: {fileID: 6206063522063547359, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
     type: 3}
   m_PrefabInstance: {fileID: 877291009740069336}
   m_PrefabAsset: {fileID: 0}

@@ -48,15 +48,6 @@ MonoBehaviour:
   weaponManager: {fileID: 0}
   cameraManager: {fileID: 0}
   hud: {fileID: 0}
-  interactable:
-    serializedVersion: 2
-    m_Bits: 1024
-  defualt:
-    serializedVersion: 2
-    m_Bits: 1
-  entity:
-    serializedVersion: 2
-    m_Bits: 2048
   canShoot: 1
   canOpenInv: 1
   canEsc: 1
@@ -69,4 +60,11 @@ MonoBehaviour:
   checkKey: {fileID: 3126269870390390657, guid: 1478fa85c1fea4340a6da04c37e094c1,
     type: 3}
   medKey: {fileID: 1520805175617777857, guid: e9b9495484deed1469f55051905ee3c1, type: 3}
-  syringe: {fileID: 8907349213612104769, guid: ab50eddd3cb7fb0419baec686e30d1ab, type: 3}
+  utahSyringe: {fileID: 8907349213612104769, guid: ab50eddd3cb7fb0419baec686e30d1ab,
+    type: 3}
+  triceraSyringe: {fileID: 8907349213612104769, guid: 5d1bb8fa2dc25634e8952fd240072586,
+    type: 3}
+  stegoSyringe: {fileID: 8907349213612104769, guid: 40b6a0281bcedd14c8d8aed5162cd60b,
+    type: 3}
+  brachioSyringe: {fileID: 8907349213612104769, guid: 01f13e635336b9f48be83a7e0cf8ac15,
+    type: 3}

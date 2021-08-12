@@ -64,13 +64,15 @@ public class SaveManager : MonoBehaviour
             gathered.Add(false);
         }
         */
+
+
         firstTimeScenes.Add(new FirstTimeScene("Level01", true));
         for (int i = 0; i < 26; i++)
         {
             collected.Add(false);
         }
 
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 15; i++)
         {
             firstTimeEvent.Add(true);
         }

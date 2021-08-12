@@ -59,6 +59,11 @@ public class Triceratops : EnemyStats
             visionRange = visionRange2;
         }
 
+        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
+        {
+            GetComponent<GatherSyringe>().ShowUI(textPrefab);
+        }
+
         float distance = Vector3.Distance(target.position, transform.position);
         if (health.HealthPoint <= 0 && !isDied)
         {
@@ -176,11 +181,6 @@ public class Triceratops : EnemyStats
         else
         {
             isInRange = false;
-        }
-
-        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
-        {
-            GetComponent<GatherSyringe>().ShowUI(textPrefab);
         }
     }
     void Attack()

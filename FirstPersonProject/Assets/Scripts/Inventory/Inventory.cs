@@ -196,7 +196,6 @@ public class Inventory : MonoBehaviour
     }
     public IInventoryItem FindKeyItem(string name)
     {
-        
         IInventoryItem item = null;
         for (int i = 0; i < iSlots.Count; i++)
         {
