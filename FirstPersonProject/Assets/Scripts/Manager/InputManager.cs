@@ -63,6 +63,7 @@ public class InputManager : MonoBehaviour
             RaycastSyringe();
             RaycastDNA();
             RaycastPanel();
+            RaycastPortal();
         }
 
         if (onConversation)
@@ -72,8 +73,8 @@ public class InputManager : MonoBehaviour
             {
                 if (Input.GetButtonDown("Interact"))
                 {
-                    FindObjectOfType<Button>().PlayClick();
-                    GameObject.Find("Con1").GetComponent<NPCDialogue>().DisplayNextSentence();
+                    FindObjectOfType<Button>().PlayNext();
+                    FindObjectOfType<NPCDialogue>().DisplayNextSentence();
                 }
             }
         }
@@ -198,6 +199,11 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
             player.GetPoisonState().tempPoisonTime = 10;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            WeaponManager.instance.GetComponent<Sedat>().CurrentSpare += 666;
+            WeaponManager.instance.GetComponent<Sedat>().Damage = 10;
         }
         #endregion
     }
@@ -328,8 +334,31 @@ public class InputManager : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Interactable"))
                 {
-                    DamPanel panel = hit.transform.GetComponent<DamPanel>();
-                    panel.OnActive();
+                    if (hit.transform.GetComponent<DamPanel>())
+                    {
+                        DamPanel panel = hit.transform.GetComponent<DamPanel>();
+                        panel.OnActive();
+                    }
+                }
+            }
+        }
+    }
+    private void RaycastPortal()
+    {
+        RaycastHit hit = CameraManager.GetCameraRaycast(player.GetStats().InteractRange);
+        if (hit.transform)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                if (hit.transform.CompareTag("Interactable"))
+                {
+                    if (hit.transform.GetComponent<PortalPanel>())
+                    {
+                        PortalPanel panel = hit.transform.GetComponent<PortalPanel>();
+                        print(panel);
+                        print(hit.transform);
+                        panel.OnActive();
+                    }
                 }
             }
         }

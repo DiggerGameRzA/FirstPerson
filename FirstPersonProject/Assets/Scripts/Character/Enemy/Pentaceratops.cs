@@ -12,6 +12,11 @@ public class Pentaceratops : EnemyStats
     ISedat sedat;
     AudioSource audioSource;
 
+    [SerializeField] Collider col;
+
+    [SerializeField] bool isStun = false;
+    float tempStunTime = 0f;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -54,6 +59,8 @@ public class Pentaceratops : EnemyStats
         tempHitTime -= Time.deltaTime;
         tempSleepTime -= Time.deltaTime;
 
+        tempStunTime -= Time.deltaTime;
+
         if (isHit)
         {
             visionRange = visionRange2;
@@ -67,7 +74,6 @@ public class Pentaceratops : EnemyStats
         float distance = Vector3.Distance(target.position, transform.position);
         if (health.HealthPoint <= 0 && !isDied)
         {
-            health.OnDead();
             isDead = true;
         }
         else if (sedat.SedatPoints <= 0 && !isDied)
@@ -82,6 +88,17 @@ public class Pentaceratops : EnemyStats
         {
             visionRange = visionRange2;
             isInRange = true;
+        }
+
+        if (tempStunTime <= 0)
+        {
+            isStun = false;
+            col.enabled = true;
+        }
+        else
+        {
+            isStun = true;
+            col.enabled = false;
         }
 
         if (distance > visionRange)
@@ -134,23 +151,23 @@ public class Pentaceratops : EnemyStats
                 tempSleepTime = 6f;
             }
         }
-        else if (isAttacking)
+        else if (isStun)
         {
             agent.SetDestination(transform.position);
-            if (tempAttackTime <= 0)
-            {
-                Attack();
-                tempAttackTime = attackDelay;
-            }
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdling", true);
         }
         else if (isInAtk)
         {
             agent.SetDestination(transform.position);
             anim.SetBool("isRunning", false);
-            anim.SetBool("isIdling", false);
-
-            anim.SetBool("isAttacking", true);
-            anim.Play("Attack");
+            anim.SetBool("isIdling", true);
+            if (tempAttackTime <= 0)
+            {
+                Attack();
+                isDealDamage = true;
+                tempAttackTime = attackDelay;
+            }
         }
         else if (isInRange)
         {
@@ -211,13 +228,11 @@ public class Pentaceratops : EnemyStats
     void Attack()
     {
         float distance = Vector3.Distance(target.position, transform.position);
-        if (isDealDamage)
+        PlayAttackSound(audioSource);
+        tempStunTime = 5f;
+        if (distance < attackRange)
         {
-            PlayAttackSound(audioSource);
-            if (distance < attackRange)
-            {
-                target.GetComponent<IHealth>().TakeDamage(damage);
-            }
+            //target.GetComponent<IHealth>().TakeDamage(damage);
         }
     }
     private void OnDestroy()
@@ -231,6 +246,33 @@ public class Pentaceratops : EnemyStats
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
     */
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            tempStunTime = 5f;
+
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            CharacterController cc = other.GetComponent<CharacterController>();
+            //Collision col = GetComponent<Player>().GetComponent<Collision>();
+
+            cc.enabled = false;
+            //col.collider.enabled = true;
+            other.GetComponent<IHealth>().TakeDamage(damage);
+
+            Invoke("EnablePlayerController", 1f);
+
+            Vector3 dir = other.transform.position - transform.position;
+            dir.y = 2;
+
+            rb.AddForce(dir.normalized * 50, ForceMode.Impulse);
+        }
+    }
+    void EnablePlayerController()
+    {
+        FindObjectOfType<CharacterController>().enabled = true;
+        //FindObjectOfType<Player>().GetComponent<Collision>().collider.enabled = false;
+    }
     void GetInfo()
     {
         for (int i = 0; i < SaveManager.instance.dinos.Count; i++)

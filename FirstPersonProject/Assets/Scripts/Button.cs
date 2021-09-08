@@ -10,6 +10,7 @@ public class Button : MonoBehaviour
     AudioSource audioSource;
     public AudioClip onHover;
     public AudioClip onClick;
+    public AudioClip onNext;
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -21,6 +22,10 @@ public class Button : MonoBehaviour
     public void PlayClick()
     {
         audioSource.PlayOneShot(onClick);
+    }
+    public void PlayNext()
+    {
+        audioSource.PlayOneShot(onNext);
     }
 
     public void ResetGame()

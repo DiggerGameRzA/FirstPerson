@@ -49,7 +49,7 @@ MonoBehaviour:
   _id: 0
   _collected: 0
   _name: Ammo Dart
-  _image: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  _image: {fileID: 21300000, guid: 885f00d9b414a3a43ac67217cc9135be, type: 3}
   _amount: 1
   _weapon: 0
   inventory: {fileID: 0}

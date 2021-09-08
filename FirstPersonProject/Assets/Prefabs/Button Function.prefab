@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onHover: {fileID: 8300000, guid: cc65871fa5cdf2d488c1e7c247ee34d6, type: 3}
   onClick: {fileID: 8300000, guid: 358703a456e95e149985535a76f9b1f0, type: 3}
+  onNext: {fileID: 8300000, guid: 53c18cd3c334dc440b60d445ebe031bb, type: 3}
 --- !u!82 &641211241
 AudioSource:
   m_ObjectHideFlags: 0

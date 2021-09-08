@@ -673,7 +673,7 @@ MonoBehaviour:
   id: 0
   textPrefab: {fileID: 4642632067294042369}
   visionRange: 20
-  visionRange2: 30
+  visionRange2: 50
   attackRange: 5
   attackDelay: 1
   damage: 30
@@ -715,6 +715,7 @@ MonoBehaviour:
   tempAttackTime: 0
   tempHitTime: 0
   tempSleepTime: 0
+  alertDistance: 50
 --- !u!114 &1263452373100667563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2242,6 +2243,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7910636115588145022}
     m_Modifications:
+    - target: {fileID: 1753135643237439211, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2670428640278088194, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5249418355628189140, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2372,14 +2383,34 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5249418355628189147, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5249418356009494169, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249418356009494169, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5249418356016680719, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
         type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5249418356016680719, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
         type: 3}
-      propertyPath: m_Layer
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206063522063547359, guid: 6c25a11a18dbfb144a007cfbd1fe4230,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8977788740322353738, guid: 6c25a11a18dbfb144a007cfbd1fe4230,

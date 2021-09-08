@@ -320,7 +320,7 @@ MonoBehaviour:
   _id: 0
   _collected: 0
   _name: Ammo Shotgun
-  _image: {fileID: 21300000, guid: 2756c5775300fe64dbd781a5375349b4, type: 3}
+  _image: {fileID: 21300000, guid: 646790a2f3e145149a91383a9bfa337b, type: 3}
   _amount: 10
   _weapon: 0
   inventory: {fileID: 0}

@@ -67,7 +67,8 @@ public class SaveManager : MonoBehaviour
 
 
         firstTimeScenes.Add(new FirstTimeScene("Level01", true));
-        for (int i = 0; i < 26; i++)
+        firstTimeScenes.Add(new FirstTimeScene("Final", true));
+        for (int i = 0; i < 27; i++)
         {
             collected.Add(false);
         }

@@ -61,7 +61,6 @@ public class UtahRaptor : EnemyStats
 
         if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
         {
-            print("aaa");
             GetComponent<GatherSyringe>().ShowUI(textPrefab);
         }
 

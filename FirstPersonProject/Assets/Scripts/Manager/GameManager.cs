@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] InputManager inputManager = null;
     [SerializeField] CameraManager cameraManager = null;
     [SerializeField] DialogueManager dialogueManager = null;
+    [SerializeField] SoundManager soundManager = null;
     [SerializeField] Inventory inventory = null;
 
     List<AsyncOperation> sceneLoading = new List<AsyncOperation>();
@@ -56,6 +57,10 @@ public class GameManager : MonoBehaviour
     public void LoadCutscene01()
     {
         LoadCutscene((int)SceneEnum.MainMenu, (int)SceneEnum.Cutscene01);
+    }
+    public void LoadCutscene02()
+    {
+        LoadCutscene((int)SceneEnum.Level02, (int)SceneEnum.Cutscene02);
     }
     public void LoadLevel01()
     {
@@ -181,6 +186,7 @@ public class GameManager : MonoBehaviour
             inputManager.Restart();
             dialogueManager.Restart();
             inventory.Restart();
+            soundManager.Restart();
 
             if (UIManager.instance != null)
                 UIManager.instance.ResetUI();

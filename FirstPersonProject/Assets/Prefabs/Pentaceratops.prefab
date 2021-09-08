@@ -346,10 +346,10 @@ MonoBehaviour:
   textPrefab: {fileID: 2070009891017223386}
   visionRange: 30
   visionRange2: 40
-  attackRange: 8
+  attackRange: 6
   attackDelay: 1
   damage: 75
-  speed: 13
+  speed: 15
   firstTimeSeen: 1
   isDead: 0
   isDied: 0
@@ -389,6 +389,7 @@ MonoBehaviour:
   tempAttackTime: 0
   tempHitTime: 0
   tempSleepTime: 0
+  isStun: 0
 --- !u!114 &228639920482824813
 MonoBehaviour:
   m_ObjectHideFlags: 0

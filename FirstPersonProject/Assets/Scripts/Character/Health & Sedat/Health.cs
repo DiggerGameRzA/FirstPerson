@@ -86,10 +86,15 @@ public class Health : MonoBehaviour, IHealth
     {
         if (!isPlayer)
         {
-            
+            if (FindObjectOfType<WaveSystem>() != null)
+            {
+                print("aa");
+                FindObjectOfType<WaveSystem>().DecreaseEnemy();
+            }
         }
         else
         {
+
             FindObjectOfType<Player>().enabled = false;
             UIManager.instance.ShowInventory(false);
             UIManager.instance.ShowMenu(false);

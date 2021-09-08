@@ -934,8 +934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   textPrefab: {fileID: 938507164391682025}
-  visionRange: 40
-  visionRange2: 50
+  visionRange: 100
+  visionRange2: 200
   attackRange: 5
   attackDelay: 0.7
   damage: 100
@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a5a93b43ddb924594ab23c3cf08aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dna: {fileID: 0}
+  dna: {fileID: 8907349213612104769, guid: 15dc77300b42ac444ac2a11defd3c51a, type: 3}
   gathered: 0
 --- !u!82 &8895864742121861461
 AudioSource:
@@ -1042,7 +1042,7 @@ AudioSource:
   Priority: 124
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 50
+  MaxDistance: 300
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0

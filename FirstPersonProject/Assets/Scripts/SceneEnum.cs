@@ -10,5 +10,6 @@ public enum SceneEnum
     Cutscene01 = 2,
 
     Level01 = 3,
-    Level02 = 4
+    Level02 = 4,
+    Cutscene02 = 5
 }

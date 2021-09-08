@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgm: {fileID: 8300000, guid: ab748f924e9d8b94cb35c4ce49f68c2e, type: 3}
+  swampBGM: {fileID: 8300000, guid: 4ea0600c4b8224a479e1758fc9ffcc98, type: 3}
+  forestBGM: {fileID: 8300000, guid: 22a0e9610ff4b1941b4b539df013f516, type: 3}
+  bossBGM: {fileID: 8300000, guid: f6a1ad8fb44f50a4788e88daf2ad7cd9, type: 3}
   inFight: {fileID: 8300000, guid: a56a6970a15c52d4f997376e98be2940, type: 3}
   pistolFire: {fileID: 8300000, guid: 14887c0d07ca53a439731d3d7f8efb96, type: 3}
   pistolReload: {fileID: 8300000, guid: 4e7f48363a71da549af5568157df22cd, type: 3}

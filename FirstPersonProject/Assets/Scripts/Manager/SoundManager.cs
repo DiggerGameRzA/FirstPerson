@@ -6,8 +6,18 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
+    public float masterVolume = 1f;
+    public float effectVolume = 1f;
+    public float musicVolume = 1f;
+
+    public float effectVolumeUI = 1f;
+    public float musicVolumeUI = 1f;
+
     [Header("BGM")]
     public AudioClip bgm;
+    public AudioClip swampBGM;
+    public AudioClip forestBGM;
+    public AudioClip bossBGM;
     public AudioClip inFight;
 
     [Header("Guns")]
@@ -37,11 +47,45 @@ public class SoundManager : MonoBehaviour
         }
         //DontDestroyOnLoad(gameObject);
     }
+    public void Restart()
+    {
+        
+    }
+    void Update()
+    {
+        AudioSource Button = FindObjectOfType<Button>().GetComponent<AudioSource>();
+        Button.volume = effectVolume;
+
+        AudioSource Gun = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
+        Gun.volume = effectVolume;
+
+        AudioSource BGM = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
+        BGM.volume = musicVolume;
+    }
     #region Music
     public void PlayBGM()
     {
         audioSource = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
+        audioSource.Stop();
         audioSource.PlayOneShot(bgm);
+    }
+    public void PlaySwamp()
+    {
+        audioSource = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
+        audioSource.Stop();
+        audioSource.PlayOneShot(swampBGM);
+    }
+    public void PlayForest()
+    {
+        audioSource = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
+        audioSource.Stop();
+        audioSource.PlayOneShot(forestBGM);
+    }
+    public void PlayBossBGM()
+    {
+        audioSource = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
+        audioSource.Stop();
+        audioSource.PlayOneShot(bossBGM);
     }
     public void PlayInFight()
     {

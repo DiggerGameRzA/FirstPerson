@@ -2559,7 +2559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dna: {fileID: 8907349213612104769, guid: 7e326c865b210d74b9379001e6c3f1af, type: 3}
-  gathered: 0
+  gathered: 1
 --- !u!82 &8516094509831606962
 AudioSource:
   m_ObjectHideFlags: 0

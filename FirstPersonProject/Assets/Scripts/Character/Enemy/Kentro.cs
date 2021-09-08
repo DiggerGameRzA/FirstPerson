@@ -12,6 +12,8 @@ public class Kentro : EnemyStats
     ISedat sedat;
     AudioSource audioSource;
 
+    public float alertDistance = 50f;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -61,6 +63,15 @@ public class Kentro : EnemyStats
 
         if (isHit)
         {
+            Kentro[] ally = FindObjectsOfType<Kentro>();
+            for (int i = 0; i < ally.Length; i++)
+            {
+                float dis = Vector3.Distance(ally[i].transform.position, transform.position);
+                if (dis < alertDistance)
+                {
+                    ally[i].isHit = true;
+                }
+            }
             visionRange = visionRange2;
         }
 

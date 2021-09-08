@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3735935088031216111}
   - component: {fileID: 8047852489406641720}
   - component: {fileID: 863007394418716788}
+  - component: {fileID: 8349092821525351776}
   m_Layer: 0
   m_Name: Weapon Manager
   m_TagString: Untagged
@@ -87,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fireDelay: 0.5
-  _reloadDuration: 2
+  _reloadDuration: 1
   _currentAmmo: 1
   _maxAmmo: 1
   _currentSpare: 0
@@ -134,5 +135,26 @@ MonoBehaviour:
   _currentSpare: 0
   _maxSpare: 0
   _damage: 50
+  muzzlePrefab: {fileID: 0}
+  muzzleTranform: {fileID: 0}
+--- !u!114 &8349092821525351776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5964441784440074889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32cb712f3cf3e78489759fd3b0e58d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fireDelay: 1
+  _reloadDuration: 2
+  _currentAmmo: 4
+  _maxAmmo: 4
+  _currentSpare: 0
+  _maxSpare: 0
+  _damage: 200
   muzzlePrefab: {fileID: 0}
   muzzleTranform: {fileID: 0}

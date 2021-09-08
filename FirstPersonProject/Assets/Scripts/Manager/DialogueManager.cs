@@ -82,11 +82,29 @@ public class DialogueManager : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
         print("restart");
 
+        bool firstTime1 = false;
+        bool firstTime2 = false;
         foreach (FirstTimeScene i in SaveManager.instance.firstTimeScenes)
         {
             if(i.scene == "Level01" && i.firstTime)
             {
                 GameObject.Find("Con1").GetComponent<NPCDialogue>().Invoke("TriggerDialogue", 0.2f);
+                if (!firstTime1)
+                {
+                    FindObjectOfType<SoundManager>().PlayBGM();
+                    firstTime1 = true;
+                }
+                i.firstTime = false;
+                break;
+            }
+            if(i.scene == "Final" && i.firstTime)
+            {
+                GameObject.Find("Con10").GetComponent<NPCDialogue>().Invoke("TriggerDialogue", 0.2f);
+                if (!firstTime2)
+                {
+                    FindObjectOfType<SoundManager>().PlayBossBGM();
+                    firstTime2 = true;
+                }
                 i.firstTime = false;
                 break;
             }

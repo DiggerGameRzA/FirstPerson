@@ -229,13 +229,10 @@ public class Tyranosaurus : EnemyStats
     {
         SaveInfo();
     }
-    /*
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, visionRange);
-        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-    */
     void GetInfo()
     {
         for (int i = 0; i < SaveManager.instance.dinos.Count; i++)
@@ -270,4 +267,5 @@ public class Tyranosaurus : EnemyStats
         anim.SetBool("isRoaring", false);
         firstTimeSeen = false;
     }
+
 }

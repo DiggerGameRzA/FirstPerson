@@ -235,6 +235,8 @@ public class EventTrigger : MonoBehaviour
             if (item != null)
             {
                 StartCon9();
+                FindObjectOfType<SoundManager>().PlayForest();
+                FindObjectOfType<SwampSound>().gameObject.SetActive(false);
                 SaveManager.instance.firstTimeEvent[12] = false;
             }
         }
@@ -264,14 +266,30 @@ public class EventTrigger : MonoBehaviour
         }
         if (SaveManager.instance.firstTimeEvent[14] && id == 14)
         {
+            bool conditionA = false;
             for (int i = 0; i < conditionDino.Length; i++)
             {
                 IHealth conDino = conditionDino[i].GetComponent<IHealth>();
                 if (conDino.HealthPoint <= 0)
                 {
+                    conditionA = true;
                     SaveManager.instance.firstTimeEvent[14] = false;
                     break;
                 }
+            }
+            bool conditionB = false;
+            for (int i = 0; i < conditionDino.Length; i++)
+            {
+                ISedat conDino = conditionDino[i].GetComponent<ISedat>();
+                if (conDino.SedatPoints <= 0)
+                {
+                    conditionB = true;
+                    SaveManager.instance.firstTimeEvent[14] = false;
+                    break;
+                }
+            }
+            if (conditionA)
+            {
                 if (SaveManager.instance.firstTimeEvent[7] && SaveManager.instance.firstTimeEvent[14])
                 {
                     for (int j = 0; j < spawnDino.Length; j++)
@@ -287,6 +305,37 @@ public class EventTrigger : MonoBehaviour
                     }
                 }
             }
+            else if (conditionB)
+            {
+                if (SaveManager.instance.firstTimeEvent[7] && SaveManager.instance.firstTimeEvent[14])
+                {
+                    for (int j = 0; j < meds.Length; j++)
+                    {
+                        meds[j].SetActive(false);
+                    }
+                }
+                else
+                {
+                    for (int j = 0; j < meds.Length; j++)
+                    {
+                        meds[j].SetActive(true);
+                    }
+                }
+            }
+            else
+            {
+                for (int j = 0; j < spawnDino.Length; j++)
+                {
+                    spawnDino[j].SetActive(false);
+                }
+
+                for (int j = 0; j < meds.Length; j++)
+                {
+                    meds[j].SetActive(false);
+                }
+
+            }
+            
         }
         if (SaveManager.instance.firstTimeEvent[15] && id == 15)
         {

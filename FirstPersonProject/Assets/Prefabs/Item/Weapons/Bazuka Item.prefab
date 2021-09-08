@@ -239,7 +239,7 @@ MonoBehaviour:
   _id: 0
   _collected: 0
   _name: Bazuka
-  _image: {fileID: 21300000, guid: 8b75c978d0eb88740912292c17a65224, type: 3}
+  _image: {fileID: 21300000, guid: f7cf9479eb2faf1488bc83437d1336f4, type: 3}
   _amount: 1
   _weapon: 4
   inventory: {fileID: 0}
