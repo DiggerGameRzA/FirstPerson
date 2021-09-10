@@ -73,7 +73,7 @@ public class SaveManager : MonoBehaviour
             collected.Add(false);
         }
 
-        for (int i = 0; i < 19; i++)
+        for (int i = 0; i < 20; i++)
         {
             firstTimeEvent.Add(true);
         }

@@ -2330,7 +2330,7 @@ MonoBehaviour:
   visionRange2: 50
   attackRange: 10
   attackDelay: 2
-  damage: 1
+  damage: 10
   speed: 13
   firstTimeSeen: 1
   isDead: 0

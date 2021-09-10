@@ -290,24 +290,27 @@ public class EventTrigger : MonoBehaviour
             }
             if (conditionA)
             {
-                if (SaveManager.instance.firstTimeEvent[7] && SaveManager.instance.firstTimeEvent[14])
+                if (!SaveManager.instance.firstTimeEvent[7] || !SaveManager.instance.firstTimeEvent[14])
                 {
-                    for (int j = 0; j < spawnDino.Length; j++)
+                    Kentro[] kentro = FindObjectsOfType<Kentro>();
+                    for (int i = 0; i < kentro.Length; i++)
                     {
-                        spawnDino[j].SetActive(false);
+                        kentro[i].isHit = true;
                     }
-                }
-                else
-                {
                     for (int j = 0; j < spawnDino.Length; j++)
                     {
                         spawnDino[j].SetActive(true);
+                        //spawnDino[j].transform.position = new Vector3(340, 1, 190);
+                    }
+                    for (int i = 0; i < conditionDinoB.Length; i++)
+                    {
+                        conditionDinoB[i].SetActive(false);
                     }
                 }
             }
             else if (conditionB)
             {
-                if (SaveManager.instance.firstTimeEvent[7] && SaveManager.instance.firstTimeEvent[14])
+                if (SaveManager.instance.firstTimeEvent[14])
                 {
                     for (int j = 0; j < meds.Length; j++)
                     {
@@ -324,11 +327,13 @@ public class EventTrigger : MonoBehaviour
             }
             else
             {
-                for (int j = 0; j < spawnDino.Length; j++)
+                if (SaveManager.instance.firstTimeEvent[7] && SaveManager.instance.firstTimeEvent[14])
                 {
-                    spawnDino[j].SetActive(false);
+                    for (int j = 0; j < spawnDino.Length; j++)
+                    {
+                        spawnDino[j].SetActive(false);
+                    }
                 }
-
                 for (int j = 0; j < meds.Length; j++)
                 {
                     meds[j].SetActive(false);
@@ -369,6 +374,7 @@ public class EventTrigger : MonoBehaviour
                 {
                     meds[i].SetActive(false);
                 }
+                cargo.SetActive(true);
                 SaveManager.instance.firstTimeEvent[15] = false;
             }
             else if (conditionB)
@@ -381,6 +387,7 @@ public class EventTrigger : MonoBehaviour
                 {
                     meds[i].SetActive(true);
                 }
+                cargo.SetActive(true);
                 SaveManager.instance.firstTimeEvent[15] = false;
             }
             else
@@ -393,6 +400,7 @@ public class EventTrigger : MonoBehaviour
                 {
                     meds[i].SetActive(false);
                 }
+                cargo.SetActive(false);
             }
         }
         if (SaveManager.instance.firstTimeEvent[16] && id == 16)
@@ -537,6 +545,47 @@ public class EventTrigger : MonoBehaviour
                 }
             }
         }
+        if (SaveManager.instance.firstTimeEvent[19] && id == 19)
+        {
+            bool conditionA = false;
+            if (conditionDino[0].GetComponent<IHealth>().HealthPoint <= 0)
+            {
+                conditionA = true;
+            }
+            bool conditionB = false;
+            if (conditionDino[0].GetComponent<ISedat>().SedatPoints <= 0)
+            {
+                conditionB = true;
+            }
+
+            if (conditionA)
+            {
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(true);
+                }
+                SaveManager.instance.firstTimeEvent[19] = false;
+            }
+            else if (conditionB)
+            {
+                for (int i = 0; i < meds.Length; i++)
+                {
+                    meds[i].SetActive(true);
+                }
+                SaveManager.instance.firstTimeEvent[19] = false;
+            }
+            else
+            {
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(false);
+                }
+                for (int i = 0; i < meds.Length; i++)
+                {
+                    meds[i].SetActive(false);
+                }
+            }
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -583,20 +632,17 @@ public class EventTrigger : MonoBehaviour
                     {
                         SaveManager.instance.firstTimeEvent[7] = false;
                     }
+                }
 
-                    if (SaveManager.instance.firstTimeEvent[7] && SaveManager.instance.firstTimeEvent[14])
+                if (!SaveManager.instance.firstTimeEvent[7])
+                {
+                    for (int i = 0; i < spawnDino.Length; i++)
                     {
-                        for (int i = 0; i < spawnDino.Length; i++)
-                        {
-                            spawnDino[i].SetActive(false);
-                        }
+                        spawnDino[i].SetActive(true);
                     }
-                    else
+                    for (int i = 0; i < conditionDinoB.Length; i++)
                     {
-                        for (int i = 0; i < spawnDino.Length; i++)
-                        {
-                            spawnDino[i].SetActive(true);
-                        }
+                        conditionDinoB[i].SetActive(false);
                     }
                 }
             }

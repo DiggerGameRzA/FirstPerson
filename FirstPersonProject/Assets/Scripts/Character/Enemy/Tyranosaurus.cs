@@ -12,6 +12,9 @@ public class Tyranosaurus : EnemyStats
     ISedat sedat;
     AudioSource audioSource;
 
+    bool firstTimeRoar02 = true;
+    bool firstTimeRoar03 = true;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -118,6 +121,20 @@ public class Tyranosaurus : EnemyStats
             anim.SetBool("isIdling", true);
             anim.SetBool("isDead", true);
             anim.Play("Death");
+        }
+
+        // roar 3
+        else if (health.HealthPoint <= .3f * health.HealthPoint && firstTimeRoar03)
+        {
+            print("lower than 30%");
+            firstTimeRoar03 = false;
+        }
+
+        // roar 2
+        else if (health.HealthPoint <= .6f * health.HealthPoint && firstTimeRoar02)
+        {
+            print("lower than 60%");
+            firstTimeRoar02 = false;
         }
         else if (isAttacking)
         {

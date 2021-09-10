@@ -17,6 +17,9 @@ public class Pentaceratops : EnemyStats
     [SerializeField] bool isStun = false;
     float tempStunTime = 0f;
 
+    [SerializeField] float knockbackHeight;
+    [SerializeField] float knockbackStrength;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -90,7 +93,11 @@ public class Pentaceratops : EnemyStats
             isInRange = true;
         }
 
-        if (tempStunTime <= 0)
+        if (isDead)
+        {
+            col.enabled = false;
+        }
+        else if (tempStunTime <= 0)
         {
             isStun = false;
             col.enabled = true;
@@ -157,6 +164,7 @@ public class Pentaceratops : EnemyStats
             anim.SetBool("isRunning", false);
             anim.SetBool("isIdling", true);
         }
+        /*
         else if (isInAtk)
         {
             agent.SetDestination(transform.position);
@@ -169,6 +177,7 @@ public class Pentaceratops : EnemyStats
                 tempAttackTime = attackDelay;
             }
         }
+        */
         else if (isInRange)
         {
             agent.SetDestination(target.position);
@@ -251,27 +260,24 @@ public class Pentaceratops : EnemyStats
         if (other.tag == "Player")
         {
             tempStunTime = 5f;
+            col.enabled = false;
 
             Rigidbody rb = other.GetComponent<Rigidbody>();
             CharacterController cc = other.GetComponent<CharacterController>();
-            //Collision col = GetComponent<Player>().GetComponent<Collision>();
-
             cc.enabled = false;
-            //col.collider.enabled = true;
+            Invoke("EnablePlayerController", .5f);
+
             other.GetComponent<IHealth>().TakeDamage(damage);
 
-            Invoke("EnablePlayerController", 1f);
-
             Vector3 dir = other.transform.position - transform.position;
-            dir.y = 2;
+            dir.y = knockbackHeight;
 
-            rb.AddForce(dir.normalized * 50, ForceMode.Impulse);
+            rb.AddForce(dir * knockbackStrength);
         }
     }
     void EnablePlayerController()
     {
-        FindObjectOfType<CharacterController>().enabled = true;
-        //FindObjectOfType<Player>().GetComponent<Collision>().collider.enabled = false;
+        FindObjectOfType<Player>().GetComponent<CharacterController>().enabled = true;
     }
     void GetInfo()
     {

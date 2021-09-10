@@ -36,11 +36,7 @@ public class Health : MonoBehaviour, IHealth
     public void TakeDamage(float damage)
     {
         HealthPoint -= damage;
-        if(HealthPoint <= 0)
-        {
-            OnDead();
-        }
-
+        
         if (isPlayer)
         {
             uiManager.UpdateHealth(HealthPoint);

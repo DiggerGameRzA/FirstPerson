@@ -55,8 +55,8 @@ public class Player : MonoBehaviour, IPlayer
     {
         velocity.y += -stats.Gravity * Time.deltaTime;
         //rb.velocity = new Vector3(0, rb.velocity.y, 0);
-        controller.Move(velocity);
 
+        controller.Move(velocity);
         if (InputManager.instance.canMove)
         {
             if (Input.GetButton("Sprint"))

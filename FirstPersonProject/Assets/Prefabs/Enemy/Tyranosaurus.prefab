@@ -939,7 +939,7 @@ MonoBehaviour:
   attackRange: 5
   attackDelay: 0.7
   damage: 100
-  speed: 13
+  speed: 10
   firstTimeSeen: 1
   isDead: 0
   isDied: 0
