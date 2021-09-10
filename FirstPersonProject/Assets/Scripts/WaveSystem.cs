@@ -16,7 +16,7 @@ public class WaveSystem : MonoBehaviour
     public GameObject[] Wave03Dinos;
     void Start()
     {
-        StartFirstWave();
+
     }
     void Update()
     {

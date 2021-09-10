@@ -934,7 +934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   textPrefab: {fileID: 938507164391682025}
-  visionRange: 100
+  visionRange: 70
   visionRange2: 200
   attackRange: 5
   attackDelay: 0.7
@@ -950,7 +950,7 @@ MonoBehaviour:
   isHit: 0
   isDealDamage: 0
   isRoaring: 0
-  isRoared: 0
+  isRoared01: 0
   isInFight: 0
   isStopPlayFight: 0
   isInRange: 0
@@ -977,6 +977,12 @@ MonoBehaviour:
   tempAttackTime: 0
   tempHitTime: 0
   tempSleepTime: 0
+  isRoared02: 0
+  isRoared03: 0
+  isRoared04: 0
+  firstTimeRoar02: 1
+  firstTimeRoar03: 1
+  firstTimeRoar04: 1
 --- !u!114 &8895864742121861458
 MonoBehaviour:
   m_ObjectHideFlags: 0

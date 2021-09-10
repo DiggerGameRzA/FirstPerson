@@ -84,7 +84,6 @@ public class Health : MonoBehaviour, IHealth
         {
             if (FindObjectOfType<WaveSystem>() != null)
             {
-                print("aa");
                 FindObjectOfType<WaveSystem>().DecreaseEnemy();
             }
         }

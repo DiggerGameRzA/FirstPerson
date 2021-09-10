@@ -12,8 +12,13 @@ public class Tyranosaurus : EnemyStats
     ISedat sedat;
     AudioSource audioSource;
 
-    bool firstTimeRoar02 = true;
-    bool firstTimeRoar03 = true;
+    [SerializeField] bool isRoared02 = false;
+    [SerializeField] bool isRoared03 = false;
+    [SerializeField] bool isRoared04 = false;
+
+    [SerializeField] bool firstTimeRoar02 = true;
+    [SerializeField] bool firstTimeRoar03 = true;
+    [SerializeField] bool firstTimeRoar04 = true;
 
     void Start()
     {
@@ -123,26 +128,51 @@ public class Tyranosaurus : EnemyStats
             anim.Play("Death");
         }
 
-        // roar 3
-        else if (health.HealthPoint <= .3f * health.HealthPoint && firstTimeRoar03)
+        // roar 4
+        else if (health.HealthPoint <= 0.25f * health.MaxHealthPoint && firstTimeRoar04)
         {
-            print("lower than 30%");
-            firstTimeRoar03 = false;
+            print("lower than 25%");
+
+            agent.SetDestination(transform.position);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdling", false);
+            anim.SetBool("isRoaring", true);
+
+            Invoke("StopPlayRoar04", 4.4f);
+        }
+
+        // roar 3
+        else if (health.HealthPoint <= 0.5f * health.MaxHealthPoint && firstTimeRoar03)
+        {
+            print("lower than 50%");
+
+            agent.SetDestination(transform.position);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdling", false);
+            anim.SetBool("isRoaring", true);
+
+            Invoke("StopPlayRoar03", 4.4f);
         }
 
         // roar 2
-        else if (health.HealthPoint <= .6f * health.HealthPoint && firstTimeRoar02)
+        else if (health.HealthPoint <= 0.75f * health.MaxHealthPoint && firstTimeRoar02)
         {
-            print("lower than 60%");
-            firstTimeRoar02 = false;
+            print("lower than 75%");
+
+            agent.SetDestination(transform.position);
+            anim.SetBool("isRunning", false);
+            anim.SetBool("isIdling", false);
+            anim.SetBool("isRoaring", true);
+
+            Invoke("StopPlayRoar02", 4.4f);
         }
+
         else if (isAttacking)
         {
             agent.SetDestination(transform.position);
             if (tempAttackTime <= 0)
             {
                 Attack();
-
             }
         }
         else if (isInAtk)
@@ -164,7 +194,7 @@ public class Tyranosaurus : EnemyStats
                 anim.SetBool("isRoaring", true);
                 anim.Play("Roar");
 
-                Invoke("StopPlayRoarAnim", 4.4f);
+                Invoke("StopPlayRoar01", 4.4f);
             }
             else
             {
@@ -204,11 +234,26 @@ public class Tyranosaurus : EnemyStats
             isDroped = true;
         }
 
-        if (isRoaring && !isRoared)
+        if (isRoaring)
         {
             PlayRoarSound(audioSource);
-            isRoared = true;
         }
+        /*
+        else if (isRoaring && !isRoared02)
+        {
+            PlayRoarSound(audioSource);
+            isRoared02 = true;
+        }
+        else if (isRoaring && !isRoared03)
+        {
+            PlayRoarSound(audioSource);
+            isRoared03 = true;
+        }
+        else if (isRoaring && !isRoared04)
+        {
+            PlayRoarSound(audioSource);
+            isRoared04 = true;
+        }*/
 
         if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
         {
@@ -279,10 +324,24 @@ public class Tyranosaurus : EnemyStats
             }
         }
     }
-    void StopPlayRoarAnim()
+    void StopPlayRoar01()
     {
         anim.SetBool("isRoaring", false);
         firstTimeSeen = false;
     }
-
+    void StopPlayRoar02()
+    {
+        anim.SetBool("isRoaring", false);
+        firstTimeRoar02 = false;
+    }
+    void StopPlayRoar03()
+    {
+        anim.SetBool("isRoaring", false);
+        firstTimeRoar03 = false;
+    }
+    void StopPlayRoar04()
+    {
+        anim.SetBool("isRoaring", false);
+        firstTimeRoar04 = false;
+    }
 }

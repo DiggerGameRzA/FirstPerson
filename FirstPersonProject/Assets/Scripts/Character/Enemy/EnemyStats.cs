@@ -59,7 +59,7 @@ public class EnemyStats : MonoBehaviour
     public float tempIdleTime, tempRunTime, tempAttackTime, tempHitTime, tempSleepTime = 0f;
     public void PlayIdleSound(AudioSource audioSource)
     {
-        audioSource.volume = SoundManager.instance.effectVolume;
+        audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;
 
         if (idleSound.Length > 0)
         {
@@ -69,48 +69,48 @@ public class EnemyStats : MonoBehaviour
     }
     public void PlayRunSound(AudioSource audioSource)
     {
-        audioSource.volume = SoundManager.instance.effectVolume;
+        audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;
 
         int index = Random.Range(0, runSound.Length);
         audioSource.PlayOneShot(runSound[index]);
     }
     public void PlayAttackSound(AudioSource audioSource)
     {
-        audioSource.volume = SoundManager.instance.effectVolume;
+        audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;
 
         int index = Random.Range(0, attackSound.Length);
         audioSource.PlayOneShot(attackSound[index]);
     }
     public void PlayHitSound(AudioSource audioSource)
     {
-        audioSource.volume = SoundManager.instance.effectVolume;
+        audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;
 
         int index = Random.Range(0, hitSound.Length);
         audioSource.PlayOneShot(hitSound[index]);
     }
     public void PlaySleepSound(AudioSource audioSource)
     {
-        audioSource.volume = SoundManager.instance.effectVolume;
+        audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;
 
         int index = Random.Range(0, sleepSound.Length);
         audioSource.PlayOneShot(sleepSound[index]);
     }
     public void PlayDeadSound(AudioSource audioSource)
     {
-        audioSource.volume = SoundManager.instance.effectVolume;
+        audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;
 
         int index = Random.Range(0, deadSound.Length);
         audioSource.PlayOneShot(deadSound[index]);
     }
     public void PlayDeadDropSound(AudioSource audioSource)
     {
-        audioSource.volume = SoundManager.instance.effectVolume;
+        audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;
 
         audioSource.PlayOneShot(deadDrop);
     }
     public void PlayRoarSound(AudioSource audioSource)
     {
-        audioSource.volume = SoundManager.instance.effectVolume;
+        audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;
 
         audioSource.PlayOneShot(roarSound);
     }

@@ -54,13 +54,16 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         AudioSource Button = FindObjectOfType<Button>().GetComponent<AudioSource>();
-        Button.volume = effectVolume;
+        Button.volume = masterVolume * effectVolume;
 
         AudioSource Gun = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
-        Gun.volume = effectVolume;
+        Gun.volume = masterVolume * effectVolume;
+
+        AudioSource UI = GameObject.Find("Button Function").GetComponent<AudioSource>();
+        UI.volume = masterVolume * effectVolume;
 
         AudioSource BGM = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
-        BGM.volume = musicVolume;
+        BGM.volume = masterVolume * musicVolume;
     }
     #region Music
     public void PlayBGM()
