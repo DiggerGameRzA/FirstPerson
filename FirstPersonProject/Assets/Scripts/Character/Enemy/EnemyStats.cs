@@ -92,8 +92,11 @@ public class EnemyStats : MonoBehaviour
     {
         audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;
 
-        int index = Random.Range(0, sleepSound.Length);
-        audioSource.PlayOneShot(sleepSound[index]);
+        if (sleepSound.Length > 0)
+        {
+            int index = Random.Range(0, sleepSound.Length);
+            audioSource.PlayOneShot(sleepSound[index]);
+        }
     }
     public void PlayDeadSound(AudioSource audioSource)
     {

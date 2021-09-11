@@ -40,6 +40,10 @@ public class Health : MonoBehaviour, IHealth
         if (isPlayer)
         {
             uiManager.UpdateHealth(HealthPoint);
+            if (HealthPoint <= 0)
+            {
+                OnDead();
+            }
         }
         else
         {
@@ -82,14 +86,10 @@ public class Health : MonoBehaviour, IHealth
     {
         if (!isPlayer)
         {
-            if (FindObjectOfType<WaveSystem>() != null)
-            {
-                FindObjectOfType<WaveSystem>().DecreaseEnemy();
-            }
+           
         }
         else
         {
-
             FindObjectOfType<Player>().enabled = false;
             UIManager.instance.ShowInventory(false);
             UIManager.instance.ShowMenu(false);

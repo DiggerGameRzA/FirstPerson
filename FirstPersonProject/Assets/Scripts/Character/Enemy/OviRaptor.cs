@@ -54,7 +54,7 @@ public class OviRaptor : EnemyStats
         tempHitTime -= Time.deltaTime;
         tempSleepTime -= Time.deltaTime;
 
-        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
+        if ((health.HealthPoint <= 0 || sedat.SedatPoints <= 0) && !GetComponent<GatherSyringe>().gathered)
         {
             GetComponent<GatherSyringe>().ShowUI(textPrefab);
         }

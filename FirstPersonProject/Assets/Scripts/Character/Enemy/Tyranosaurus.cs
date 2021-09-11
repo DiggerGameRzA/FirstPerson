@@ -12,6 +12,8 @@ public class Tyranosaurus : EnemyStats
     ISedat sedat;
     AudioSource audioSource;
 
+    WaveSystem ws;
+
     [SerializeField] bool isRoared02 = false;
     [SerializeField] bool isRoared03 = false;
     [SerializeField] bool isRoared04 = false;
@@ -29,6 +31,8 @@ public class Tyranosaurus : EnemyStats
         health = GetComponent<IHealth>();
         sedat = GetComponent<SedatPoint>();
         audioSource = GetComponent<AudioSource>();
+
+        ws = FindObjectOfType<WaveSystem>();
 
         GetInfo();
         if (health.HealthPoint <= 0)
@@ -68,7 +72,7 @@ public class Tyranosaurus : EnemyStats
         }
 
         float distance = Vector3.Distance(target.position, transform.position);
-        if (health.HealthPoint <= 0 && !isDied)
+        if ((health.HealthPoint <= 0 || sedat.SedatPoints <= 0) && !GetComponent<GatherSyringe>().gathered)
         {
             health.OnDead();
             isDead = true;
@@ -132,39 +136,45 @@ public class Tyranosaurus : EnemyStats
         else if (health.HealthPoint <= 0.25f * health.MaxHealthPoint && firstTimeRoar04)
         {
             print("lower than 25%");
+            ws.SpawnWave04();
 
             agent.SetDestination(transform.position);
             anim.SetBool("isRunning", false);
             anim.SetBool("isIdling", false);
             anim.SetBool("isRoaring", true);
+            anim.SetBool("isAttacking", false);
 
-            Invoke("StopPlayRoar04", 4.4f);
+            Invoke("StopPlayRoar04", 4.9f);
         }
 
         // roar 3
         else if (health.HealthPoint <= 0.5f * health.MaxHealthPoint && firstTimeRoar03)
         {
             print("lower than 50%");
+            ws.SpawnWave03();
 
             agent.SetDestination(transform.position);
             anim.SetBool("isRunning", false);
             anim.SetBool("isIdling", false);
             anim.SetBool("isRoaring", true);
+            anim.SetBool("isAttacking", false);
 
-            Invoke("StopPlayRoar03", 4.4f);
+            Invoke("StopPlayRoar03", 4.9f);
         }
 
         // roar 2
         else if (health.HealthPoint <= 0.75f * health.MaxHealthPoint && firstTimeRoar02)
         {
             print("lower than 75%");
+            ws.SpawnWave02();
 
             agent.SetDestination(transform.position);
             anim.SetBool("isRunning", false);
             anim.SetBool("isIdling", false);
             anim.SetBool("isRoaring", true);
+            anim.SetBool("isAttacking", false);
 
-            Invoke("StopPlayRoar02", 4.4f);
+            Invoke("StopPlayRoar02", 4.9f);
         }
 
         else if (isAttacking)
@@ -194,7 +204,9 @@ public class Tyranosaurus : EnemyStats
                 anim.SetBool("isRoaring", true);
                 anim.Play("Roar");
 
-                Invoke("StopPlayRoar01", 4.4f);
+                ws.SpawnWave01();
+
+                Invoke("StopPlayRoar01", 4.9f);
             }
             else
             {
@@ -238,23 +250,6 @@ public class Tyranosaurus : EnemyStats
         {
             PlayRoarSound(audioSource);
         }
-        /*
-        else if (isRoaring && !isRoared02)
-        {
-            PlayRoarSound(audioSource);
-            isRoared02 = true;
-        }
-        else if (isRoaring && !isRoared03)
-        {
-            PlayRoarSound(audioSource);
-            isRoared03 = true;
-        }
-        else if (isRoaring && !isRoared04)
-        {
-            PlayRoarSound(audioSource);
-            isRoared04 = true;
-        }*/
-
         if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
         {
             GetComponent<GatherSyringe>().ShowUI(textPrefab);

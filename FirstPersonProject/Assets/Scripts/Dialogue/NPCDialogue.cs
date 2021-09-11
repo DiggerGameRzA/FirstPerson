@@ -7,7 +7,7 @@ public class NPCDialogue : MonoBehaviour
     public Dialogue dialogue;
     public void TriggerDialogue()
     {
-        //DialogueManager.instance.StartConversation(dialogue);
+        DialogueManager.instance.StartConversation(dialogue);
     }
     public void DisplayNextSentence()
     {

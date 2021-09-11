@@ -1721,7 +1721,7 @@ MonoBehaviour:
   id: 0
   textPrefab: {fileID: 7299101105044370238}
   visionRange: 10
-  visionRange2: 10
+  visionRange2: 50
   attackRange: 8
   attackDelay: 1
   damage: 20

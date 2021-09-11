@@ -16,7 +16,8 @@ public class SpawnPteraBG : MonoBehaviour
             tempTime = waitTime;
             for (int i = 0; i < pos.Length; i++)
             {
-                Instantiate(ptera, pos[i]);
+                GameObject pter = Instantiate(ptera, pos[i]);
+                Destroy(pter, 30f);
             }
         }
     }

@@ -1653,7 +1653,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1234850900686277329}
   - component: {fileID: 1180373453896504429}
-  - component: {fileID: 3251558530597749326}
+  - component: {fileID: 1156675945030630647}
   m_Layer: 0
   m_Name: Pteranodon BG
   m_TagString: Untagged
@@ -1696,7 +1696,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3251558530597749326
+--- !u!114 &1156675945030630647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1705,7 +1705,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1240546202090707065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8f40243cee68440993f7ab8ffcadc1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8953a645529dcd4478f9942dfaa069ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1240577696209611335

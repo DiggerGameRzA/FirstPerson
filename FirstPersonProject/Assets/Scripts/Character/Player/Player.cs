@@ -85,10 +85,12 @@ public class Player : MonoBehaviour, IPlayer
         {
             AnimationCon.SetPlayerRun(anim, false);
         }
-
-        if (Input.GetButton("Jump") && controller.isGrounded)
+        if (InputManager.instance.canMove) 
         {
-            velocity.y = Mathf.Sqrt(stats.JumpForce * stats.Gravity);
+            if (Input.GetButton("Jump") && controller.isGrounded)
+            {
+                velocity.y = Mathf.Sqrt(stats.JumpForce * stats.Gravity);
+            }
         }
     }
     public Stats GetStats()

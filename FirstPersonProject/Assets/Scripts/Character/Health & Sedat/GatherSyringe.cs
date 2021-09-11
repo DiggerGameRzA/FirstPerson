@@ -30,8 +30,11 @@ public class GatherSyringe : MonoBehaviour
                 GameObject go;
                 if (hit.collider.GetComponentInParent<GatherSyringe>())
                 {
-                    go = hit.collider.GetComponentInParent<GatherSyringe>().gameObject;
-                    go.GetComponent<EnemyStats>().textPrefab.SetActive(true);
+                    if (!gathered)
+                    {
+                        go = hit.collider.GetComponentInParent<GatherSyringe>().gameObject;
+                        go.GetComponent<EnemyStats>().textPrefab.SetActive(true);
+                    }
                 }
                 else
                 {

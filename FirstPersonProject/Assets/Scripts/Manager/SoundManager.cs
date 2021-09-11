@@ -26,13 +26,15 @@ public class SoundManager : MonoBehaviour
     public AudioClip pistolNoAmmo;
 
     public AudioClip arFire;
-    public AudioClip arReload;
+    public AudioClip dartFire;
 
     public AudioClip shotgunFire;
     public AudioClip shotgunReload;
 
     public AudioClip bazukaFire;
     public AudioClip bazukaExplode;
+
+    public AudioClip doorOpen;
 
     AudioSource audioSource;
     void Awake()
@@ -56,14 +58,19 @@ public class SoundManager : MonoBehaviour
         AudioSource Button = FindObjectOfType<Button>().GetComponent<AudioSource>();
         Button.volume = masterVolume * effectVolume;
 
-        AudioSource Gun = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
-        Gun.volume = masterVolume * effectVolume;
-
+        if (GameObject.Find("Gun sfx") != null)
+        {
+            AudioSource Gun = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
+            Gun.volume = masterVolume * effectVolume;
+        }
         AudioSource UI = GameObject.Find("Button Function").GetComponent<AudioSource>();
         UI.volume = masterVolume * effectVolume;
 
-        AudioSource BGM = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
-        BGM.volume = masterVolume * musicVolume;
+        if (GameObject.Find("BGM sfx") != null)
+        {
+            AudioSource BGM = GameObject.Find("BGM sfx").GetComponent<AudioSource>();
+            BGM.volume = masterVolume * musicVolume;
+        }
     }
     #region Music
     public void PlayBGM()
@@ -124,10 +131,10 @@ public class SoundManager : MonoBehaviour
         audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
         audioSource.PlayOneShot(arFire);
     }
-    public void PlayARReload()
+    public void PlayDartFire()
     {
         audioSource = GameObject.Find("Gun sfx").GetComponent<AudioSource>();
-        audioSource.PlayOneShot(arReload);
+        audioSource.PlayOneShot(dartFire);
     }
 
     public void PlayBazukaFire()
@@ -151,4 +158,10 @@ public class SoundManager : MonoBehaviour
         audioSource.PlayOneShot(shotgunReload);
     }
     #endregion
+    public void PlayDoorOpen(AudioSource audioSource)
+    {
+        audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;
+
+        audioSource.PlayOneShot(doorOpen);
+    }
 }

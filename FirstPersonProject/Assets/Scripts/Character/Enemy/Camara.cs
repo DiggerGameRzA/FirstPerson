@@ -12,6 +12,9 @@ public class Camara : EnemyStats
     ISedat sedat;
     AudioSource audioSource;
 
+    [SerializeField] bool isChased = false;
+    [SerializeField] ParticleSystem stomp;
+    [SerializeField] Transform escapePos;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -59,7 +62,7 @@ public class Camara : EnemyStats
             visionRange = visionRange2;
         }
 
-        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
+        if ((health.HealthPoint <= 0 || sedat.SedatPoints <= 0) && !GetComponent<GatherSyringe>().gathered)
         {
             GetComponent<GatherSyringe>().ShowUI(textPrefab);
         }
@@ -91,6 +94,12 @@ public class Camara : EnemyStats
         else if (distance > attackRange)
         {
             isInAtk = false;
+        }
+
+        float escDis = Vector3.Distance(escapePos.position, transform.position);
+        if (escDis <= 3)
+        {
+            gameObject.SetActive(false);
         }
 
         if (isDied)
@@ -134,6 +143,7 @@ public class Camara : EnemyStats
                 tempSleepTime = 6f;
             }
         }
+        /*
         else if (isAttacking)
         {
             agent.SetDestination(transform.position);
@@ -153,21 +163,26 @@ public class Camara : EnemyStats
             anim.SetBool("isAttacking", true);
             anim.Play("Attack");
         }
-        /*
-        else if (isInRange)
+        */
+        else if (isInRange || isChased)
         {
-            agent.SetDestination(target.position);
+            isChased = true;
+            agent.SetDestination(escapePos.position);
             anim.SetBool("isIdling", false);
             anim.SetBool("isAttacking", false);
 
             anim.SetBool("isRunning", true);
             if (tempRunTime <= 0)
             {
+                if (distance < attackRange)
+                {
+                    target.GetComponent<IHealth>().TakeDamage(damage);
+                }
                 PlayRunSound(audioSource);
-                tempRunTime = 0.8f;
+                stomp.Play();
+                tempRunTime = 2f;
             }
         }
-        */
         else if (!isInAtk && !isInRange)
         {
             agent.SetDestination(transform.position);

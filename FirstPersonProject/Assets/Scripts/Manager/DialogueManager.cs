@@ -80,7 +80,6 @@ public class DialogueManager : MonoBehaviour
     public void Restart()
     {
         uiManager = FindObjectOfType<UIManager>();
-        print("restart");
 
         bool firstTime1 = false;
         bool firstTime2 = false;

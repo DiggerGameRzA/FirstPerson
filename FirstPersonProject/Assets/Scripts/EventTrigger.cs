@@ -340,7 +340,7 @@ public class EventTrigger : MonoBehaviour
                 }
 
             }
-            
+
         }
         if (SaveManager.instance.firstTimeEvent[15] && id == 15)
         {
@@ -469,7 +469,7 @@ public class EventTrigger : MonoBehaviour
             bool[] conA1 = new bool[3];
             for (int i = 0; i < conditionDino.Length; i++)
             {
-                if(conditionDino[i].GetComponent<IHealth>().HealthPoint <= 0)
+                if (conditionDino[i].GetComponent<IHealth>().HealthPoint <= 0)
                 {
                     conA1[i] = true;
                 }
@@ -482,6 +482,7 @@ public class EventTrigger : MonoBehaviour
                     break;
                 }
             }
+            print(conA1[0] + "" + conA1[1] + conA1[2]);
             if (conA1[0] && conA1[1] && conA1[2])
             {
                 conditionA = true;
@@ -500,7 +501,7 @@ public class EventTrigger : MonoBehaviour
             {
                 if (conditionDinoB[i].GetComponent<ISedat>().SedatPoints <= 0)
                 {
-                    conA1[2] = true;
+                    conB[2] = true;
                     break;
                 }
             }

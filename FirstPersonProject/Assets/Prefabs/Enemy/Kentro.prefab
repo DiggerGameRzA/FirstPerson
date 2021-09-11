@@ -1027,7 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77c725bacb992824b966a6ec9fffbbe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sedatPoint: 1
+  _sedatPoint: 8
 --- !u!114 &8242954770079005579
 MonoBehaviour:
   m_ObjectHideFlags: 0

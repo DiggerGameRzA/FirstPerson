@@ -161,7 +161,7 @@ public class InputManager : MonoBehaviour
                     weaponManager.Reload();
             }
         }
-
+        
         #region Cheat
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -206,6 +206,7 @@ public class InputManager : MonoBehaviour
             WeaponManager.instance.GetComponent<Sedat>().Damage = 10;
         }
         #endregion
+        
     }
     public static float GetVerInput()
     {
@@ -294,6 +295,7 @@ public class InputManager : MonoBehaviour
                         {
                             if (inventory.FindKeyItem(door.keyName) != null)
                             {
+                                door.PlaySFX();
                                 inventory.RemoveItem(inventory.FindKeyItem(door.keyName));
                                 door.needKey = false;
                                 //SaveManager.instance.UnlockDoor(door.id);
@@ -355,8 +357,6 @@ public class InputManager : MonoBehaviour
                     if (hit.transform.GetComponent<PortalPanel>())
                     {
                         PortalPanel panel = hit.transform.GetComponent<PortalPanel>();
-                        print(panel);
-                        print(hit.transform);
                         panel.OnActive();
                     }
                 }

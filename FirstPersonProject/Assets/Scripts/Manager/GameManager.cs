@@ -47,13 +47,27 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive);
+        /*
+        sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneEnum.Loading, LoadSceneMode.Additive));
+        sceneLoading.Add(SceneManager.UnloadSceneAsync((int)SceneEnum.Intro));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex((int)SceneEnum.MainMenu));
+        */
 
-        sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive));
-        StartCoroutine(GetSceneLoadProgess(false, (int)SceneEnum.MainMenu));
+        sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneEnum.Intro, LoadSceneMode.Additive));
+        StartCoroutine(GetSceneLoadProgess(false, (int)SceneEnum.Intro));
 
-        Invoke("SetActive", 0.2f);
+        //Invoke("SetActive", 0.2f);
     }
     //------------------------------------------------------------------------------------------------
+    public void LoadMainMenu()
+    {
+        LoadCutscene((int)SceneEnum.Intro, (int)SceneEnum.MainMenu);
+        /*
+        sceneLoading.Add(SceneManager.UnloadSceneAsync((int)SceneEnum.Intro));
+        sceneLoading.Add(SceneManager.LoadSceneAsync((int)SceneEnum.MainMenu, LoadSceneMode.Additive));
+        Invoke("SetActive", 0.4f);
+        */
+    }
     public void LoadCutscene01()
     {
         LoadCutscene((int)SceneEnum.MainMenu, (int)SceneEnum.Cutscene01);
@@ -130,7 +144,19 @@ public class GameManager : MonoBehaviour
         EnableManagers(level);
         if (!level)
         {
-            FindObjectOfType<EndCutscene>().StartVideo();
+            if (FindObjectOfType<EndCutscene>() != null)
+                FindObjectOfType<EndCutscene>().StartVideo();
+
+            GameObject go = new GameObject("TheDestroyer");
+            DontDestroyOnLoad(go);
+            foreach (var root in go.scene.GetRootGameObjects())
+            {
+                if(root.name != "Game Manager" && root.name != "~LeanTween")
+                    Destroy(root);
+            }
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
     public IEnumerator GetSceneLoadProgess(bool level, int scene, Vector3 position)
@@ -203,6 +229,6 @@ public class GameManager : MonoBehaviour
     }
     void SetActive()
     {
-        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex((int)SceneEnum.MainMenu));
     }
 }

@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 3574889815517663191}
   - component: {fileID: 228639920482824787}
   - component: {fileID: 228639920482824784}
+  - component: {fileID: 5311485761244931428}
   m_Layer: 0
   m_Name: Pentaceratops
   m_TagString: Dino
@@ -342,13 +343,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74289ebab9517b447be8f9b20e2b1ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 9
   textPrefab: {fileID: 2070009891017223386}
-  visionRange: 30
-  visionRange2: 40
+  visionRange: 50
+  visionRange2: 60
   attackRange: 6
   attackDelay: 1
-  damage: 75
+  damage: 50
   speed: 15
   firstTimeSeen: 1
   isDead: 0
@@ -389,7 +390,10 @@ MonoBehaviour:
   tempAttackTime: 0
   tempHitTime: 0
   tempSleepTime: 0
+  col: {fileID: 5311485761244931428}
   isStun: 0
+  knockbackHeight: 4
+  knockbackStrength: 150
 --- !u!114 &228639920482824813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,6 +534,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &5311485761244931428
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228639920482824785}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 3.57
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.14, z: 0}
 --- !u!1 &228665232039209299
 GameObject:
   m_ObjectHideFlags: 0

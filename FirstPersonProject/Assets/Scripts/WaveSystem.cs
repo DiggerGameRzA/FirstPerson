@@ -4,53 +4,37 @@ using UnityEngine;
 
 public class WaveSystem : MonoBehaviour
 {
-    bool startFirst = false;
-    bool startWave = false;
-    public float firstWaveDelay = 2f;
-    public float nextWaveDelay = 5f;
-    public int enemyLeft = 0;
-    public float tempTime = 0;
+    public GameObject[] wave01Dinos;
+    public GameObject[] wave02Dinos;
+    public GameObject[] wave03Dinos;
+    public GameObject[] wave04Dinos;
 
-    public GameObject[] Wave01Dinos;
-    public GameObject[] Wave02Dinos;
-    public GameObject[] Wave03Dinos;
-    void Start()
+    public void SpawnWave01()
     {
-
-    }
-    void Update()
-    {
-        tempTime -= Time.deltaTime;
-
-        if (startFirst)
+        for (int i = 0; i < wave01Dinos.Length; i++)
         {
-            if (startWave)
-            {
-                if (tempTime <= 0)
-                {
-                    for (int i = 0; i < Wave01Dinos.Length; i++)
-                    {
-                        print("spawn " + i);
-                        Wave01Dinos[i].SetActive(true);
-                        enemyLeft++;
-                    }
-                    startWave = false;
-                } 
-            }
+            wave01Dinos[i].SetActive(true);
         }
     }
-    public void StartFirstWave()
+    public void SpawnWave02()
     {
-        startFirst = true;
-        startWave = true;
-        tempTime = firstWaveDelay;
+        for (int i = 0; i < wave02Dinos.Length; i++)
+        {
+            wave02Dinos[i].SetActive(true);
+        }
     }
-    void NextWave()
+    public void SpawnWave03()
     {
-
+        for (int i = 0; i < wave03Dinos.Length; i++)
+        {
+            wave03Dinos[i].SetActive(true);
+        }
     }
-    public void DecreaseEnemy()
+    public void SpawnWave04()
     {
-        enemyLeft--;
+        for (int i = 0; i < wave04Dinos.Length; i++)
+        {
+            wave04Dinos[i].SetActive(true);
+        }
     }
 }

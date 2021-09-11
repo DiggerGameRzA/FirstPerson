@@ -12,6 +12,8 @@ public class Pentaceratops : EnemyStats
     ISedat sedat;
     AudioSource audioSource;
 
+    [SerializeField] bool playBGM = true;
+
     [SerializeField] Collider col;
 
     [SerializeField] bool isStun = false;
@@ -69,7 +71,7 @@ public class Pentaceratops : EnemyStats
             visionRange = visionRange2;
         }
 
-        if (health.HealthPoint <= 0 || sedat.SedatPoints <= 0)
+        if ((health.HealthPoint <= 0 || sedat.SedatPoints <= 0) && !GetComponent<GatherSyringe>().gathered)
         {
             GetComponent<GatherSyringe>().ShowUI(textPrefab);
         }
@@ -94,6 +96,10 @@ public class Pentaceratops : EnemyStats
         }
 
         if (isDead)
+        {
+            col.enabled = false;
+        }
+        else if (isSleep)
         {
             col.enabled = false;
         }
@@ -218,7 +224,7 @@ public class Pentaceratops : EnemyStats
                 isInFight = false;
             }
         }
-        else if (isInRange)
+        else if (isInRange && playBGM)
         {
             if (!isInFight)
             {

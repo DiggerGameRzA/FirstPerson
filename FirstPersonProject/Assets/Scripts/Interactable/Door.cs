@@ -95,4 +95,8 @@ public class Door : MonoBehaviour
             gate[i].GetComponent<Animator>().Play("Open");
         }
     }
+    public void PlaySFX()
+    {
+        SoundManager.instance.PlayDoorOpen(GetComponent<AudioSource>());
+    }
 }
