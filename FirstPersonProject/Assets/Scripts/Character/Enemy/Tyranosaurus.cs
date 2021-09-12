@@ -133,7 +133,7 @@ public class Tyranosaurus : EnemyStats
         }
 
         // roar 4
-        else if (health.HealthPoint <= 0.25f * health.MaxHealthPoint && firstTimeRoar04)
+        else if (health.HealthPoint <= 0.2f * health.MaxHealthPoint && firstTimeRoar04)
         {
             print("lower than 25%");
             ws.SpawnWave04();
@@ -148,7 +148,7 @@ public class Tyranosaurus : EnemyStats
         }
 
         // roar 3
-        else if (health.HealthPoint <= 0.5f * health.MaxHealthPoint && firstTimeRoar03)
+        else if (health.HealthPoint <= 0.4f * health.MaxHealthPoint && firstTimeRoar03)
         {
             print("lower than 50%");
             ws.SpawnWave03();
@@ -163,7 +163,7 @@ public class Tyranosaurus : EnemyStats
         }
 
         // roar 2
-        else if (health.HealthPoint <= 0.75f * health.MaxHealthPoint && firstTimeRoar02)
+        else if (health.HealthPoint <= 0.6f * health.MaxHealthPoint && firstTimeRoar02)
         {
             print("lower than 75%");
             ws.SpawnWave02();
@@ -175,6 +175,10 @@ public class Tyranosaurus : EnemyStats
             anim.SetBool("isAttacking", false);
 
             Invoke("StopPlayRoar02", 4.9f);
+        }
+        else if (health.HealthPoint <= 0.80f * health.MaxHealthPoint && firstTimeRoar02)
+        {
+            ws.SpawnWave01();
         }
 
         else if (isAttacking)
@@ -203,8 +207,6 @@ public class Tyranosaurus : EnemyStats
                 anim.SetBool("isIdling", false);
                 anim.SetBool("isRoaring", true);
                 anim.Play("Roar");
-
-                ws.SpawnWave01();
 
                 Invoke("StopPlayRoar01", 4.9f);
             }

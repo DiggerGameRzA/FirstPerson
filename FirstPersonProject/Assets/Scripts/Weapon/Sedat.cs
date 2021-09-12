@@ -81,6 +81,7 @@ public class Sedat : MonoBehaviour, IWeapon
     public void Fire()
     {
         SoundManager.instance.PlayDartFire();
+        WeaponManager.instance.Reload();
 
         RaycastHit hit = CameraManager.GetCameraRaycast(100f);
         if (hit.collider.GetComponentInParent<SedatPoint>())
@@ -89,7 +90,6 @@ public class Sedat : MonoBehaviour, IWeapon
             int index;
             EnemyStats dino = hit.transform.GetComponentInParent<EnemyStats>();
             index = dino.id;
-            WeaponManager.instance.Reload();
             /*
             if (hit.transform.gameObject.GetComponent<UtahRaptor>())
             {

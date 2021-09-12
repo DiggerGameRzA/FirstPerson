@@ -134,6 +134,10 @@ public class InputManager : MonoBehaviour
             {
                 EquipWeaponInSlot(3);
             }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                EquipWeaponInSlot(4);
+            }
         }
 
         if (canShoot)
@@ -225,7 +229,29 @@ public class InputManager : MonoBehaviour
             if (Input.GetButtonDown("Collect"))
             {
                 IInventoryItem item = hit.transform.GetComponent<IInventoryItem>();
-                if(hit.transform.CompareTag("Ammo"))
+
+                IInventoryItem rpg = null;
+                for (int i = 0; i < inventory.wSlots.Count; i++)
+                {
+                    if (inventory.wSlots[i].mItemStack.Count != 0)
+                    {
+                        rpg = inventory.GetPeekItem(i, "Weapon");
+                    }
+                    if (rpg != null)
+                    {
+                        rpg = inventory.GetPeekItem(i, "Weapon");
+                        if (rpg.Name == "Bazuka")
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            rpg = null;
+                        }
+                    }
+                }
+
+                if (hit.transform.CompareTag("Ammo"))
                 {
                     item.Collected = true;
                     SaveManager.instance.collected[item.Id] = true;
@@ -252,6 +278,14 @@ public class InputManager : MonoBehaviour
                     {
                         UIManager.instance.UpdateAmmo(WeaponManager.instance.GetComponent<Sedat>().CurrentAmmo, WeaponManager.instance.GetComponent<Sedat>().CurrentSpare);
                     }
+                    else if (SaveManager.instance.currentWeapon == WeaponEnum.Shotgun)
+                    {
+                        UIManager.instance.UpdateAmmo(WeaponManager.instance.GetComponent<Shotgun>().CurrentAmmo, WeaponManager.instance.GetComponent<Shotgun>().CurrentSpare);
+                    }
+                    else if (SaveManager.instance.currentWeapon == WeaponEnum.Bazuka)
+                    {
+                        UIManager.instance.UpdateAmmo(WeaponManager.instance.GetComponent<Bazuka>().CurrentAmmo, WeaponManager.instance.GetComponent<Bazuka>().CurrentSpare);
+                    }
                     item.OnPickUp();
                 }
                 else if (hit.transform.CompareTag("Item"))
@@ -259,6 +293,14 @@ public class InputManager : MonoBehaviour
                     item.Collected = true;
                     SaveManager.instance.collected[item.Id] = true;
                     inventory.AddItem(item, "Item");
+                }
+                else if (hit.transform.CompareTag("Weapon") && rpg != null)
+                {
+                    item.Collected = true;
+                    SaveManager.instance.collected[item.Id] = true;
+                    WeaponManager.instance.GetComponent<Bazuka>().CurrentSpare += 1;
+                    UIManager.instance.UpdateAmmo(WeaponManager.instance.GetComponent<Bazuka>().CurrentAmmo, WeaponManager.instance.GetComponent<Bazuka>().CurrentSpare);
+                    item.OnPickUp();
                 }
                 else if (hit.transform.CompareTag("Weapon"))
                 {

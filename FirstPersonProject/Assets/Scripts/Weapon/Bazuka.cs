@@ -88,6 +88,7 @@ public class Bazuka : MonoBehaviour, IWeapon
     public void Fire()
     {
         SoundManager.instance.PlayBazukaFire();
+        WeaponManager.instance.Reload();
 
         RaycastHit hit = CameraManager.GetCameraRaycast(100f);
         if (hit.transform)

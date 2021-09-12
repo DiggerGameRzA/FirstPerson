@@ -64,9 +64,9 @@ public class WeaponManager : MonoBehaviour
             //weapon.GetAnimator().SetBool("fire", true);
             if (weapon.GetAnimator() != null)
             {
+                Invoke("ResetAnimation", Mathf.Abs(weapon.FireDelay - 0.2f));
                 weapon.GetAnimator().Play("Fire");
             }
-            Invoke("ResetAnimation", Mathf.Abs(weapon.FireDelay - 0.2f));
             weapon.Fire();
 
             RaycastHit hit = CameraManager.GetCameraRaycast(100f, lDefault);
