@@ -443,6 +443,7 @@ GameObject:
   - component: {fileID: 3993805239889536754}
   - component: {fileID: 3317313510224280937}
   - component: {fileID: 205438821963542100}
+  - component: {fileID: 1448486711}
   m_Layer: 0
   m_Name: Triceratops
   m_TagString: Dino
@@ -520,13 +521,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 231ebbf4459d91643acf70d4d3db652d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 6
   textPrefab: {fileID: 6686919861115664680}
   visionRange: 30
   visionRange2: 40
-  attackRange: 8
+  attackRange: 5
   attackDelay: 1
-  damage: 75
+  damage: 40
   speed: 13
   firstTimeSeen: 1
   isDead: 0
@@ -567,6 +568,10 @@ MonoBehaviour:
   tempAttackTime: 0
   tempHitTime: 0
   tempSleepTime: 0
+  col: {fileID: 1448486711}
+  isStun: 0
+  knockbackHeight: 4
+  knockbackStrength: 150
 --- !u!114 &1119215687524178593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,7 +615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dna: {fileID: 8907349213612104769, guid: 5d1bb8fa2dc25634e8952fd240072586, type: 3}
-  gathered: 0
+  gathered: 1
 --- !u!82 &205438821963542100
 AudioSource:
   m_ObjectHideFlags: 0
@@ -707,6 +712,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!136 &1448486711
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33833611926118787}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 3.48
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.14, z: 0}
 --- !u!1 &33833611954963971
 GameObject:
   m_ObjectHideFlags: 0

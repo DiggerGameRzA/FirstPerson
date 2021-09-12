@@ -12,6 +12,13 @@ public class Triceratops : EnemyStats
     ISedat sedat;
     AudioSource audioSource;
 
+    [SerializeField] Collider col;
+
+    [SerializeField] bool isStun = false;
+    float tempStunTime = 0f;
+
+    [SerializeField] float knockbackHeight;
+    [SerializeField] float knockbackStrength;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -74,6 +81,7 @@ public class Triceratops : EnemyStats
         {
             isSleep = true;
         }
+
         else if (distance < attackRange)
         {
             isInAtk = true;
@@ -91,6 +99,25 @@ public class Triceratops : EnemyStats
         else if (distance > attackRange)
         {
             isInAtk = false;
+        }
+
+        if (isDead)
+        {
+            col.enabled = false;
+        }
+        else if (isSleep)
+        {
+            col.enabled = false;
+        }
+        else if (tempStunTime <= 0)
+        {
+            isStun = false;
+            col.enabled = true;
+        }
+        else
+        {
+            isStun = true;
+            col.enabled = false;
         }
 
         if (isDied)
@@ -183,6 +210,32 @@ public class Triceratops : EnemyStats
             isInRange = false;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            tempStunTime = 5f;
+            col.enabled = false;
+
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            CharacterController cc = other.GetComponent<CharacterController>();
+            cc.enabled = false;
+            Invoke("EnablePlayerController", .5f);
+
+            other.GetComponent<IHealth>().TakeDamage(damage);
+
+            Vector3 dir = other.transform.position - transform.position;
+            dir.y = knockbackHeight;
+
+            rb.AddForce(dir * knockbackStrength);
+        }
+    }
+    void EnablePlayerController()
+    {
+        FindObjectOfType<Player>().GetComponent<CharacterController>().enabled = true;
+    }
+
     void Attack()
     {
         float distance = Vector3.Distance(target.position, transform.position);

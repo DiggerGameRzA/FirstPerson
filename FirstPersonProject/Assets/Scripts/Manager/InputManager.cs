@@ -161,7 +161,7 @@ public class InputManager : MonoBehaviour
                     weaponManager.Reload();
             }
         }
-        
+        /*
         #region Cheat
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -206,7 +206,7 @@ public class InputManager : MonoBehaviour
             WeaponManager.instance.GetComponent<Sedat>().Damage = 10;
         }
         #endregion
-        
+        */
     }
     public static float GetVerInput()
     {

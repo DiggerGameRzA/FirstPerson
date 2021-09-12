@@ -306,6 +306,11 @@ public class EventTrigger : MonoBehaviour
                     {
                         conditionDinoB[i].SetActive(false);
                     }
+                    for (int i = 0; i < spawnItems.Length; i++)
+                    {
+                        spawnItems[i].SetActive(true);
+                    }
+                    cargo.SetActive(true);
                 }
             }
             else if (conditionB)
@@ -324,6 +329,7 @@ public class EventTrigger : MonoBehaviour
                         meds[j].SetActive(true);
                     }
                 }
+                cargo.SetActive(true);
             }
             else
             {
@@ -338,7 +344,11 @@ public class EventTrigger : MonoBehaviour
                 {
                     meds[j].SetActive(false);
                 }
-
+                for (int i = 0; i < spawnItems.Length; i++)
+                {
+                    spawnItems[i].SetActive(false);
+                }
+                cargo.SetActive(false);
             }
 
         }
