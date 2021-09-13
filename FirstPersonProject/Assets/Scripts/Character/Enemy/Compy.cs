@@ -64,11 +64,6 @@ public class Compy : EnemyStats
             visionRange = visionRange2;
         }
 
-        if ((health.HealthPoint <= 0 || sedat.SedatPoints <= 0) && !GetComponent<GatherSyringe>().gathered)
-        {
-            GetComponent<GatherSyringe>().ShowUI(textPrefab);
-        }
-
         if (disToEsc < 1)
         {
             isEscaped = true;

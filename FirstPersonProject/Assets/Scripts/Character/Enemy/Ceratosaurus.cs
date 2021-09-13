@@ -59,11 +59,6 @@ public class Ceratosaurus : EnemyStats
             visionRange = visionRange2;
         }
 
-        if ((health.HealthPoint <= 0 || sedat.SedatPoints <= 0) && !GetComponent<GatherSyringe>().gathered)
-        {
-            GetComponent<GatherSyringe>().ShowUI(textPrefab);
-        }
-
         float distance = Vector3.Distance(target.position, transform.position);
         if (health.HealthPoint <= 0 && !isDied)
         {

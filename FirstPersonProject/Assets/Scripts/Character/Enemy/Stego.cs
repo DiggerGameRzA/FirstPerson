@@ -56,10 +56,6 @@ public class Stego : EnemyStats
         tempHitTime -= Time.deltaTime;
         tempSleepTime -= Time.deltaTime;
 
-        if ((health.HealthPoint <= 0 || sedat.SedatPoints <= 0) && !GetComponent<GatherSyringe>().gathered)
-        {
-            GetComponent<GatherSyringe>().ShowUI(textPrefab);
-        }
         if (GetComponent<GatherSyringe>().gathered)
         {
             Stego[] stego = FindObjectsOfType<Stego>();

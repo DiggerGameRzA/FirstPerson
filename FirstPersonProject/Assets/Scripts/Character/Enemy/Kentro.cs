@@ -56,11 +56,6 @@ public class Kentro : EnemyStats
         tempHitTime -= Time.deltaTime;
         tempSleepTime -= Time.deltaTime;
 
-        if ((health.HealthPoint <= 0 || sedat.SedatPoints <= 0) && !GetComponent<GatherSyringe>().gathered)
-        {
-            GetComponent<GatherSyringe>().ShowUI(textPrefab);
-        }
-
         if (isHit)
         {
             Kentro[] ally = FindObjectsOfType<Kentro>();

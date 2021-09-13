@@ -18,6 +18,15 @@ public class GatherSyringe : MonoBehaviour
 
         //gathered = SaveManager.instance.gathered[GetComponent<EnemyStats>().id];
     }
+    void Update()
+    {
+        IHealth health = GetComponent<IHealth>();
+        ISedat sedat = GetComponent<ISedat>();
+        if ((health.HealthPoint <= 0 || sedat.SedatPoints <= 0) && !gathered)
+        {
+            ShowUI(GetComponent<EnemyStats>().textPrefab);
+        }
+    }
     public void ShowUI(GameObject text)
     {
         player = FindObjectOfType<Player>();
@@ -34,6 +43,11 @@ public class GatherSyringe : MonoBehaviour
                     {
                         go = hit.collider.GetComponentInParent<GatherSyringe>().gameObject;
                         go.GetComponent<EnemyStats>().textPrefab.SetActive(true);
+                    }
+                    else
+                    { 
+                        go = hit.collider.GetComponentInParent<GatherSyringe>().gameObject;
+                        go.GetComponent<EnemyStats>().textPrefab.SetActive(false);
                     }
                 }
                 else

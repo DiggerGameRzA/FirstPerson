@@ -430,6 +430,7 @@ public class InputManager : MonoBehaviour
                             GameObject dna = hit.collider.GetComponentInParent<GatherSyringe>().dna;
 
                             inventory.RemoveItem(item);
+                            hit.collider.GetComponentInParent<EnemyStats>().textPrefab.SetActive(false);
                             hit.collider.GetComponentInParent<GatherSyringe>().gathered = true;
 
                             int index;

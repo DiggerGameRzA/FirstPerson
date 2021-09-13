@@ -57,6 +57,7 @@ public class EnemyStats : MonoBehaviour
     //Temporary Time
     [HideInInspector]
     public float tempIdleTime, tempRunTime, tempAttackTime, tempHitTime, tempSleepTime = 0f;
+
     public void PlayIdleSound(AudioSource audioSource)
     {
         audioSource.volume = SoundManager.instance.masterVolume * SoundManager.instance.effectVolume;

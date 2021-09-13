@@ -492,7 +492,6 @@ public class EventTrigger : MonoBehaviour
                     break;
                 }
             }
-            print(conA1[0] + "" + conA1[1] + conA1[2]);
             if (conA1[0] && conA1[1] && conA1[2])
             {
                 conditionA = true;
