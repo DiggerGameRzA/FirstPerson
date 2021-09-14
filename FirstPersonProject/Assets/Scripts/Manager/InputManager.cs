@@ -165,36 +165,8 @@ public class InputManager : MonoBehaviour
                     weaponManager.Reload();
             }
         }
-        /*
+        
         #region Cheat
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            player.GetHealth().TakeDamage(10f);
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            inventory.AddItem(utahSyringe.GetComponent<IInventoryItem>(), "Item");
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            inventory.AddItem(medKey.GetComponent<IInventoryItem>(), "Item");
-        }
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            inventory.AddItem(checkKey.GetComponent<IInventoryItem>(), "Item");
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            inventory.AddItem(triceraSyringe.GetComponent<IInventoryItem>(), "Item");
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            inventory.AddItem(stegoSyringe.GetComponent<IInventoryItem>(), "Item");
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            inventory.AddItem(brachioSyringe.GetComponent<IInventoryItem>(), "Item");
-        }
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
             WeaponManager.instance.GetComponent<Pistol>().CurrentSpare += 666;
@@ -210,7 +182,7 @@ public class InputManager : MonoBehaviour
             WeaponManager.instance.GetComponent<Sedat>().Damage = 10;
         }
         #endregion
-        */
+        
     }
     public static float GetVerInput()
     {
@@ -299,7 +271,10 @@ public class InputManager : MonoBehaviour
                     item.Collected = true;
                     SaveManager.instance.collected[item.Id] = true;
                     WeaponManager.instance.GetComponent<Bazuka>().CurrentSpare += 1;
-                    UIManager.instance.UpdateAmmo(WeaponManager.instance.GetComponent<Bazuka>().CurrentAmmo, WeaponManager.instance.GetComponent<Bazuka>().CurrentSpare);
+                    if (SaveManager.instance.currentWeapon == WeaponEnum.Bazuka)
+                    {
+                        UIManager.instance.UpdateAmmo(WeaponManager.instance.GetComponent<Bazuka>().CurrentAmmo, WeaponManager.instance.GetComponent<Bazuka>().CurrentSpare);
+                    }
                     item.OnPickUp();
                 }
                 else if (hit.transform.CompareTag("Weapon"))
@@ -430,8 +405,8 @@ public class InputManager : MonoBehaviour
                             GameObject dna = hit.collider.GetComponentInParent<GatherSyringe>().dna;
 
                             inventory.RemoveItem(item);
-                            hit.collider.GetComponentInParent<EnemyStats>().textPrefab.SetActive(false);
                             hit.collider.GetComponentInParent<GatherSyringe>().gathered = true;
+                            hit.collider.GetComponentInParent<EnemyStats>().textPrefab.SetActive(false);
 
                             int index;
                             EnemyStats dino = hit.collider.GetComponentInParent<EnemyStats>();

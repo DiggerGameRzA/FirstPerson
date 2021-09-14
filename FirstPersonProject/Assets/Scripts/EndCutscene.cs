@@ -13,7 +13,7 @@ public class EndCutscene : MonoBehaviour
     bool isEnded = false;
     void Start()
     {
-        time = GetComponent<VideoPlayer>().clip.length;
+        time = Mathf.Round((float)GetComponent<VideoPlayer>().clip.length);
     }
     void Update()
     {
@@ -21,7 +21,7 @@ public class EndCutscene : MonoBehaviour
         {
             if (!isEnded)
             {
-                currentTime = GetComponent<VideoPlayer>().time;
+                currentTime = Mathf.Round((float)GetComponent<VideoPlayer>().time);
                 if (currentTime >= time)
                 {
                     print("Cutscene is end.");

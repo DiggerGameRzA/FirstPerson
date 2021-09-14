@@ -183,6 +183,21 @@ PrefabInstance:
       propertyPath: lDefault.m_Bits
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8349092821525351776, guid: 19dadc00c276d5749adb36067e9b04a5,
+        type: 3}
+      propertyPath: _reloadDuration
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349092821525351776, guid: 19dadc00c276d5749adb36067e9b04a5,
+        type: 3}
+      propertyPath: _currentAmmo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349092821525351776, guid: 19dadc00c276d5749adb36067e9b04a5,
+        type: 3}
+      propertyPath: _maxAmmo
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19dadc00c276d5749adb36067e9b04a5, type: 3}
 --- !u!1 &5299741697112950521 stripped
