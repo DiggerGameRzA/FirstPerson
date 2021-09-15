@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractRange: 10
-  WalkSpeed: 0.2
+  WalkSpeed: 0.15
   RunSpeed: 0.3
   Gravity: 0.3
   JumpForce: 0.1

@@ -231,16 +231,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6872073005093507984}
     m_Modifications:
-    - target: {fileID: 1922747884173364995, guid: c87861952b749884eb4aa0ccddd195aa,
-        type: 3}
-      propertyPath: doorOpen
-      value: 
-      objectReference: {fileID: 8300000, guid: 8fce73e653afefa4095514bf0b156062, type: 3}
-    - target: {fileID: 1922747884173364995, guid: c87861952b749884eb4aa0ccddd195aa,
-        type: 3}
-      propertyPath: dartFire
-      value: 
-      objectReference: {fileID: 8300000, guid: f830044c3e7d4314e9b3fdc6ecf31908, type: 3}
     - target: {fileID: 5433229575717393439, guid: c87861952b749884eb4aa0ccddd195aa,
         type: 3}
       propertyPath: m_LocalPosition.x
